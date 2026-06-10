@@ -19,5 +19,16 @@
     spacing: 0.65em, // 段落間の間隔
     first-line-indent: (amount: 1em, all: false),
   )
+
+  // ページ番号
+  // 本文上の見た目と PDF 内部のページラベルを揃えるため
+  // set page(numbering: "--- 1 ---")
+  // のようには設定しない．
+  set page(numbering: "1")
+  set page(
+    footer: context align(center)[
+      --- #counter(page).display() ---
+    ],
+  )
 }
 

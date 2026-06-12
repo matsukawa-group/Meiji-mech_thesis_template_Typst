@@ -11,9 +11,12 @@
 #thesis-cover(
   kind: "bachelor",
   title: [乱流遷移に関する研究],
-  author: [姓姓　名名],
   supervisor: [姓姓　名名　教授],
-  department: [明治大学理工学部　機械工学科],
+  department: [機械工学科],
+  FY: [2026],
+  ID: [12345678],
+  class: [n年n組nn番],
+  author: [姓姓　名名],
 )
 
 #show: setup

@@ -36,52 +36,66 @@
   doc
 }
 
+// =================================================================
+// 表紙に関する設定
+// =================================================================
+
+// 卒業論文の表紙
 #let bachelor-cover(
   title: [],
   subtitle: none,
   author: [],
   supervisor: [],
   department: [],
+  FY: [],
+  ID: [],
+  class: [],
   date: none,
 ) = [
   #align(center)[
     #v(25mm)
 
-    #text(28pt, weight: "bold")[卒業論文]
-
-    #v(25mm)
-
-    #text(22pt, weight: "bold")[#title]
+    #text(22pt)[#title]
 
     #if subtitle != none [
       #v(5mm)
       #text(14pt)[#subtitle]
     ]
 
-    #v(40mm)
+    #v(25mm)
 
-    #table(
-      columns: (35mm, 60mm),
-      align: left,
-      stroke: none,
+    #text(18pt)[指導教員]
 
-      [所属], [#department],
-      [氏名], [#author],
-      [指導教員], [#supervisor],
-    )
+    #text(18pt)[#supervisor]
 
-    #v(30mm)
+    #v(18mm)
 
-    #date.display("[year]年[month]月")
+    #text(18pt)[明治大学理工学部]
+
+    #text(18pt)[#department]
+
+    #v(18mm)
+
+    #text(18pt)[#FY 年度]
+
+    #v(18mm)
+
+    #text(18pt)[学籍番号 #h(1em) #ID]
+
+    #text(18pt)[#class]
+
+    #text(18pt)[#author]
   ]
 ]
 
+// 修士論文の表紙
 #let master-cover(
   title: [],
   subtitle: none,
   author: [],
   supervisor: [],
   department: [],
+  FY: [],
   date: none,
 ) = [
   #align(center)[
@@ -96,6 +110,7 @@
     #v(3mm)
 
     #line(length: 90mm)
+    #text(18pt)[#FY 年度]
 
     #v(25mm)
 
@@ -123,6 +138,7 @@
   ]
 ]
 
+// 表紙の設定
 #let thesis-cover(
   kind: "bachelor", // bachelor, master
   title: [],
@@ -130,12 +146,17 @@
   author: [],
   supervisor: [],
   department: [],
+  FY: [],
+  ID: [],
+  class: [],
   date: datetime.today(),
 ) = {
   set page(
     margin: (top: 25mm, bottom: 25mm, x: 25mm),
     numbering: none,
   )
+  // 表紙のフォント
+  set text(lang: "en", font: ("New Computer Modern", "BIZ UDMincho"))
 
   if kind == "bachelor" {
     bachelor-cover(
@@ -144,6 +165,9 @@
       author: author,
       supervisor: supervisor,
       department: department,
+      FY: FY,
+      ID: ID,
+      class: class,
       date: date,
     )
   } else if kind == "master" {
@@ -153,7 +177,10 @@
       author: author,
       supervisor: supervisor,
       department: department,
+      FY: FY,
       date: date,
     )
   }
 }
+
+// =================================================================

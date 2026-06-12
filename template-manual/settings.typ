@@ -132,7 +132,8 @@
 ) = {
   set page(
     margin: (top: 25mm, bottom: 25mm, x: 25mm),
-    numbering: none,
+    numbering: "i",
+    footer: none,
   )
   // 表紙のフォント
   set text(lang: "en", font: ("New Computer Modern", "BIZ UDMincho"))

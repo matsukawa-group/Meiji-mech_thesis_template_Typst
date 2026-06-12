@@ -10,7 +10,7 @@
 
 #thesis-cover(
   // 卒業論文なら "bachelor" を，修士論文なら "master" を指定
-  kind: "master",
+  kind: "bachelor",
   // 学位論文題目を間違えずに入力
   title: [乱流遷移に関する研究],
   // 指導教員の氏名
@@ -34,13 +34,27 @@
 
 #show: setup
 
+#set page(numbering: "i")
 // 目次が不要な場合は以下の行をコメントアウトしてください．
 #outline(
   title: "目次",
   indent: auto,
 )
-
 #pagebreak()
+#outline(
+  title: "図目次",
+  indent: auto,
+  target: figure.where(kind: image)
+)
+#pagebreak()
+#outline(
+  title: "表目次",
+  target: figure.where(kind: table)
+)
+#pagebreak()
+
+#set page(numbering: "1")
+#counter(page).update(1)
 
 = これは見出し
 <sec:heading>

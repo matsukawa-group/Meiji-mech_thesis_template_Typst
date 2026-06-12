@@ -57,11 +57,6 @@
 
     #text(22pt)[#title]
 
-    #if subtitle != none [
-      #v(5mm)
-      #text(14pt)[#subtitle]
-    ]
-
     #v(25mm)
 
     #text(18pt)[指導教員]
@@ -101,40 +96,24 @@
   #align(center)[
     #v(15mm)
 
-    #text(
-      34pt,
-      weight: "bold",
-      font: "Segoe UI",
-    )[修士学位請求論文]
+    #text(18pt)[明治大学大学院　理工学研究科]
 
-    #v(3mm)
-
-    #line(length: 90mm)
     #text(18pt)[#FY 年度]
 
-    #v(25mm)
+    #text(18pt)[修士学位請求論文]
 
-    #text(24pt, weight: "bold")[#title]
+    #v(18mm)
 
-    #if subtitle != none [
-      #v(6mm)
-      #text(15pt)[#subtitle]
-    ]
+    #box(width: 80%, stroke: 1pt, inset: 12pt,)[#text(18pt)[#align(left)[論文題目：]#title]]
 
-    #v(50mm)
+    #v(18mm)
 
-    #grid(
-      columns: (35mm, 80mm),
-      gutter: 5mm,
+    #box(width: 80%, stroke: 1pt, inset: 12pt,)[#text(18pt)[#align(left)[指導教員名：#supervisor]]]
 
-      [請求者氏名], [#author],
-      [指導教員名], [#supervisor],
-      [所属], [#department],
-    )
+    #v(18mm)
 
-    #v(35mm)
+    #box(width: 80%, stroke: 1pt, inset: 12pt,)[#text(18pt)[#department#v(18pt)#align(left)[請求者氏名：#author]]]
 
-    #date.display("[month repr:long] [year]")
   ]
 ]
 

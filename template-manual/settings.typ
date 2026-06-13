@@ -37,6 +37,7 @@
   show heading: it => {
     if it.level == 1 {
       pagebreak()
+      v(1.8em)
       let has-number = it.numbering != none
       block(width: 100%, above: 2em, below: 2em)[
         #if has-number {
@@ -44,7 +45,7 @@
           text(size: 24pt, font: "Segoe UI")[
             第 #ns.first() 章
           ]
-          v(0.8em) + h(-1em)
+          v(1.0em) + h(-1em)
         }
         #text(size: 24pt, font: "Segoe UI")[
           #it.body

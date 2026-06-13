@@ -40,18 +40,16 @@
   title: "目次",
   indent: auto,
 )
-#pagebreak()
 #outline(
   title: "図目次",
   indent: auto,
   target: figure.where(kind: image)
 )
-#pagebreak()
 #outline(
   title: "表目次",
+  indent: auto,
   target: figure.where(kind: table)
 )
-#pagebreak()
 
 #set page(numbering: "1")
 #counter(page).update(1)

@@ -36,6 +36,7 @@
   )
   show heading: it => {
     if it.level == 1 {
+      pagebreak()
       let has-number = it.numbering != none
       block(width: 100%, above: 2em, below: 2em)[
         #if has-number {

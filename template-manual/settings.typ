@@ -59,7 +59,6 @@
     }
   }
 
-
   // ページ番号
   // 本文上の見た目と PDF 内部のページラベルを揃えるため
   // set page(numbering: "--- 1 ---")
@@ -70,6 +69,12 @@
       --- #counter(page).display() ---
     ],
   )
+
+  // リンク
+  show link: set text(fill: blue)
+  show ref: set text(fill: blue)
+  show footnote: set text(fill: blue)
+
   doc
 }
 

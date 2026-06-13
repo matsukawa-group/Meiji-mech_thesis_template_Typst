@@ -77,6 +77,11 @@
   show ref: set text(fill: blue)
   show footnote: set text(fill: blue)
 
+  // コードブロック
+  import "@preview/codly:1.3.0": *
+  import "@preview/codly-languages:0.1.1": *
+  show: codly-init.with()
+
   doc
 }
 

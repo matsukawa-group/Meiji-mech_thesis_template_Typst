@@ -23,6 +23,43 @@
     first-line-indent: (amount: 1em, all: false),
   )
 
+  // 見出しのスタイル
+  set heading(
+    numbering: (..nums) => {
+      let ns = nums.pos()
+      if ns.len() == 1 {
+        [第 #ns.first() 章]
+      } else {
+        numbering("1.1", ..ns)
+      }
+    },
+  )
+  show heading: it => {
+    if it.level == 1 {
+      let has-number = it.numbering != none
+      block(width: 100%, above: 2em, below: 2em)[
+        #if has-number {
+          let ns = counter(heading).at(it.location())
+          text(size: 24pt, font: "Segoe UI")[
+            第 #ns.first() 章
+          ]
+          v(0.8em) + h(-1em)
+        }
+        #text(size: 24pt, font: "Segoe UI")[
+          #it.body
+        ]
+      ]
+    } else if it.numbering != none {
+      let ns = counter(heading).at(it.location())
+      text(font: "Segoe UI")[
+        #numbering("1.1", ..ns)#h(1em)#it.body
+      ]
+    } else {
+      text(font: "Segoe UI")[#it.body]
+    }
+  }
+
+
   // ページ番号
   // 本文上の見た目と PDF 内部のページラベルを揃えるため
   // set page(numbering: "--- 1 ---")
@@ -104,15 +141,15 @@
 
     #v(18mm)
 
-    #box(width: 80%, stroke: 1pt, inset: 12pt,)[#text(18pt)[#align(left)[論文題目：]#title]]
+    #box(width: 80%, stroke: 1pt, inset: 12pt)[#text(18pt)[#align(left)[論文題目：]#title]]
 
     #v(18mm)
 
-    #box(width: 80%, stroke: 1pt, inset: 12pt,)[#text(18pt)[#align(left)[指導教員名：#supervisor]]]
+    #box(width: 80%, stroke: 1pt, inset: 12pt)[#text(18pt)[#align(left)[指導教員名：#supervisor]]]
 
     #v(18mm)
 
-    #box(width: 80%, stroke: 1pt, inset: 12pt,)[#text(18pt)[#department#v(18pt)#align(left)[請求者氏名：#author]]]
+    #box(width: 80%, stroke: 1pt, inset: 12pt)[#text(18pt)[#department#v(18pt)#align(left)[請求者氏名：#author]]]
 
   ]
 ]

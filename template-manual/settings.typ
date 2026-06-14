@@ -74,6 +74,21 @@
     ],
   )
 
+  // 番号なしの箇条書きの設定
+  set list(
+    indent: 1em,
+  )
+  show list: set block(
+    spacing: 1em,
+  )
+  // 番号付きの箇条書きの設定
+  set enum(
+    indent: 1em,
+  )
+  show enum: set block(
+    spacing: 1em,
+  )
+
   // リンク
   show link: set text(fill: blue)
   show ref: set text(fill: blue)

@@ -33,6 +33,7 @@
         numbering("1.1", ..ns)
       }
     },
+    supplement: none
   )
   show heading: it => {
     if it.level == 1 {

@@ -54,11 +54,12 @@
     } else if it.numbering != none {
       let ns = counter(heading).at(it.location())
       text(font: "Segoe UI")[
-        #numbering("1.1", ..ns)#h(1em)#it.body
+        #v(0.2em)#linebreak()#numbering("1.1", ..ns)#h(1em)#it.body
       ]
     } else {
       text(font: "Segoe UI")[#it.body]
     }
+    par(text(size: 0pt, "")) // 見出しの後に字下げするために空の段落を設定
   }
 
   // ページ番号

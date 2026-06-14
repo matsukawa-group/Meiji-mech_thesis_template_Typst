@@ -33,6 +33,7 @@
         numbering("1.1", ..ns)
       }
     },
+    supplement: none
   )
   show heading: it => {
     if it.level == 1 {
@@ -54,11 +55,12 @@
     } else if it.numbering != none {
       let ns = counter(heading).at(it.location())
       text(font: "Segoe UI")[
-        #numbering("1.1", ..ns)#h(1em)#it.body
+        #v(0.2em)#linebreak()#numbering("1.1", ..ns)#h(1em)#it.body
       ]
     } else {
       text(font: "Segoe UI")[#it.body]
     }
+    par(text(size: 0pt, "")) // 見出しの後に字下げするために空の段落を設定
   }
 
   // ページ番号
@@ -72,10 +74,30 @@
     ],
   )
 
+  // 番号なしの箇条書きの設定
+  set list(
+    indent: 1em,
+  )
+  show list: set block(
+    spacing: 1em,
+  )
+  // 番号付きの箇条書きの設定
+  set enum(
+    indent: 1em,
+  )
+  show enum: set block(
+    spacing: 1em,
+  )
+
   // リンク
   show link: set text(fill: blue)
   show ref: set text(fill: blue)
   show footnote: set text(fill: blue)
+
+  // コードブロック
+  import "@preview/codly:1.3.0": *
+  import "@preview/codly-languages:0.1.1": *
+  show: codly-init.with()
 
   doc
 }

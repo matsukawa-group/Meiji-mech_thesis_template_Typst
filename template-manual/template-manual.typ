@@ -55,28 +55,29 @@
 #counter(page).update(1)
 
 = これは見出し
-<sec:heading>
+<ch:heading>
 
 ```Typst
 = これは見出し
-<sec:heading>
+<ch:heading>
 ```
 
 == これは小見出し
-<ssec:subheading>
+<sec:subheading>
 
 ```Typst
 == これは小見出し
-<ssec:subheading>
+<sec:subheading>
 ```
 
 === これはさらに小さい見出し
-<sssec:subsubheading>
+<ssec:subsubheading>
 
 ```Typst
 === これはさらに小さい見出し
-<sssec:subsubheading>
+<ssec:subsubheading>
 ```
 
+#include "chapter/basic.typ"
 
 #roremu(2000)

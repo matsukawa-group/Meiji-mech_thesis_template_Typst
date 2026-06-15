@@ -28,12 +28,12 @@
     numbering: (..nums) => {
       let ns = nums.pos()
       if ns.len() == 1 {
-        [第 #ns.first() 章]
+        [第 #ns.first() 章#h(1em)]
       } else {
         numbering("1.1", ..ns)
       }
     },
-    supplement: none
+    supplement: none,
   )
   show heading: it => {
     if it.level == 1 {
@@ -72,6 +72,18 @@
     footer: context align(center)[
       --- #counter(page).display() ---
     ],
+  )
+
+  // ページのヘッダーの設定
+  import "@preview/hydra:0.6.2": hydra
+  set page(
+    header: context {
+      let is-chapter-start = query(heading.where(level: 1)).any(it => it.location().page() == here().page())
+      if not is-chapter-start {
+        text(font: "Segoe UI", weight: "bold")[#hydra(1)]
+        line(length: 100%)
+      }
+    },
   )
 
   // 番号なしの箇条書きの設定

@@ -41,16 +41,21 @@
   title: "目次",
   indent: auto,
 )
+#heading(numbering: none)[図目次]
 #outline(
-  title: "図目次",
+  title: none,
   indent: auto,
   target: figure.where(kind: image)
 )
+#heading(numbering: none)[表目次]
 #outline(
-  title: "表目次",
+  title: none,
   indent: auto,
   target: figure.where(kind: table)
 )
+
+// 記号表
+#include "chapter/symbol.typ"
 
 #set page(numbering: "1")
 #counter(page).update(1)

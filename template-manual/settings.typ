@@ -156,6 +156,18 @@
   import "@preview/codly-languages:0.1.1": *
   show: codly-init.with()
 
+  // 単位に関する設定
+  fancy-units-configure(
+    per-mode: "slash",
+    unit-separator: sym.dot,
+  )
+  // 単位のマクロを追加
+  add-macros(
+    u: sym.mu,
+    celsius: [$degree:C$],
+    fahrenheit: [$degree:F$],
+  )
+
   doc
 }
 

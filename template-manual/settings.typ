@@ -18,6 +18,9 @@
 #import cosmos.rainbow: *
 // #import cosmos.clouds: *
 
+// 単位に関する設定
+#import "@preview/fancy-units:0.1.1": *
+
 #let setup(doc) = {
   // CJK 文字を組むときのスペース
   import "@preview/cjk-spacer:0.2.1": cjk-spacer

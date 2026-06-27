@@ -32,7 +32,8 @@
   author: [姓姓　名名],
 )
 
-#show: setup
+#show: setup            // 文書全体の設定
+#show: show-theorion    // 定理環境
 
 #set page(numbering: "i")
 // 目次が不要な場合は以下の行をコメントアウトしてください．

@@ -32,6 +32,7 @@
 
 #v(8mm)
 
+// 上付き添え字
 #text(font: "Segoe UI", weight: "bold")[Superscripts]
 #table(
   columns: (1fr, 3fr),
@@ -45,6 +46,7 @@
 
 #v(8mm)
 
+// 下付き添え字
 #text(font: "Segoe UI", weight: "bold")[Subscripts]
 #table(
   columns: (1fr, 3fr),
@@ -57,6 +59,7 @@
 
 #v(8mm)
 
+// 略語をアルファベット順で並べる
 #text(font: "Segoe UI", weight: "bold")[Abbreviations]
 #table(
   columns: (1fr, 3fr),

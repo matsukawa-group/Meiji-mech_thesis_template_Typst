@@ -200,3 +200,32 @@ $s i n x$ などと書くことのないよう気をつけましょう．
 これらは `physica` パッケージでサポートされているコマンドを使用し，それぞれ `va(u)`，`vb(u)` とすることで出力できます．
 式~@eq:NSr~の左辺第二項では直立ボールド体の $vr(u)$ を採用していますが，これを簡単に出すコマンドは無いため，このテンプレートで自作したコマンドを使用し `vr(u)` とすることで出力できます．
 他のテンプレートでは `vr(u)` と書いても出力できないので注意してください．
+
+=== `physica` パッケージの数式コマンド
+<sssec:math-physica>
+
+#link("https://typst.app/universe/package/physica/")[`physica`] パッケージでサポートされている数式コマンドの一部を以下に示します．
+
+#showybox(
+  frame: bluebox,
+  title: [`physica` パッケージの数式コマンド],
+)[
+  #align(center)[
+    // #mytable[
+      #table(
+        columns: (90mm, 50mm),
+        inset: 6pt,
+        table.header([コマンド], [出力]),
+        [`va(u)`, `vb(u)`, `vu(u)`], $va(u), vb(u), vu(u)$,
+        [`dd(x)`, `dd(x, y)`, `dd(x, 2)`, `dd(x, [n])`], $dd(x), dd(x, y), dd(x, 2), dd(x, [n])$,
+        [`dv(, x)`, `dv(f, x)`, `dv(f, x, n)`], $display(dv(, x)"," dv(f, x)"," dv(f, x, n))$,
+        [`pdv(, x)`, `pdv(f, x)`, `pdv(f, x, y)`, `pdv(f, x, [n])`],
+        $display(pdv(, x)"," pdv(f, x)"," pdv(f, x, y)"," pdv(f, x, [n]))$,
+        [`dv(, x, d: upright(D))`, `dv(f, x, d: upright(D))`, `dv(f, x, n, d: upright(D))`],
+        $display(dv(, x, d: upright(D))"," dv(f, x, d: upright(D))"," dv(f, x, n, d: upright(D)))$,
+        table.hline(),
+      )
+    // ]
+  ]
+]
+

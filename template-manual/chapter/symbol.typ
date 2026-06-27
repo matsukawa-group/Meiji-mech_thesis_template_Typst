@@ -10,11 +10,11 @@
   columns: (1fr, 3fr),
   stroke: none,
   align: left,
-  [$d$], [Channel width [$m$]],
-  [$L_j$], [Computational domain size in $j$-direction [$m$]],
+  [$d$], [Channel width [$#unit[m]$]],
+  [$L_j$], [Computational domain size in $j$-direction [$#unit[m]$]],
   [$N_j$], [Number of grid points in $j$-direction],
   [$"Re"$], [Reynolds number, $= u d slash nu$],
-  [$u$], [Velocity [$m slash s$]],
+  [$u$], [Velocity [$#unit[m / s]$]],
 )
 
 #v(8mm)
@@ -25,9 +25,9 @@
   columns: (1fr, 3fr),
   stroke: none,
   align: left,
-  [$delta$], [Channel half width [$m$]],
+  [$delta$], [Channel half width [$#unit[m]$]],
   [$epsilon_(i j k)$], [Levi--Civita symbol],
-  [$nu$], [Kinematic viscosity [$m^2 slash s$]],
+  [$nu$], [Kinematic viscosity [$#unit[m^2 / s]$]],
 )
 
 #v(8mm)

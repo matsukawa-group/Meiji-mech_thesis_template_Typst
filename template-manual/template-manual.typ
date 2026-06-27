@@ -78,6 +78,10 @@
 <ssec:subsubheading>
 ```
 
+// Typst 文書の基本的な書き方
 #include "chapter/basic.typ"
+
+// 定理環境・かっこいい枠
+#include "chapter/theorem.typ"
 
 #roremu(2000)

@@ -88,4 +88,4 @@
 // 謝辞
 #include "chapter/acknowledgement.typ"
 
-#roremu(2000)
+// #roremu(2000)

@@ -63,6 +63,9 @@
 // Typst 文書の基本的な書き方
 #include "chapter/basic.typ"
 
+// 図表の配置
+#include "chapter/figure_table.typ"
+
 // 定理環境・かっこいい枠
 #include "chapter/theorem.typ"
 

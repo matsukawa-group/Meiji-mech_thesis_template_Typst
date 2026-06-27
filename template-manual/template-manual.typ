@@ -61,4 +61,7 @@
 // 定理環境・かっこいい枠
 #include "chapter/theorem.typ"
 
+// 謝辞
+#include "chapter/acknowledgement.typ"
+
 // #roremu(2000)

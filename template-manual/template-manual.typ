@@ -41,13 +41,15 @@
   title: "目次",
   indent: auto,
 )
+#heading(numbering: none)[図目次]
 #outline(
-  title: "図目次",
+  title: none,
   indent: auto,
   target: figure.where(kind: image)
 )
+#heading(numbering: none)[表目次]
 #outline(
-  title: "表目次",
+  title: none,
   indent: auto,
   target: figure.where(kind: table)
 )

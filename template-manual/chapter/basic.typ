@@ -299,11 +299,14 @@ $
 === 単位の書き方
 <ssec:math-unit>
 
-数式中の物理量は Italic 体で表記しますが，単位は直立体で表記するのが一般的です．
+数式中の物理量は _Italic_ 体で表記しますが，単位は直立体で表記するのが一般的です．
 また，数値と単位の間には空白を設けるのが一般的な書き方です#footnote[例外的に空白を設けなくてもいい単位として，角度を表す $degree$ があります．$45 degree$ のように数値と単位を詰めて書くことが許容されています．ただし，温度を表す $#unit[celsius]$ は空白が必要です（$#qty[45][celsius]$）．ちなみに $degree$ を出力する `degree` コマンド自体は `fancy-units` パッケージのものではありません．]．
 これらの要求を満たして簡単に単位を書けるのが #link("https://typst.app/universe/package/fancy-units")[`fancy-units`] パッケージです#footnote[単位の出力に関しては #link("https://typst.app/universe/package/fancy-units")[`fancy-units`] パッケージ以外にも #link("https://typst.app/universe/package/unify/")[`unify`] パッケージがあります．しかし，熱伝達率の単位 $#unit[W / ((m^2 K))]$ のような単位をこの見た目で出力するには `unify` パッケージよりも `fancy-units` パッケージの方が簡単だったので，このレポートテンプレートでは `fancy-units` パッケージを採用しています．単位に関するパッケージはこれからのアップデート次第で，このレポートテンプレートで採用するパッケージも変更する可能性があります．]．
 単位のみの出力は `#unit[]` コマンド，数値と単位を併せての出力は `#qty[][]` コマンドを使用します．
 `#qty[][]` コマンドを使用すると，数値と単位の間に適切な長さの空白を自動で入れてくれます．
+
+また，物理量の次元を表記する際は $#dimension[T^-3 M $Theta$^-1]$ のように，指数表記することが多いです．
+そこで，このテンプレートでは `#dimension[]` コマンドを用意して，次元の表記を簡単にできるようにしています．
 
 #showybox(
   frame: bluebox,
@@ -315,6 +318,7 @@ $
         columns: (90mm, 50mm),
         inset: 6pt,
         table.header([コマンド], [出力]),
+        [`#dimension[T^-3 M $Theta$^-1]`], $#dimension[T^-3 M $Theta$^-1]$,
         [`#unit[W / ((m^2 K))]`], $#unit[W / ((m^2 K))]$,
         [`#unit(per-mode: "power")[W / (m^2 K)]`], $#unit(per-mode: "power")[W / (m^2 K)]$,
         [`#unit(per-mode: "fraction")[W / (m^2 K)]`], $#unit(per-mode: "fraction")[W / (m^2 K)]$,

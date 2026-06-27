@@ -7,6 +7,9 @@
 
 // 日本語のダミーテキスト
 #import "@preview/roremu:0.1.0": roremu
+// 数式を簡単に書くための設定
+#import "@preview/physica:0.9.5": *
+#let vr(v) = math.bold(math.upright(v)) // ベクトルを直立ボールドで表すコマンドを追加で作成
 
 #let setup(doc) = {
   // CJK 文字を組むときのスペース
@@ -99,6 +102,38 @@
   )
   show enum: set block(
     spacing: 1em,
+  )
+
+  // 複数行に亘る数式に関する設定
+  import "@preview/equate:0.3.3": equate
+  show: equate.with(breakable: true, sub-numbering: false)
+
+  // 数式に関する設定
+  set math.equation(
+    numbering: (..n) => numbering("(1.1)", ..n),
+    supplement: none,
+  )
+  show math.equation: set block(
+    spacing: 1em,
+  )
+  set math.cases(gap: 1em)
+
+  // 図表・数式の番号付けを章ごとにリセットするための設定
+  show heading.where(level: 1): it => {
+    counter(math.equation).update(0)
+    counter(figure.where(kind: image)).update(0)
+    counter(figure.where(kind: table)).update(0)
+    counter(figure.where(kind: raw)).update(0)
+    it
+  }
+  set math.equation(
+    numbering: num => 
+      numbering("(1.1)", counter(heading).get().first(), num),
+      number-align: bottom
+    )
+  set figure(
+    numbering: num =>
+      numbering("1.1", counter(heading).get().first(), num)
   )
 
   // リンク

@@ -52,6 +52,9 @@
   target: figure.where(kind: table)
 )
 
+// 記号表
+#include "chapter/symbol.typ"
+
 #set page(numbering: "1")
 #counter(page).update(1)
 

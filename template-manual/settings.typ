@@ -7,6 +7,9 @@
 
 // 日本語のダミーテキスト
 #import "@preview/roremu:0.1.0": roremu
+// 数式を簡単に書くための設定
+#import "@preview/physica:0.9.5": *
+#let vr(v) = math.bold(math.upright(v)) // ベクトルを直立ボールドで表すコマンドを追加で作成
 // 定理環境の設定
 #import "@preview/theorion:0.6.0": *
 // （好みに応じて変更可）
@@ -14,6 +17,9 @@
 // #import cosmos.fancy: *
 #import cosmos.rainbow: *
 // #import cosmos.clouds: *
+
+// 単位に関する設定
+#import "@preview/fancy-units:0.1.1": *
 
 #let setup(doc) = {
   // CJK 文字を組むときのスペース
@@ -35,12 +41,12 @@
     numbering: (..nums) => {
       let ns = nums.pos()
       if ns.len() == 1 {
-        [第 #ns.first() 章]
+        [第 #ns.first() 章#h(1em)]
       } else {
         numbering("1.1", ..ns)
       }
     },
-    supplement: none
+    supplement: none,
   )
   show heading: it => {
     if it.level == 1 {
@@ -81,6 +87,18 @@
     ],
   )
 
+  // ページのヘッダーの設定
+  import "@preview/hydra:0.6.2": hydra
+  set page(
+    header: context {
+      let is-chapter-start = query(heading.where(level: 1)).any(it => it.location().page() == here().page())
+      if not is-chapter-start {
+        text(font: "Segoe UI", weight: "bold")[#hydra(1)]
+        line(length: 100%)
+      }
+    },
+  )
+
   // 番号なしの箇条書きの設定
   set list(
     indent: 1em,
@@ -94,6 +112,38 @@
   )
   show enum: set block(
     spacing: 1em,
+  )
+
+  // 複数行に亘る数式に関する設定
+  import "@preview/equate:0.3.3": equate
+  show: equate.with(breakable: true, sub-numbering: false)
+
+  // 数式に関する設定
+  set math.equation(
+    numbering: (..n) => numbering("(1.1)", ..n),
+    supplement: none,
+  )
+  show math.equation: set block(
+    spacing: 1em,
+  )
+  set math.cases(gap: 1em)
+
+  // 図表・数式の番号付けを章ごとにリセットするための設定
+  show heading.where(level: 1): it => {
+    counter(math.equation).update(0)
+    counter(figure.where(kind: image)).update(0)
+    counter(figure.where(kind: table)).update(0)
+    counter(figure.where(kind: raw)).update(0)
+    it
+  }
+  set math.equation(
+    numbering: num => 
+      numbering("(1.1)", counter(heading).get().first(), num),
+      number-align: bottom
+    )
+  set figure(
+    numbering: num =>
+      numbering("1.1", counter(heading).get().first(), num)
   )
 
   // リンク

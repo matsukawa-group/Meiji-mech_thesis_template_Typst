@@ -60,30 +60,6 @@
 #set page(numbering: "1")
 #counter(page).update(1)
 
-= これは見出し
-<ch:heading>
-
-```Typst
-= これは見出し
-<ch:heading>
-```
-
-== これは小見出し
-<sec:subheading>
-
-```Typst
-== これは小見出し
-<sec:subheading>
-```
-
-=== これはさらに小さい見出し
-<ssec:subsubheading>
-
-```Typst
-=== これはさらに小さい見出し
-<ssec:subsubheading>
-```
-
 // Typst 文書の基本的な書き方
 #include "chapter/basic.typ"
 

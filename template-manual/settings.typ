@@ -10,6 +10,13 @@
 // 数式を簡単に書くための設定
 #import "@preview/physica:0.9.5": *
 #let vr(v) = math.bold(math.upright(v)) // ベクトルを直立ボールドで表すコマンドを追加で作成
+// 定理環境の設定
+#import "@preview/theorion:0.6.0": *
+// （好みに応じて変更可）
+// #import cosmos.simple: *
+// #import cosmos.fancy: *
+#import cosmos.rainbow: *
+// #import cosmos.clouds: *
 
 #let setup(doc) = {
   // CJK 文字を組むときのスペース
@@ -277,3 +284,57 @@
 }
 
 // =================================================================
+
+
+//========== showybox の設定 ============
+#import "@preview/showybox:2.0.4": showybox as original-showybox
+#let showybox(
+  title: none,
+  ..args,
+  body,
+) = {
+  let title-arg = if title == none {
+    (:)
+  } else {
+    (title: text(font: "Segoe UI")[#title])
+  }
+
+  original-showybox(
+    ..args,
+    ..title-arg,
+  )[
+    #body
+  ]
+}
+
+#let bluebox = (
+  title-color: rgb("#007bff"),
+  border-color: rgb("#007bff"),
+  body-color: rgb("#f0f8ff"),
+  footer-color: rgb("#f0f8ff"),
+)
+
+#let redbox = (
+  title-color: rgb("#fc3e3e"),
+  border-color: rgb("#fc3e3e"),
+  body-color: rgb("#fff0f0"),
+  footer-color: rgb("#fff0f0"),
+)
+
+#let greenbox = (
+  title-color: rgb("#00cc4b"),
+  border-color: rgb("#00cc4b"),
+  body-color: rgb("#f0fff0"),
+  footer-color: rgb("#f0fff0"),
+)
+
+#let graybox = (
+  title-color: rgb("#666666"),
+  border-color: rgb("#666666"),
+  body-color: rgb("#F5F5F5"),
+  footer-color: rgb("#F5F5F5"),
+)
+//=======================================
+
+
+

@@ -13,7 +13,7 @@
   [$d$], [Channel width [$#dimension[L]$]],
   [$L_j$], [Computational domain size in $j$-direction [$#dimension[L]$]],
   [$N_j$], [Number of grid points in $j$-direction],
-  [$"Re"$], [Reynolds number, $= u d slash nu$],
+  [$Re$], [Reynolds number, $= u d slash nu$],
   [$u$], [Velocity [$#dimension[L / T]$]],
 )
 
@@ -52,7 +52,7 @@
   columns: (1fr, 3fr),
   stroke: none,
   align: left,
-  [$(quad)_("rms")$], [Root mean square],
+  [$(quad)_rms$], [Root mean square],
   [$(quad)_("w")$], [Wall],
   [$(quad)_tau$], [Wall unit],
 )

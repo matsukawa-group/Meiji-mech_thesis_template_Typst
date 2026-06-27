@@ -229,3 +229,69 @@ $s i n x$ などと書くことのないよう気をつけましょう．
   ]
 ]
 
+=== 複数行に亘る数式の書き方
+<ssec:math-multiline>
+
+複数の数式を並べる場合は
+$
+  a^2 & = b^2 + c^2 - 2 b c cos A #<eq:cosA> \
+  b^2 & = a^2 + c^2 - 2 c a cos B #<eq:cosB> \
+  c^2 & = a^2 + b^2 - 2 a b cos C #<eq:cosC>
+$
+```Typst
+$
+  a^2 & = b^2 + c^2 - 2 b c cos A #<eq:cosA>\
+  b^2 & = a^2 + c^2 - 2 c a cos B #<eq:cosB>\
+  c^2 & = a^2 + b^2 - 2 a b cos C #<eq:cosC>
+$
+```
+のように `&` の位置で数式を揃えることができます．
+式~@eq:cosA–@eq:cosC~は $=$ の前に `&` を置いているため，$=$ の位置で数式が揃っています．
+数式を改行するときは行末にバックスラッシュ `\` を入れます．
+また，このやり方を応用すれば
+$
+  sin 2 alpha & = sin (alpha + alpha) #<equate:revoke> \
+              & = sin alpha cos alpha + cos alpha sin alpha #<equate:revoke> \
+              & = 2 sin alpha cos alpha #<eq:double-angle>
+$
+```Typst
+$
+  sin 2 alpha & = sin (alpha + alpha) #<equate:revoke> \
+              & = sin alpha cos alpha + cos alpha sin alpha #<equate:revoke> \
+              & = 2 sin alpha cos alpha #<eq:double-angle>
+$
+```
+のように途中式も入れられます．
+式番号を振らなくていい行は `#<equate:revoke>` コマンドを使用しています．
+
+$
+  epsilon lr((pdv(tilde(phi.alt)_1, t, 2) + g pdv(tilde(phi.alt)_1, z)) |)_(z = 0) & + epsilon^2 lr(\[pdv(tilde(phi.alt)_2, t, 2) + g pdv(tilde(phi.alt)_2, z) + tilde(eta)_1 pdv(, z) (pdv(tilde(phi.alt)_1, t, 2) + g pdv(tilde(phi.alt)_1, z))) #<equate:revoke> \
+  & + pdv(, t) lr(lr({(pdv(tilde(phi.alt)_1, x)) + (pdv(tilde(phi.alt)_1, z))^2}])|)_(z = 0) = 0 #<eq:wave>
+$
+```Typst
+$
+  epsilon lr((pdv(tilde(phi.alt)_1, t, 2) + g pdv(tilde(phi.alt)_1, z)) |)_(z = 0) & + epsilon^2 lr(\[pdv(tilde(phi.alt)_2, t, 2) + g pdv(tilde(phi.alt)_2, z) + tilde(eta)_1 pdv(, z) (pdv(tilde(phi.alt)_1, t, 2) + g pdv(tilde(phi.alt)_1, z))) #<equate:revoke> \
+  & + pdv(, t) lr(lr({(pdv(tilde(phi.alt)_1, x)) + (pdv(tilde(phi.alt)_1, z))^2}])|)_(z = 0) = 0 #<eq:wave>
+$
+```
+
+式~@eq:wave~は式の途中で改行を挟む場合の処理方法を示しています．
+注目すべき箇所は大括弧 $[ quad ]$ の途中で改行を挟んでいる点，代入記法として $|_(z = 0)$ を使用している点の二箇所です．
+このような場合には #link("https://typst.app/docs/reference/math/lr/")[`lr` コマンド] と `\` によるエスケープでうまいこと表現します．
+また，`phi` は $phi$ と出力されますが，`phi.alt` とすることで $phi.alt$ と出力されるようになります．
+
+場合分けのある数式は `cases` が便利です．式~@eq:kronecker-delta~は Kronecker のデルタです．
+$
+  delta_(i j) = cases(
+    1"," quad i = j,
+    0"," quad i != j
+  )#<eq:kronecker-delta>
+$
+```Typst
+$
+  delta_(i j) = cases(
+    1"," quad i = j,
+    0"," quad i != j
+  )#<eq:kronecker-delta>
+$
+```

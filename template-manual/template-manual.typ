@@ -82,6 +82,14 @@
 // === 謝辞 ===
 #include "chapter/acknowledgement.typ"
 
+// === 参考文献 ===
+#show: bib-init
+#bibliography-list(
+  title: "参考文献",
+  ..bib-file(read("mybib_en.bib"), ..my-bib-style),
+  ..bib-file(read("mybib_ja.bib"), ..my-bib-style),
+)
+
 // === 付録 ===
 #include "chapter/appendix.typ"
 

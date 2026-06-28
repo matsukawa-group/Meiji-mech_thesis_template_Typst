@@ -72,6 +72,16 @@
   ]
 }
 
+#let appendix-mode = state("appendix-mode", false)
+
+#let appendix = {
+  counter(heading).update(0)
+  counter(figure.where(kind: image)).update(0)
+  counter(figure.where(kind: table)).update(0)
+  counter(math.equation).update(0)
+  appendix-mode.update(true)
+}
+
 // =================================================================
 // 文書全体の設定
 // =================================================================
@@ -103,26 +113,39 @@
     supplement: none,
   )
   show heading: it => {
+    let is-appendix = appendix-mode.get()
     if it.level == 1 {
       pagebreak()
       v(1.8em)
       let has-number = it.numbering != none
+      let ns = counter(heading).at(it.location())
       block(width: 100%, above: 2em, below: 2em)[
         #if has-number {
-          let ns = counter(heading).at(it.location())
           text(size: 24pt, font: "Segoe UI")[
-            第 #ns.first() 章
+            #if is-appendix {
+              [付録 #numbering("A", ns.first())]
+            } else {
+              [第 #ns.first() 章]
+            }
           ]
-          v(1.0em) + h(-1em)
+          v(1.0em)
         }
         #text(size: 24pt, font: "Segoe UI")[
-          #it.body
+          #h(-1em)#it.body
         ]
       ]
     } else if it.numbering != none {
       let ns = counter(heading).at(it.location())
       text(font: "Segoe UI")[
-        #v(0.2em)#linebreak()#numbering("1.1", ..ns)#h(1em)#it.body
+        #v(0.2em)
+        #linebreak()
+        #if is-appendix {
+          numbering("A.1", ..ns)
+        } else {
+          numbering("1.1", ..ns)
+        }
+        #h(1em)
+        #it.body
       ]
     } else {
       text(font: "Segoe UI")[#it.body]
@@ -260,6 +283,43 @@
       it
     }
   }
+
+show figure.where(kind: image): set figure(
+  numbering: (..nums) => {
+    let fig-no = nums.pos().first()
+    let chap-no = counter(heading).get().first()
+
+    if appendix-mode.get() {
+      numbering("A.1", chap-no, fig-no)
+    } else {
+      numbering("1.1", chap-no, fig-no)
+    }
+  },
+)
+
+show figure.where(kind: table): set figure(
+  numbering: (..nums) => {
+    let tab-no = nums.pos().first()
+    let chap-no = counter(heading).get().first()
+
+    if appendix-mode.get() {
+      numbering("A.1", chap-no, tab-no)
+    } else {
+      numbering("1.1", chap-no, tab-no)
+    }
+  },
+)
+
+
+set math.equation(
+  numbering: (..nums) => {
+    if appendix-mode.get() {
+      numbering("(A.1)", counter(heading).get().first(), nums.pos().first())
+    } else {
+      numbering("(1.1)", counter(heading).get().first(), nums.pos().first())
+    }
+  },
+)
 
   doc
 }

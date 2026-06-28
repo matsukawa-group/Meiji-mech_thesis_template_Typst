@@ -128,10 +128,10 @@
               [第 #ns.first() 章]
             }
           ]
-          v(1.0em)
+          v(1.0em)+h(-1em)
         }
         #text(size: 24pt, font: "Segoe UI")[
-          #h(-1em)#it.body
+          #it.body
         ]
       ]
     } else if it.numbering != none {

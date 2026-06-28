@@ -399,7 +399,59 @@
     )
   }
 }
+// =================================================================
 
+// =================================================================
+// 自作の表環境
+// =================================================================
+#let mytable(body) = {
+  set table(
+    stroke: (x, y) => (
+      if y == 0 {
+        (top: black)
+        (bottom: black)
+      }
+        + if x == 0 {
+          (right: black)
+        }
+    ),
+    align: (x, y) => center,
+    fill: (x, y) => {
+      if y == 0 {
+        none
+      } else if calc.odd(y) {
+        rgb("F7FBFD")
+      } else {
+        rgb("E6F2F7")
+      }
+    },
+  )
+
+  body
+}
+
+#let mytable2(body) = {
+  set table(
+    stroke: (x, y) => (
+      if y == 0 {
+        (top: black)
+      }
+        + if x == 0 {
+          (right: black)
+        }
+    ),
+    align: (x, y) => center,
+    fill: (x, y) => {
+      if calc.odd(y) {
+        rgb("F7FBFD")
+      } else {
+        rgb("E6F2F7")
+      }
+    },
+  )
+
+  body
+}
 // =================================================================
 
 

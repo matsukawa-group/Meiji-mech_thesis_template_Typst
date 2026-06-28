@@ -157,7 +157,7 @@
   title: [図のラベルの参照方法],
 )[
   #align(center)[
-    // #mytable[
+    #mytable[
       #table(
         columns: (120mm, 30mm),
         inset: 6pt,
@@ -170,7 +170,7 @@
         [`(@subfig:four_figures-a–@subfig:four_figures-c)`], [(@subfig:four_figures-a–@subfig:four_figures-c)],
         table.hline(),
       )
-    // ]
+    ]
   ]
 ]
 #h(1em)

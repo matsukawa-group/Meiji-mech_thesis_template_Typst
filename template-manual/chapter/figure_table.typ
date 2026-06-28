@@ -179,3 +179,94 @@
 図~@fig:four_figures(@subfig:four_figures-a)~のように全体の図とサブ図を両方参照したいときは `@fig:four_figures(@subfig:four_figures-a)` と入力すれば出力できます．
 このとき，`@subfig:four_figures-a` 前後の括弧 `()` を忘れないでください．
 括弧をデフォルトで出力するような設定もできますが，図~@fig:four_figures(@subfig:four_figures-a, @subfig:four_figures-b)~のように複数のサブ図を参照したいときもあるので，このテンプレートでは括弧は手動で入力する方式にしています．
+
+== 表の配置
+<sec:table>
+
+次に表の作り方・配置の仕方について説明します．
+正直，Typst での表作成は少々面倒です．
+特に表のセルの数が多くなると行をいくつも増やさなければいけないのでかなり労力がかかります．
+表作成時は `table` コマンドを使用しますが，図の場合と挙動が似ているので `#figure()` 環境内で `table` コマンドを使用して表を配置します．
+表~@tb:example_table~は表の作成例です．
+ヘッダー（学会名・会員種別・年会費）は中央揃え，それ以外の内容は左列から順に左揃え・中央揃え・右揃えにしています．
+揃え位置の指定は `align` オプションで行います．
+
+次に表のセル結合について説明します．
+行方向のセル結合は `table.cell(colspan: 3, align: center)[実在する学会]` のように `colspan` オプションを使用して行います．
+`colspan: 3` とすれば 3 列分のセルを結合できます．
+列方向のセル結合は `table.cell(rowspan: 4, align: left + horizon)[日本架空学会]` のように `rowspan` オプションを使用して行います．
+`rowspan: 4` とすれば 4 行分のセルを結合できます．
+
+#figure(
+  placement: top,
+  table(
+    columns: (auto, auto, auto),
+    align: (left, center, right),
+
+    stroke: (x, y) => (
+      if y == 0 {
+        (top: 1.2pt + black, bottom: 1.2pt + black)
+      } else {
+        (bottom: 0.5pt + black)
+      }
+    ),
+
+    table.header(
+      table.cell(align: center)[学会名],
+      table.cell(align: center)[会員種別],
+      table.cell(align: center)[年会費],
+    ),
+
+    table.cell(colspan: 3, align: center)[実在する学会],
+
+    [日本機械学会], [学生員], [$4,800$ 円],
+    [日本流体力学会], [学生会員], [$5,000$ 円],
+    [日本伝熱学会], [学生会員], [$4,000$ 円],
+
+    table.cell(colspan: 3, align: center)[実在しない学会],
+
+    table.cell(rowspan: 4, align: left + horizon)[日本架空学会], [小学生会員], [$-8,000$ 円],
+    [中高生会員], [$-5,000$ 円],
+    [大学生会員], [$-2,000$ 円],
+    [名誉学生会員], [$6.02 times 10^23$ 円],
+  ),
+  caption: [Please write the table caption here.],
+) <tb:example_table>
+
+```Typst
+#figure(
+  placement: top,
+  table(
+    columns: (auto, auto, auto),
+    align: (left, center, right),
+
+    stroke: (x, y) => (
+      if y == 0 {
+        (top: 1.2pt + black, bottom: 1.2pt + black)
+      } else {
+        (bottom: 0.5pt + black)
+      }
+    ),
+
+    table.header(
+      table.cell(align: center)[学会名],
+      table.cell(align: center)[会員種別],
+      table.cell(align: center)[年会費],
+    ),
+
+    table.cell(colspan: 3, align: center)[実在する学会],
+
+    [日本機械学会], [学生員], [$4,800$ 円],
+    [日本流体力学会], [学生会員], [$5,000$ 円],
+    [日本伝熱学会], [学生会員], [$4,000$ 円],
+
+    table.cell(colspan: 3, align: center)[実在しない学会],
+
+    table.cell(rowspan: 4, align: left + horizon)[日本架空学会], [小学生会員], [$-8,000$ 円],
+    [中高生会員], [$-5,000$ 円],
+    [大学生会員], [$-2,000$ 円],
+    [名誉学生会員], [$6.02 times 10^23$ 円],
+  ),
+  caption: [Please write the table caption here.],
+) <tb:example_table>
+```

@@ -1,7 +1,6 @@
 // 設定ファイル
 #import "../settings.typ": *
 
-
 #heading(numbering: none)[謝辞]
 
 謝辞は非常に重要な章です．

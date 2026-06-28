@@ -82,4 +82,6 @@
 // === 謝辞 ===
 #include "chapter/acknowledgement.typ"
 
-// #roremu(2000)
+// === 付録 ===
+#include "chapter/appendix.typ"
+

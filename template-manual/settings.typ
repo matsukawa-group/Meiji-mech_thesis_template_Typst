@@ -222,17 +222,44 @@
     fahrenheit: [$degree:F$],
   )
 
+  // 複数の図を並べるための設定
   show: hallon.style-figures.with(
     heading-levels: 1,
     figure-caption: my-figure-caption,
     subfigure-caption: my-subfigure-caption,
   )
-
   show figure.where(kind: image): set figure(supplement: "Figure")
   show figure.where(kind: image): set figure.caption(separator: h(1em))
   show figure.where(kind: "subfigure"): set figure(supplement: none, numbering: " (a)")
   show figure.where(kind: table): set figure.caption(position: top)
   show figure.where(kind: table): set figure.caption(separator: h(1em))
+
+  // 図とキャプションの間のスペースを設定
+  set figure(gap: 1em)
+  // 参照時に図・表は番号だけ表示
+  show ref: it => {
+    let el = it.element
+
+    if el != none and el.func() == figure {
+      let loc = el.location()
+
+      if el.kind == image {
+        link(loc)[#numbering(
+          el.numbering,
+          ..counter(figure.where(kind: image)).at(loc),
+        )]
+      } else if el.kind == table {
+        link(loc)[#numbering(
+          el.numbering,
+          ..counter(figure.where(kind: table)).at(loc),
+        )]
+      } else {
+        it
+      }
+    } else {
+      it
+    }
+  }
 
   doc
 }

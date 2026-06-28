@@ -21,6 +21,60 @@
 // 単位に関する設定
 #import "@preview/fancy-units:0.1.1": *
 
+// 複数の図を並べるための設定
+#import "@preview/hallon:0.1.3" as hallon: subfigure
+#import "@preview/smartaref:0.1.0": Cref, cref
+// 図のキャプションの設定
+#let my-figure-caption(it) = context {
+  let gutter = 1em
+
+  let label = [
+    #it.supplement
+    #h(0.1em)
+    #it.counter.display(it.numbering)
+  ]
+
+  layout(size => {
+    let label-w = measure(label).width
+    let body-w = measure(it.body).width
+    let gutter-w = measure(h(gutter)).width
+    let total-w = label-w + gutter-w + body-w
+
+    if total-w <= size.width {
+      // 1 行に収まる場合：キャプション全体を中央寄せ
+      align(center)[
+        #grid(
+          columns: (auto, auto),
+          column-gutter: gutter,
+          align: (left, top),
+          label,
+          align(left)[#it.body],
+        )
+      ]
+    } else {
+      // 折り返す場合：本文冒頭で揃える
+      grid(
+        columns: (auto, 1fr),
+        column-gutter: gutter,
+        align: (left, top),
+        label,
+        align(left)[#it.body],
+      )
+    }
+  })
+}
+// サブ図のキャプションの設定
+#let my-subfigure-caption(it, parent: none) = context {
+  align(center)[
+    #counter(figure.where(kind: "subfigure")).display(it.numbering)
+    #h(0.5em)
+    #it.body
+  ]
+}
+
+// =================================================================
+// 文書全体の設定
+// =================================================================
 #let setup(doc) = {
   // CJK 文字を組むときのスペース
   import "@preview/cjk-spacer:0.2.1": cjk-spacer
@@ -168,8 +222,48 @@
     fahrenheit: [$degree:F$],
   )
 
+  // 複数の図を並べるための設定
+  show: hallon.style-figures.with(
+    heading-levels: 1,
+    figure-caption: my-figure-caption,
+    subfigure-caption: my-subfigure-caption,
+  )
+  show figure.where(kind: image): set figure(supplement: "Figure")
+  show figure.where(kind: image): set figure.caption(separator: h(1em))
+  show figure.where(kind: "subfigure"): set figure(supplement: none, numbering: " (a)")
+  show figure.where(kind: table): set figure.caption(position: top)
+  show figure.where(kind: table): set figure.caption(separator: h(1em))
+
+  // 図とキャプションの間のスペースを設定
+  set figure(gap: 1em)
+  // 参照時に図・表は番号だけ表示
+  show ref: it => {
+    let el = it.element
+
+    if el != none and el.func() == figure {
+      let loc = el.location()
+
+      if el.kind == image {
+        link(loc)[#numbering(
+          el.numbering,
+          ..counter(figure.where(kind: image)).at(loc),
+        )]
+      } else if el.kind == table {
+        link(loc)[#numbering(
+          el.numbering,
+          ..counter(figure.where(kind: table)).at(loc),
+        )]
+      } else {
+        it
+      }
+    } else {
+      it
+    }
+  }
+
   doc
 }
+// =================================================================
 
 // 次元表記用のマクロ
 #let dimension(body) = {
@@ -305,7 +399,59 @@
     )
   }
 }
+// =================================================================
 
+// =================================================================
+// 自作の表環境
+// =================================================================
+#let mytable(body) = {
+  set table(
+    stroke: (x, y) => (
+      if y == 0 {
+        (top: black)
+        (bottom: black)
+      }
+        + if x == 0 {
+          (right: black)
+        }
+    ),
+    align: (x, y) => center,
+    fill: (x, y) => {
+      if y == 0 {
+        none
+      } else if calc.odd(y) {
+        rgb("F7FBFD")
+      } else {
+        rgb("E6F2F7")
+      }
+    },
+  )
+
+  body
+}
+
+#let mytable2(body) = {
+  set table(
+    stroke: (x, y) => (
+      if y == 0 {
+        (top: black)
+      }
+        + if x == 0 {
+          (right: black)
+        }
+    ),
+    align: (x, y) => center,
+    fill: (x, y) => {
+      if calc.odd(y) {
+        rgb("F7FBFD")
+      } else {
+        rgb("E6F2F7")
+      }
+    },
+  )
+
+  body
+}
 // =================================================================
 
 

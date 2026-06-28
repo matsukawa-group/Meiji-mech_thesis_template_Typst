@@ -211,7 +211,7 @@ $s i n x$ などと書くことのないよう気をつけましょう．
   title: [`physica` パッケージの数式コマンド],
 )[
   #align(center)[
-    // #mytable[
+    #mytable[
       #table(
         columns: (90mm, 50mm),
         inset: 6pt,
@@ -225,7 +225,7 @@ $s i n x$ などと書くことのないよう気をつけましょう．
         $display(dv(, x, d: upright(D))"," dv(f, x, d: upright(D))"," dv(f, x, n, d: upright(D)))$,
         table.hline(),
       )
-    // ]
+    ]
   ]
 ]
 
@@ -313,7 +313,7 @@ $
   title: [`fancy-units` パッケージの単位コマンド],
 )[
   #align(center)[
-    // #mytable[
+    #mytable[
       #table(
         columns: (90mm, 50mm),
         inset: 6pt,
@@ -329,7 +329,7 @@ $
         [`#qty[45][mL]`], $#qty[45][mL]$,
         table.hline(),
       )
-    // ]
+    ]
   ]
 ]
 

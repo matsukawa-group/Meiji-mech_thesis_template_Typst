@@ -5,9 +5,12 @@
 ////
 //////////////////////////////////////////////////////////////////
 
-// 設定ファイル
+// === 設定ファイル ===
 #import "settings.typ": *
 
+// ========================
+// ========= 表紙 =========
+// ========================
 #thesis-cover(
   // 卒業論文なら "bachelor" を，修士論文なら "master" を指定
   kind: "bachelor",
@@ -31,11 +34,13 @@
   // 学位論文執筆者氏名
   author: [姓姓　名名],
 )
+// ========================
 
 #show: setup            // 文書全体の設定
 #show: show-theorion    // 定理環境
 
 #set page(numbering: "i")
+// === 目次 ===
 // 目次が不要な場合は以下の行をコメントアウトしてください．
 #outline(
   title: "目次",
@@ -54,19 +59,27 @@
   target: figure.where(kind: table)
 )
 
-// 記号表
+// === 記号表 ===
 #include "chapter/symbol.typ"
 
 #set page(numbering: "1")
 #counter(page).update(1)
+// 上のコマンドは消さないで．
+// 本文はこれ以降に記載する．
 
-// Typst 文書の基本的な書き方
+// Typst ソースは一つの typ ファイルに書くのではなく，章ごとの typ ファイルに分割して書きましょう．
+// 分割したファイルを読み込むときは #include を使います．
+
+// === Typst 文書の基本的な書き方 ===
 #include "chapter/basic.typ"
 
-// 定理環境・かっこいい枠
+// === 図表の配置 ===
+#include "chapter/figure_table.typ"
+
+// === 定理環境・かっこいい枠 ===
 #include "chapter/theorem.typ"
 
-// 謝辞
+// === 謝辞 ===
 #include "chapter/acknowledgement.typ"
 
 // #roremu(2000)

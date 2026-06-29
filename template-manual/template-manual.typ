@@ -79,6 +79,9 @@
 // === 定理環境・かっこいい枠 ===
 #include "chapter/theorem.typ"
 
+// === 参考文献リストの作成と出力 ===
+#include "chapter/bibliography.typ"
+
 // === 謝辞 ===
 #include "chapter/acknowledgement.typ"
 

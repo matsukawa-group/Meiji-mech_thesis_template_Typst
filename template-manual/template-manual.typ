@@ -38,6 +38,7 @@
 
 #show: setup            // 文書全体の設定
 #show: show-theorion    // 定理環境
+#show: bib-init         // 参考文献の設定
 
 #set page(numbering: "i")
 // === 目次 ===
@@ -86,7 +87,6 @@
 #include "chapter/acknowledgement.typ"
 
 // === 参考文献 ===
-#show: bib-init
 #bibliography-list(
   title: "参考文献",
   ..bib-file(read("mybib_en.bib"), ..my-bib-style),

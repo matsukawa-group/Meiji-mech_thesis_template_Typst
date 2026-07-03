@@ -171,7 +171,7 @@
       let is-chapter-start = query(heading.where(level: 1)).any(it => it.location().page() == here().page())
       if not is-chapter-start {
         text(font: "Segoe UI", weight: "bold")[#hydra(1)]
-        line(length: 100%)
+        line(length: 100%, stroke: 0.5pt)
       }
     },
   )

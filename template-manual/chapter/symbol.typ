@@ -13,7 +13,7 @@
   [$d$], [Channel width [$#dimension[L]$]],
   [$L_j$], [Computational domain size in $j$-direction [$#dimension[L]$]],
   [$N_j$], [Number of grid points in $j$-direction],
-  [$Re$], [Reynolds number, $= u d slash nu$],
+  [$Re$], [Reynolds number, $= u d slash nu$ [-]],
   [$u$], [Velocity [$#dimension[L / T]$]],
 )
 

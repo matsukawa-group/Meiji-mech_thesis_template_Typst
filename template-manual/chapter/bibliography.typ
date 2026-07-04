@@ -105,7 +105,7 @@ Typst でも `bib` ファイルを使用して文献リストを自動で作成�
 また，不要なフィールドがあっても無視されるだけなので邪魔であれば消しても構いません．
 
 === 各フィールドの詳細
-<sec:bib-field>
+<ssec:bib-field>
 
 - `access`\ Webページを閲覧した日付（参照日）を記入します．`online` でのみ有効です．
 // 書き方の詳細は第~\ref{ssec:online}節（\ttonline）を参照．
@@ -162,5 +162,38 @@ Typst でも `bib` ファイルを使用して文献リストを自動で作成�
         yomi = {Matsukawa, Yuki and Tsukahara, Takahiro}
   ```
   のようにローマ字で読みを書くと，英語文献と日本語文献を混ぜてアルファベット順でソートしてくれます．
+
+=== `@article`
+<ssec:bib-article>
+
+#showybox(
+  frame: bluebox,
+  title: [`@article`],
+)[
+  - 必須項目\ `author`, `title`, `journal`, `year`
+  - オプション項目\ `volume`, `number`, `pages`, `month`, `note`, `key`, `doi`, `url`
+  - 出力例（英語文献）\ #box(fill: luma(80%))[`author 1`], #box(fill: luma(80%))[`author 2`] and #box(fill: luma(80%))[`author 3`], "#box(fill: luma(80%))[`title`]," #box(fill: luma(80%))[_`journal`_] (#box(fill: luma(80%))[`year`]), #box(fill: luma(80%))[*`volume`*] (#box(fill: luma(80%))[`number`]), #box(fill: luma(80%))[`pages`], (#box(fill: luma(80%))[`note`]), DOI: #box(fill: luma(80%))[`doi`].
+  - 出力例（日本語文献）\ #box(fill: luma(80%))[`author 1`], #box(fill: luma(80%))[`author 2`], #box(fill: luma(80%))[`author 3`],「#box(fill: luma(80%))[`title`]」, #box(fill: luma(80%))[`journal`] (#box(fill: luma(80%))[`year`]), #box(fill: luma(80%))[*`volume`*] (#box(fill: luma(80%))[`number`]), #box(fill: luma(80%))[`pages`], (#box(fill: luma(80%))[`note`]), DOI: #box(fill: luma(80%))[`doi`].
+
+  ```BibTeX
+  @article{Matsukawa:PoF2022,
+      author  = {Matsukawa, Yuki and Tsukahara, Takahiro},
+      title   = {Subcritical transition of {Taylor--Couette--Poiseuille} flow 
+                  at high radius ratio},
+      journal = {Physics of Fluids},
+      volume  = {34},
+      number  = {7},
+      year    = {2022},
+      doi     = {10.1063/5.0096676},
+      url     = {https://doi.org/10.1063/5.0096676},
+      note    = {074109}
+  }
+  ```
+]
+
+`article` は雑誌に掲載された論文です．
+流体力学分野では英文雑誌だと Journal of Fluid Mechanics #footnote[Journal of Fluid Mechanics, #link("https://www.cambridge.org/core/journals/journal-of-fluid-mechanics")] や Physics of Fluids #footnote[Physics of Fluids, #link("https://pubs.aip.org/aip/pof")] などが挙げられます．
+国内雑誌だと日本機械学会誌 #footnote[日本機械学会誌, #link("https://www.jsme.or.jp/publication/kaisi/")]や日本流体力学会誌『ながれ』#footnote[日本流体力学会誌『ながれ』, #link("https://www.nagare.or.jp/publication/nagare.html")]などが該当します．
+
 
 

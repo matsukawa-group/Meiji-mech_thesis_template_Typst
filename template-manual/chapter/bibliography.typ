@@ -21,6 +21,44 @@
 
 このレポートテンプレートでは #link("https://typst.app/universe/package/enja-bib/")[`enja-bib`] パッケージを利用して，BibTeX 形式の文献データベースから参考文献を出力しているため，日本語文献と英語文献で異なるスタイルを適用できるようにしています．
 
+== 本文中での引用方法
+<sec:bib-cite>
+
+文献を文章中で引用する際の主なコマンドは以下の通りです．
+
+#showybox(
+  frame: bluebox,
+  title: [文献を引用するためのコマンド],
+)[
+  #align(center)[
+    #mytable2[
+      #table(
+        columns: (20mm, 130mm),
+        inset: 6pt,
+        // table.header([コマンド], [出力]),
+        [コマンド], [`@Reynolds:PhilTransRoySoc1883`],
+        [出力], [@Reynolds:PhilTransRoySoc1883],
+        [コマンド], [`#citen(<Reynolds:PhilTransRoySoc1883>)`],
+        [出力], [#citen(<Reynolds:PhilTransRoySoc1883>)],
+        [コマンド], [`#citet(<Reynolds:PhilTransRoySoc1883>)`],
+        [出力], [#citet(<Reynolds:PhilTransRoySoc1883>)],
+        [コマンド], [`#citep(<Reynolds:PhilTransRoySoc1883>)`],
+        [出力], [#citep(<Reynolds:PhilTransRoySoc1883>)],
+        [コマンド], [`@Reynolds:PhilTransRoySoc1883,@Matsukawa:PoF2022`],
+        [出力], [@Reynolds:PhilTransRoySoc1883,@Matsukawa:PoF2022],
+        [コマンド], [`#citen(<Reynolds:PhilTransRoySoc1883>,<Matsukawa:PoF2022>)`],
+        [出力], [#citen(<Reynolds:PhilTransRoySoc1883>,<Matsukawa:PoF2022>)],
+        [コマンド], [`#citet(<Reynolds:PhilTransRoySoc1883>,<Matsukawa:PoF2022>)`],
+        [出力], [#citet(<Reynolds:PhilTransRoySoc1883>,<Matsukawa:PoF2022>)],
+        [コマンド], [`#citep(<Reynolds:PhilTransRoySoc1883>,<Matsukawa:PoF2022>)`],
+        [出力], [#citep(<Reynolds:PhilTransRoySoc1883>,<Matsukawa:PoF2022>)],
+        table.hline(),
+      )
+    ]
+  ]
+]
+
+
 == 書誌情報ファイル（`bib` ファイル）の作り方
 <sec:bib-file>
 
@@ -42,7 +80,7 @@ Typst でも `bib` ファイルを使用して文献リストを自動で作成�
 だいたいの雑誌論文のウェブサイトでは BibTeX 形式で書誌情報を出力できる機能があるのでそこから `bib` ファイルをダウンロードします．
 もちろん，ダウンロードした `bib` ファイルを自分で書き換えることもできますし，自分で一から `bib` ファイルを作成することも可能です．
 
-後で第~@sec:bib-cite~節でも述べますが，文献を本文中で引用する際は `@Matsukawa:PoF2022` や `#citet(<Matsukawa:PoF2022>)` のように参照キーを使います．
+第~@sec:bib-cite~節でも述べましたが，文献を本文中で引用する際は `@Matsukawa:PoF2022` や `#citet(<Matsukawa:PoF2022>)` のように参照キーを使います．
 このときの `Matsukawa:PoF2022` が参照キーです．
 参照キーの書き方に特に規則は無く，半角カンマ以外の半角記号も使用可能です．
 ただ，自分の中でマイルールを設けておくと引用する際に楽です．
@@ -125,40 +163,4 @@ Typst でも `bib` ファイルを使用して文献リストを自動で作成�
   ```
   のようにローマ字で読みを書くと，英語文献と日本語文献を混ぜてアルファベット順でソートしてくれます．
 
-== 本文中での引用方法
-<sec:bib-cite>
-
-文献を文章中で引用する際の主なコマンドは以下の通りです．
-
-#showybox(
-  frame: bluebox,
-  title: [文献を引用するためのコマンド],
-)[
-  #align(center)[
-    #mytable2[
-      #table(
-        columns: (20mm, 130mm),
-        inset: 6pt,
-        // table.header([コマンド], [出力]),
-        [コマンド], [`@Reynolds:PhilTransRoySoc1883`],
-        [出力], [@Reynolds:PhilTransRoySoc1883],
-        [コマンド], [`#citen(<Reynolds:PhilTransRoySoc1883>)`],
-        [出力], [#citen(<Reynolds:PhilTransRoySoc1883>)],
-        [コマンド], [`#citet(<Reynolds:PhilTransRoySoc1883>)`],
-        [出力], [#citet(<Reynolds:PhilTransRoySoc1883>)],
-        [コマンド], [`#citep(<Reynolds:PhilTransRoySoc1883>)`],
-        [出力], [#citep(<Reynolds:PhilTransRoySoc1883>)],
-        [コマンド], [`@Reynolds:PhilTransRoySoc1883,@Matsukawa:PoF2022`],
-        [出力], [@Reynolds:PhilTransRoySoc1883,@Matsukawa:PoF2022],
-        [コマンド], [`#citen(<Reynolds:PhilTransRoySoc1883>,<Matsukawa:PoF2022>)`],
-        [出力], [#citen(<Reynolds:PhilTransRoySoc1883>,<Matsukawa:PoF2022>)],
-        [コマンド], [`#citet(<Reynolds:PhilTransRoySoc1883>,<Matsukawa:PoF2022>)`],
-        [出力], [#citet(<Reynolds:PhilTransRoySoc1883>,<Matsukawa:PoF2022>)],
-        [コマンド], [`#citep(<Reynolds:PhilTransRoySoc1883>,<Matsukawa:PoF2022>)`],
-        [出力], [#citep(<Reynolds:PhilTransRoySoc1883>,<Matsukawa:PoF2022>)],
-        table.hline(),
-      )
-    ]
-  ]
-]
 

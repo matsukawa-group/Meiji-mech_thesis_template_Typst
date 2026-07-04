@@ -903,6 +903,7 @@ set math.equation(
 #import "@preview/showybox:2.0.4": showybox as original-showybox
 #let showybox(
   title: none,
+  breakable: true,
   ..args,
   body,
 ) = {
@@ -913,6 +914,7 @@ set math.equation(
   }
 
   original-showybox(
+  breakable: true,
     ..args,
     ..title-arg,
   )[

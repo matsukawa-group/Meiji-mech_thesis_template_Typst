@@ -107,34 +107,33 @@ Typst でも `bib` ファイルを使用して文献リストを自動で作成�
 === 各フィールドの詳細
 <ssec:bib-field>
 
-- `access`\ Webページを閲覧した日付（参照日）を記入します．`online` でのみ有効です．
+- `access`\ Webページを閲覧した日付（参照日）を記入します．`@online` でのみ有効です．
 // 書き方の詳細は第~\ref{ssec:online}節（\ttonline）を参照．
 - `address`\ 出版社（`publisher`）の住所．このテンプレートでは出力しません．
 - `archivePrefix`\ arXiv 上の文献を引用する際に自動で出力されます．このテンプレートでは `archivePrefix` があると arXiv の文献として判断します．
 - `author`\ 文献の著者情報を入力します．日本語文献でも英語文献でも
   ```BibTeX
-        author = {Family, Given and Family, Given and Family, Given}
-        author = {Given Family and Given Family and Given Family}
+  author = {Family, Given and Family, Given and Family, Given}
+  author = {Given Family and Given Family and Given Family}
   ```
   の形式で書いてください．
   例えば #citet(<Tsukahara:TSFP2005>) と #citet(<堀本:可視化情報2020>) の場合だと
   ```BibTeX
-        author = {Tsukahara, Takahiro and Seki, Yohji and 
-                    Kawamura, Hiroshi and Tochio, Daisuke}
-        author = {堀本, 康文 and 川口, 靖夫 and 塚原, 隆裕}
+  author = {Tsukahara, Takahiro and Seki, Yohji and Kawamura, Hiroshi and Tochio, Daisuke}
+  author = {堀本, 康文 and 川口, 靖夫 and 塚原, 隆裕}
   ```
   のようになります．`Family, Given` で書く場合は日本語文献でも半角カンマと半角スペースで姓と名を区切ります．また，著者が複数いる場合は `and` で著者を区切ります．日本語文献の場合は後述の `yomi` フィールドで読み方を指定してください．
-- `booktitle`\ 書籍の名前ですが，`conference`, `incollection`, `inproceedings` で使われることからわかるように，引用する文献が書籍のうちの一部である場合の書籍そのものの題名を書きます．例えば，#citet(<Lueptow:Springer2000>) はそれ単独で Stability and experimental velocity field in Taylor--Couette flow with axial and radial flow という題目（`title`）を持っていますが，これは Physics of Rotating Fluids という書籍（`booktitle`）の一部です．
+- `booktitle`\ 書籍の名前ですが，`@conference`, `@incollection`, `@inproceedings` で使われることからわかるように，引用する文献が書籍のうちの一部である場合の書籍そのものの題名を書きます．例えば，#citet(<Lueptow:Springer2000>) はそれ単独で Stability and experimental velocity field in Taylor--Couette flow with axial and radial flow という題目（`title`）を持っていますが，これは Physics of Rotating Fluids という書籍（`booktitle`）の一部です．
 - `chapter`\ 書籍の一部の章を引用するときに使用します．このテンプレートでは出力しません．
 - `doi`\ 文献のデジタルオブジェクト識別子（Digital Object Identifier, DOI）を入力します．学術論文だけでなく Springer 等の書籍などにも DOI が割り当てられています．このテンプレートでは `doi` フィールドの値を読み込んで文献情報の末尾に出力するようにしています．また，このテンプレートでは `doi` の方が `url` よりも優先されるので，`doi` と `url` の両方に値が入っていた場合は `doi` の内容を優先して表示します．
 - `edition`\ （第3版などの）版を入力します．#citet(<奥村:技評2020>) のように `title = {［改訂第8版］LaTeX2e 美文書作成入門}` と `title` の中に書いてしまってもいいと思います．
-- `editor`\ 編者名を入力します．書き方は著者名（`author`）と同じですが，このテンプレートでは出力しません．
+- `editor`\ 編者名を入力します．書き方は著者名（`author`）と同じですが，出力時に「編」や「ed.」と付くようにしています．
 - `eprint`\ 論文の eprint を入力します．arXivから BibTeX 形式で書誌情報を出力するとデフォルトで入ってくるフィールドです．
         // \jsmefile では \ttarchivePrefix フィールドがあった場合に \tteprint の情報からarXivの該当論文へのハイパーリンクを生成します（詳細は第~\ref{ssec:misc}節 \ttmisc を参照）．
 - `howpublished`\ 特殊な出版形態をとる場合の説明を入力します．
         // また，第~\ref{ssec:misc}節では学部の卒業論文を \ttmisc に分類する際に \tthowpublished に「xx大学xx学部xx学科卒業論文」と書くことにしています．
-- `institution`\ 技術報告書（`techreport`）でのみ使用されるフィールドです．報告書が出された機関名を入力します．
-- `journal`\ 学術雑誌論文が出された誌名を入力します．`article` でのみ有効なフィールドです．
+- `institution`\ 技術報告書（`@techreport`）でのみ使用されるフィールドです．報告書が出された機関名を入力します．
+- `journal`\ 学術雑誌論文が出された誌名を入力します．`@article` でのみ有効なフィールドです．
 - `key`\ 著者名に相当するものが無い場合，ソートに利用します．
 - `langid`, `language`\ その文献が書かれている言語を指定するフィールドです．
 - `month`\ 出版された月を入力します．このテンプレートでは出力しません．
@@ -143,22 +142,22 @@ Typst でも `bib` ファイルを使用して文献リストを自動で作成�
 - `organization`\ 会議の主催者・団体やマニュアルを出している機関を入力します．
 - `pages`\ ページ番号を入力します．
 - `publisher`\ 出版社の名前を入力します．
-- `school`\ 学校名を入力します．`mastersthesis` と `phdthesis` でのみ有効なフィールドです．学部の卒業論文の場合は `misc` に分類し，`school` フィールドの代わりに `howpublished` を使用してください．
-- `series`\ 書籍のシリーズを入力します．`book` と `inbook` でのみ有効なフィールドです．
+- `school`\ 学校名を入力します．`@mastersthesis` と `@phdthesis` でのみ有効なフィールドです．学部の卒業論文の場合は `@misc` に分類し，`school` フィールドの代わりに `howpublished` を使用してください．
+- `series`\ 書籍のシリーズを入力します．`@book` と `@inbook` でのみ有効なフィールドです．
 - `title`\ 文献のタイトルを入力します．このテンプレートでは標準設定として，英語文献の場合はタイトル冒頭以外のアルファベットを全て小文字に変換して出力します（sentence case）．ただし，固有名詞や二次元を表す 2D などのようにタイトルの途中で大文字を使用する場合は
   ```BibTeX
-        title = {Subcritical transition of {Taylor--Couette--Poiseuille} flow at high radius ratio}
-        title = {A mathematical consideration of vortex thinning in {2D} turbulence}
+  title = {Subcritical transition of {Taylor--Couette--Poiseuille} flow at high radius ratio}
+  title = {A mathematical consideration of vortex thinning in {2D} turbulence}
   ```
   のように `{ }` で囲めば該当箇所はそのままの形で出力してくれます #citep(<Matsukawa:PoF2022>,<Yoneda:arXiv2016>)．
-- `type`\ `techreport` でのみ有効なフィールドです．
+- `type`\ `@techreport` でのみ有効なフィールドです．
 - `url`\ 文献やウェブページの URL を入力します．`doi` フィールドと `url` フィールドの両方に値が入っていた場合は `doi` の内容を優先して表示します．
 - `volume`\ 雑誌等の巻数（第 3 巻，Vol.~3 など）を入力します．このテンプレートでは *bold* 体で出力します．
 - `year`\ 発行年を入力します．学位論文の場合は修了「年」を記入します
         // （第~\ref{ssec:mastersthesis}節 \ttmastersthesis を参照）．
 - `yomi`\ 著者（`author`）の読みを入力します．`yomi` の内容から判断してアルファベット順に文献をソートしてくれます．
   ```BibTeX
-        yomi = {Matsukawa, Yuki and Tsukahara, Takahiro}
+  yomi = {Matsukawa, Yuki and Tsukahara, Takahiro}
   ```
   のようにローマ字で読みを書くと，英語文献と日本語文献を混ぜてアルファベット順でソートしてくれます．
 
@@ -183,7 +182,24 @@ Typst でも `bib` ファイルを使用して文献リストを自動で作成�
         note    = {074109}
     }
     ```
-  - `article` は雑誌に掲載された論文です．流体力学分野では英文雑誌だと _Journal of Fluid Mechanics_ #footnote[_Journal of Fluid Mechanics_, #link("https://www.cambridge.org/core/journals/journal-of-fluid-mechanics")] や _Physics of Fluids_ #footnote[_Physics of Fluids_, #link("https://pubs.aip.org/aip/pof")] などが挙げられます．国内雑誌だと日本機械学会誌 #footnote[日本機械学会誌, #link("https://www.jsme.or.jp/publication/kaisi/")]や日本流体力学会誌『ながれ』#footnote[日本流体力学会誌『ながれ』, #link("https://www.nagare.or.jp/publication/nagare.html")]などが該当します．
+  - `@article` は雑誌に掲載された論文です．流体力学分野では英文雑誌だと _Journal of Fluid Mechanics_ #footnote[_Journal of Fluid Mechanics_, <#link("https://www.cambridge.org/core/journals/journal-of-fluid-mechanics")>] や _Physics of Fluids_ #footnote[_Physics of Fluids_, <#link("https://pubs.aip.org/aip/pof")>] などが挙げられます．国内雑誌だと日本機械学会誌 #footnote[日本機械学会誌, <#link("https://www.jsme.or.jp/publication/kaisi/")>]や日本流体力学会誌『ながれ』#footnote[日本流体力学会誌『ながれ』, <#link("https://www.nagare.or.jp/publication/nagare.html")>]などが該当します．
+- `@book`
+  - 必須項目\ `author` / `editor`, `title`, `publisher`, `year`
+  - オプション項目\ `volume`, `number`, `series`, `address`, `edition`, `month`, `note`, `key`, `doi`, `url`
+  - 出力（英語文献）\ #box(fill: luma(80%))[`author 1`], #box(fill: luma(80%))[`author 2`] and #box(fill: luma(80%))[`author 3`], "#box(fill: luma(80%))[`title`]," #box(fill: luma(80%))[_`publisher`_] (#box(fill: luma(80%))[`year`]), #box(fill: luma(80%))[*`volume`*] (#box(fill: luma(80%))[`number`]), (#box(fill: luma(80%))[`note`]), DOI: #box(fill: luma(80%))[`doi`].
+  - 出力例（日本語文献）\ #box(fill: luma(80%))[`author 1`], #box(fill: luma(80%))[`author 2`], #box(fill: luma(80%))[`author 3`],「#box(fill: luma(80%))[`title`]」, #box(fill: luma(80%))[`publisher`] (#box(fill: luma(80%))[`year`]), #box(fill: luma(80%))[*`volume`*] (#box(fill: luma(80%))[`number`]), (#box(fill: luma(80%))[`note`]), DOI: #box(fill: luma(80%))[`doi`].
+    ```BibTeX
+    @book{Schmid:Springer2001,
+        author      = {Peter J. Schmid and Dan S. Henningson},
+        title       = {Stability and Transition in Shear Flows},
+        publisher   = {Springer New York},
+        year        = {2001},
+        doi         = {10.1007/978-1-4613-0185-1}
+    }
+    ```
+  - 出版社が刊行した書籍を引用する際は `@book` を使います．似たエントリーとして `@inbook` がありますが，特定のページを参照したのではなく，書籍全体を参照した場合は `@book` を使いましょう．このテンプレートでは _Springer_ #footnote[Springer, <#link("https://www.springer.com/jp")>]や朝倉書店#footnote[朝倉書店, <#link("https://www.asakura.co.jp/")>]，丸善出版#footnote[丸善出版, <#link("https://www.maruzen-publishing.co.jp/")>]等の出版社から出た書籍を `@book` に分類しています．`publisher` フィールドにはこれらの出版社名を入れましょう．また，`@book` では `author` か `editor` か選べるようになっています．特定の著者ではなく学会等の編者を記載する場合には `editor` を使用してください．日本機械学会が編集している『JSMEテキストシリーズ』や『伝熱工学資料』などを引用する際は `editor` を使いましょう．
+
+
 
 
 

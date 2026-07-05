@@ -88,7 +88,7 @@ Typst でも `bib` ファイルを使用して文献リストを自動で作成�
 また，エントリー名とフィールド名は大文字と小文字を区別しませんが，参照キーは区別するので気をつけてください．
 
 エントリーは雑誌論文や学位論文といった，その文献の該当する種別を表します．
-このテンプレートでサポートされているエントリーは `article`, `book`, `booklet`, `comment`, `conference`, `inbook`, `incollection`, `inproceedings`, `manual`, `mastersthesis`, `misc`, `online`, `phdthesis`, `proceedings`, `techreport`, `unpublished` の 16 種類です．
+このテンプレートでサポートされているエントリーは #link(<entry:article>)[`@article`], #link(<entry:book>)[`@book`], #link(<entry:booklet>)[`@booklet`], #link(<entry:comment>)[`@comment`], `@conference`, `@inbook`, `@incollection`, `@inproceedings`, `@manual`, `@mastersthesis`, `@misc`, `@online`, `@phdthesis`, `@proceedings`, `@techreport`, `@unpublished` の 16 種類です．
 それぞれのエントリーで必須となるフィールドが異なり，文献一覧への出力の方法も異なるので面倒くさがらずに分類しましょう．
 ただ，全ての文献を正確に分類することは難しく，判断が人により異なることもあります．
 このテンプレートにおける分類の仕方も見る人によっては違和感を覚えるものがあるかもしれません．
@@ -164,7 +164,7 @@ Typst でも `bib` ファイルを使用して文献リストを自動で作成�
 === 各エントリーの詳細
 <ssec:bib-entry>
 
-- `@article`
+- `@article` <entry:article>
   - 必須項目\ `author`, `title`, `journal`, `year`
   - オプション項目\ `volume`, `number`, `pages`, `month`, `note`, `key`, `doi`, `url`
   - 出力例（英語文献）\ #box(fill: luma(80%))[`author 1`], #box(fill: luma(80%))[`author 2`] and #box(fill: luma(80%))[`author 3`], "#box(fill: luma(80%))[`title`]," #box(fill: luma(80%))[_`journal`_] (#box(fill: luma(80%))[`year`]), #box(fill: luma(80%))[*`volume`*] (#box(fill: luma(80%))[`number`]), #box(fill: luma(80%))[`pages`], (#box(fill: luma(80%))[`note`]), DOI: #box(fill: luma(80%))[`doi`].
@@ -183,7 +183,7 @@ Typst でも `bib` ファイルを使用して文献リストを自動で作成�
     }
     ```
   - `@article` は雑誌に掲載された論文です．流体力学分野では英文雑誌だと _Journal of Fluid Mechanics_ #footnote[_Journal of Fluid Mechanics_, <#link("https://www.cambridge.org/core/journals/journal-of-fluid-mechanics")>] や _Physics of Fluids_ #footnote[_Physics of Fluids_, <#link("https://pubs.aip.org/aip/pof")>] などが挙げられます．国内雑誌だと日本機械学会誌 #footnote[日本機械学会誌, <#link("https://www.jsme.or.jp/publication/kaisi/")>]や日本流体力学会誌『ながれ』#footnote[日本流体力学会誌『ながれ』, <#link("https://www.nagare.or.jp/publication/nagare.html")>]などが該当します．
-- `@book`
+- `@book` <entry:book>
   - 必須項目\ `author` / `editor`, `title`, `publisher`, `year`
   - オプション項目\ `volume`, `number`, `series`, `address`, `edition`, `month`, `note`, `key`, `doi`, `url`
   - 出力例（英語文献）\ #box(fill: luma(80%))[`author 1`], #box(fill: luma(80%))[`author 2`] and #box(fill: luma(80%))[`author 3`], "#box(fill: luma(80%))[`title`]," #box(fill: luma(80%))[_`publisher`_] (#box(fill: luma(80%))[`year`]), #box(fill: luma(80%))[*`volume`*] (#box(fill: luma(80%))[`number`]), (#box(fill: luma(80%))[`note`]), DOI: #box(fill: luma(80%))[`doi`].
@@ -198,7 +198,7 @@ Typst でも `bib` ファイルを使用して文献リストを自動で作成�
     }
     ```
   - 出版社が刊行した書籍を引用する際は `@book` を使います．似たエントリーとして `@inbook` がありますが，特定のページを参照したのではなく，書籍全体を参照した場合は `@book` を使いましょう．このテンプレートでは _Springer_ #footnote[Springer, <#link("https://www.springer.com/jp")>]や朝倉書店#footnote[朝倉書店, <#link("https://www.asakura.co.jp/")>]，丸善出版#footnote[丸善出版, <#link("https://www.maruzen-publishing.co.jp/")>]等の出版社から出た書籍を `@book` に分類しています．`publisher` フィールドにはこれらの出版社名を入れましょう．また，`@book` では `author` か `editor` か選べるようになっています．特定の著者ではなく学会等の編者を記載する場合には `editor` を使用してください．日本機械学会が編集している『JSMEテキストシリーズ』や『伝熱工学資料』などを引用する際は `editor` を使いましょう．
-- `@booklet`
+- `@booklet` <entry:booklet>
   - 必須項目\ `title`
   - オプション項目\ `author`, `howpublished`, `address`, `month`, `year`, `note`, `key`, `doi`, `url`
   - 出力例（英語文献）\ #box(fill: luma(80%))[`author 1`], #box(fill: luma(80%))[`author 2`] and #box(fill: luma(80%))[`author 3`], "#box(fill: luma(80%))[`title`]," #box(fill: luma(80%))[_`howpublished`_] (#box(fill: luma(80%))[`year`]), (#box(fill: luma(80%))[`note`]), URL: #box(fill: luma(80%))[`url`].
@@ -213,6 +213,18 @@ Typst でも `bib` ファイルを使用して文献リストを自動で作成�
     }
     ```
   - `@booklet` は使う機会が少ないため分類が難しいエントリーですが，出版社が明記されていないような（薄い）冊子媒体が該当します．このテンプレートでは例として東京理科大学理工学部機械工学科（現・創域理工学部機械航空宇宙工学科）が毎年出している ME ニュースレター#footnote[MEニュースレター, <#link("https://www.rs.tus.ac.jp/me/newsletter.html")>]という広報の冊子を引用しました．
+- `@comment` <entry:comment>
+  - 必須項目\ なし
+  - オプション項目\ なし
+  - 出力\ 出力されない
+    ```BibTeX
+    @comment{
+    %%%%%%%%%%%%%%%%%%%
+    %%%%% 英語文献 %%%%%
+    %%%%%%%%%%%%%%%%%%%
+    }
+    ```
+  - `bib` ファイル内でコメントを書く場合に用います．
 
 
 

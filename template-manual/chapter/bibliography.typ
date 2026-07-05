@@ -234,14 +234,31 @@ Typst でも `bib` ファイルを使用して文献リストを自動で作成�
   - 出力例（日本語文献）\ #box(fill: luma(80%))[`author 1`], #box(fill: luma(80%))[`author 2`], #box(fill: luma(80%))[`author 3`],「#box(fill: luma(80%))[`title`]」, #box(fill: luma(80%))[`publisher`] (#box(fill: luma(80%))[`year`]), #box(fill: luma(80%))[*`volume`*], #box(fill: luma(80%))[`pages`], (#box(fill: luma(80%))[`note`]), DOI: #box(fill: luma(80%))[`doi`].
     ```BibTeX
     @inbook{Davidson:Oxford2015,
-      author      = {Peter A. Davidson},
-      title       = {Turbulence: An Introduction for Scientists and Engineers, Second Edition},
-      publisher   = {Oxford University Press},
-      year        = {2015},
-      pages       = {61--104}
+        author      = {Peter A. Davidson},
+        title       = {Turbulence: An Introduction for Scientists and Engineers, Second Edition},
+        publisher   = {Oxford University Press},
+        year        = {2015},
+        pages       = {61--104}
     }
     ```
   - `@book` に似ていますが，`@book` が書籍丸々一冊なのに対して `@inbook` は書籍中の一部から引用する場合に使用します．そのため，`@book` と異なり `pages` フィールドが使用可能です．また `@book` と同様，`author` と `editor` を選択できます．このテンプレートでは例として日本機械学会の『伝熱工学資料』と朝倉書店の『乱流工学ハンドブック』を `editor` で引用しています．
+- `@incollection` <entry:incollection>
+  - 必須項目\ `author`, `title`, `booktitle`, `year`
+  - オプション項目\ `editor`, `pages`, `organization`, `publisher`, `address`, `month`, `note`, `key`, `doi`, `url`
+  - 出力例（英語文献）\ #box(fill: luma(80%))[`author 1`], #box(fill: luma(80%))[`author 2`] and #box(fill: luma(80%))[`author 3`], "#box(fill: luma(80%))[`title`]," #box(fill: luma(80%))[`booktitle`], #box(fill: luma(80%))[_`publisher`_] (#box(fill: luma(80%))[`year`]), #box(fill: luma(80%))[`pages`], (#box(fill: luma(80%))[`note`]), URL: <#box(fill: luma(80%))[`url`]>.
+  - 出力例（日本語文献）\ #box(fill: luma(80%))[`author 1`], #box(fill: luma(80%))[`author 2`], #box(fill: luma(80%))[`author 3`],「#box(fill: luma(80%))[`title`]」, #box(fill: luma(80%))[`booktitle`], #box(fill: luma(80%))[_`publisher`_] (#box(fill: luma(80%))[`year`]), #box(fill: luma(80%))[`pages`], (#box(fill: luma(80%))[`note`]), URL: <#box(fill: luma(80%))[`url`]>.
+    ```BibTeX
+    @incollection{Lueptow:Springer2000,
+        author      = {Lueptow, Richard M.},
+        title       = {Stability and experimental velocity field in {Taylor--Couette} flow with axial and radial flow},
+        booktitle   = {Physics of Rotating Fluids},
+        publisher   = {Springer-Verlag Berlin Heidelberg New York},
+        pages       = {137--155},
+        year        = {2000},
+        doi         = {10.1007/3-540-45549-3}
+    }
+    ```
+  - `@incollection` は分類が難しいエントリーの一つです．これは書籍の一部からの引用ですが，`@inbook` と異なる点は，引用箇所が独立して表題を持っているようなものを指します．学会等があるテーマについて組んだ特集といったイメージです．上記の #citet(<Lueptow:Springer2000>) の例では，それ単独で "Stability and experimental velocity field in Taylor--Couette flow with axial and radial flow" という題目（`title`）を持っていますが，これは "Physics of Rotating Fluids" という書籍（`booktitle`）の一部です．日本語文献では京都大学数理解析研究所の講究録 #footnote[京都大学数理解析研究所（RIMS）講究録, <#link("https://www.kurims.kyoto-u.ac.jp/ja/kokyuroku.html")>] や文部科学省科学研究補助金における特定の新学術領域研究の研究成果報告書等を `@incollection` に分類しています．それは `@inproceedings` だろとか `@techreport` だろとか言われそうな気もします．
 
 
 

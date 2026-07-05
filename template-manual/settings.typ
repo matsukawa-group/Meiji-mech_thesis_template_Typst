@@ -567,6 +567,7 @@ set math.equation(
 
 #let bibtex-book-en = (
   ("author", (none, "", author-set, "", ", ", (), ".")),
+  ("editor", (none, "", author-set, " ed.", ", ", (), ".")),
   ("title", (none, "\"", title-en, ",\"", " ", (), ".")),
   ("publisher", (none, "", all-emph, "", ", ", (), ".")),
   ("year", (" ","(",all-return, "%year-doubling)", ", ", ("author","title","publisher"), "%year-doubling).")),
@@ -579,6 +580,7 @@ set math.equation(
 
 #let bibtex-book-ja = (
   ("author", (none, "", author-set, "", ", ", (), ".")),
+  ("editor", (none, "", author-set, "編", ", ", (), ".")),
   ("title", (none, "「", all-return, "」, ", " ", (), ".")),
   ("publisher", (none, "", all-return, "", ", ", (), ".")),
   ("year", (" ","(",all-return, "%year-doubling)", ", ", ("author","title","publisher"), "%year-doubling).")),
@@ -633,6 +635,7 @@ set math.equation(
 
 #let bibtex-inbook-en = (
   ("author", (none, "", author-set, "", ", ", (), ".")),
+  ("editor", (none, "", author-set, " ed.", ", ", (), ".")),
   ("title", (none, "\"", title-en, ",\"", " ", (), ".")),
   ("publisher", (none, "", all-emph, "", ", ", (), ".")),
   ("year", (" ","(",all-return, "%year-doubling)", ", ", ("author","title","publisher"), "%year-doubling).")),
@@ -645,6 +648,7 @@ set math.equation(
 
 #let bibtex-inbook-ja = (
   ("author", (none, "", author-set, "", ", ", (), ".")),
+  ("editor", (none, "", author-set, "編", ", ", (), ".")),
   ("title", (none, "「", all-return, "」, ", " ", (), ".")),
   ("publisher", (none, "", all-return, "", ", ", (), ".")),
   ("year", (" ","(",all-return, "%year-doubling)", ", ", ("author","title","publisher"), "%year-doubling).")),
@@ -803,7 +807,7 @@ set math.equation(
 )
 
 #let bibtex-proceedings-en = (
-  ("editor", (none, "", author-set, "", ", ", (), ".")),
+  ("editor", (none, "", author-set, " ed.", ", ", (), ".")),
   ("title", (none, "\"", title-en, ",\"", " ", (), ".")),
   ("publisher", (none, "", all-emph, "", ", ", (), ".")),
   ("year", (" ","(",all-return, "%year-doubling)", ", ", ("editor","title","publisher"), "%year-doubling).")),
@@ -813,7 +817,7 @@ set math.equation(
 )
 
 #let bibtex-proceedings-ja = (
-  ("editor", (none, "", author-set, "", ", ", (), ".")),
+  ("editor", (none, "", author-set, "編", ", ", (), ".")),
   ("title", (none, "「", all-return, "」, ", " ", (), ".")),
   ("publisher", (none, "", all-return, "", ", ", (), ".")),
   ("year", (" ","(",all-return, "%year-doubling)", ", ", ("editor","title","publisher"), "%year-doubling).")),

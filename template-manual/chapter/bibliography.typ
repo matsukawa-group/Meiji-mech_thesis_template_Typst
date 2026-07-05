@@ -88,7 +88,7 @@ Typst でも `bib` ファイルを使用して文献リストを自動で作成�
 また，エントリー名とフィールド名は大文字と小文字を区別しませんが，参照キーは区別するので気をつけてください．
 
 エントリーは雑誌論文や学位論文といった，その文献の該当する種別を表します．
-このテンプレートでサポートされているエントリーは #link(<entry:article>)[`@article`], #link(<entry:book>)[`@book`], #link(<entry:booklet>)[`@booklet`], #link(<entry:comment>)[`@comment`], `@conference`, `@inbook`, `@incollection`, `@inproceedings`, `@manual`, `@mastersthesis`, `@misc`, `@online`, `@phdthesis`, `@proceedings`, `@techreport`, `@unpublished` の 16 種類です．
+このテンプレートでサポートされているエントリーは #link(<entry:article>)[`@article`], #link(<entry:book>)[`@book`], #link(<entry:booklet>)[`@booklet`], #link(<entry:comment>)[`@comment`], #link(<entry:conference>)[`@conference`], `@inbook`, `@incollection`, `@inproceedings`, `@manual`, `@mastersthesis`, `@misc`, `@online`, `@phdthesis`, `@proceedings`, `@techreport`, `@unpublished` の 16 種類です．
 それぞれのエントリーで必須となるフィールドが異なり，文献一覧への出力の方法も異なるので面倒くさがらずに分類しましょう．
 ただ，全ての文献を正確に分類することは難しく，判断が人により異なることもあります．
 このテンプレートにおける分類の仕方も見る人によっては違和感を覚えるものがあるかもしれません．
@@ -225,6 +225,8 @@ Typst でも `bib` ファイルを使用して文献リストを自動で作成�
     }
     ```
   - `bib` ファイル内でコメントを書く場合に用います．
+- `@conference` <entry:conference>
+  - `@inproceedings` と同様なので省略．Scribe というシステムとの互換性のために残されているらしい #citep(<奥村:技評2020>)．
 
 
 

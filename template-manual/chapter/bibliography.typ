@@ -201,8 +201,8 @@ Typst でも `bib` ファイルを使用して文献リストを自動で作成�
 - `@booklet` <entry:booklet>
   - 必須項目\ `title`
   - オプション項目\ `author`, `howpublished`, `address`, `month`, `year`, `note`, `key`, `doi`, `url`
-  - 出力例（英語文献）\ #box(fill: luma(80%))[`author 1`], #box(fill: luma(80%))[`author 2`] and #box(fill: luma(80%))[`author 3`], "#box(fill: luma(80%))[`title`]," #box(fill: luma(80%))[_`howpublished`_] (#box(fill: luma(80%))[`year`]), (#box(fill: luma(80%))[`note`]), URL: #box(fill: luma(80%))[`url`].
-  - 出力例（日本語文献）\ #box(fill: luma(80%))[`author 1`], #box(fill: luma(80%))[`author 2`], #box(fill: luma(80%))[`author 3`],「#box(fill: luma(80%))[`title`]」, #box(fill: luma(80%))[`howpublished`] (#box(fill: luma(80%))[`year`]), (#box(fill: luma(80%))[`note`]), URL: #box(fill: luma(80%))[`url`].
+  - 出力例（英語文献）\ #box(fill: luma(80%))[`author 1`], #box(fill: luma(80%))[`author 2`] and #box(fill: luma(80%))[`author 3`], "#box(fill: luma(80%))[`title`]," #box(fill: luma(80%))[_`howpublished`_] (#box(fill: luma(80%))[`year`]), (#box(fill: luma(80%))[`note`]), URL: <#box(fill: luma(80%))[`url`]>.
+  - 出力例（日本語文献）\ #box(fill: luma(80%))[`author 1`], #box(fill: luma(80%))[`author 2`], #box(fill: luma(80%))[`author 3`],「#box(fill: luma(80%))[`title`]」, #box(fill: luma(80%))[`howpublished`] (#box(fill: luma(80%))[`year`]), (#box(fill: luma(80%))[`note`]), URL: <#box(fill: luma(80%))[`url`]>.
     ```BibTeX
     @booklet{Wang:MEnews2014,
         author          = {Wang, Lin},
@@ -227,7 +227,21 @@ Typst でも `bib` ファイルを使用して文献リストを自動で作成�
   - `bib` ファイル内でコメントを書く場合に用います．
 - `@conference` <entry:conference>
   - `@inproceedings` と同様なので省略．Scribe というシステムとの互換性のために残されているらしい #citep(<奥村:技評2020>)．
-
+- `@inbook` <entry:inbook>
+  - 必須項目\ `author` / `editor`, `title`, `chapter` / `pages`, `publisher`, `year`
+  - オプション項目\ `volume`, `series`, `address`, `edition`, `month`, `note`, `key`, `doi`, `url`
+  - 出力例（英語文献）\ #box(fill: luma(80%))[`author 1`], #box(fill: luma(80%))[`author 2`] and #box(fill: luma(80%))[`author 3`], "#box(fill: luma(80%))[`title`]," #box(fill: luma(80%))[_`publisher`_] (#box(fill: luma(80%))[`year`]), #box(fill: luma(80%))[*`volume`*], #box(fill: luma(80%))[`pages`], (#box(fill: luma(80%))[`note`]), DOI: #box(fill: luma(80%))[`doi`].
+  - 出力例（日本語文献）\ #box(fill: luma(80%))[`author 1`], #box(fill: luma(80%))[`author 2`], #box(fill: luma(80%))[`author 3`],「#box(fill: luma(80%))[`title`]」, #box(fill: luma(80%))[`publisher`] (#box(fill: luma(80%))[`year`]), #box(fill: luma(80%))[*`volume`*], #box(fill: luma(80%))[`pages`], (#box(fill: luma(80%))[`note`]), DOI: #box(fill: luma(80%))[`doi`].
+    ```BibTeX
+    @inbook{Davidson:Oxford2015,
+      author      = {Peter A. Davidson},
+      title       = {Turbulence: An Introduction for Scientists and Engineers, Second Edition},
+      publisher   = {Oxford University Press},
+      year        = {2015},
+      pages       = {61--104}
+    }
+    ```
+  - `@book` に似ていますが，`@book` が書籍丸々一冊なのに対して `@inbook` は書籍中の一部から引用する場合に使用します．そのため，`@book` と異なり `pages` フィールドが使用可能です．また `@book` と同様，`author` と `editor` を選択できます．このテンプレートでは例として日本機械学会の『伝熱工学資料』と朝倉書店の『乱流工学ハンドブック』を `editor` で引用しています．
 
 
 

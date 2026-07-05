@@ -259,7 +259,21 @@ Typst でも `bib` ファイルを使用して文献リストを自動で作成�
     }
     ```
   - `@incollection` は分類が難しいエントリーの一つです．これは書籍の一部からの引用ですが，`@inbook` と異なる点は，引用箇所が独立して表題を持っているようなものを指します．学会等があるテーマについて組んだ特集といったイメージです．上記の #citet(<Lueptow:Springer2000>) の例では，それ単独で "Stability and experimental velocity field in Taylor--Couette flow with axial and radial flow" という題目（`title`）を持っていますが，これは "Physics of Rotating Fluids" という書籍（`booktitle`）の一部です．日本語文献では京都大学数理解析研究所の講究録 #footnote[京都大学数理解析研究所（RIMS）講究録, <#link("https://www.kurims.kyoto-u.ac.jp/ja/kokyuroku.html")>] や文部科学省科学研究補助金における特定の新学術領域研究の研究成果報告書等を `@incollection` に分類しています．それは `@inproceedings` だろとか `@techreport` だろとか言われそうな気もします．
-
+- `@inproceedings` <entry:inproceedings>
+  - 必須項目\ `author`, `title`, `booktitle`, `year`
+  - オプション項目\ `editor`, `pages`, `organization`, `publisher`, `address`, `month`, `note`, `key`, `doi`, `url`
+  - 出力例（英語文献）\ #box(fill: luma(80%))[`author 1`], #box(fill: luma(80%))[`author 2`] and #box(fill: luma(80%))[`author 3`], "#box(fill: luma(80%))[`title`]," #box(fill: luma(80%))[_`booktitle`_] (#box(fill: luma(80%))[`year`]), #box(fill: luma(80%))[`pages`], (#box(fill: luma(80%))[`note`]), DOI: #box(fill: luma(80%))[`doi`].
+  - 出力例（日本語文献）\ #box(fill: luma(80%))[`author 1`], #box(fill: luma(80%))[`author 2`], #box(fill: luma(80%))[`author 3`],「#box(fill: luma(80%))[`title`]」, #box(fill: luma(80%))[_`booktitle`_] (#box(fill: luma(80%))[`year`]), #box(fill: luma(80%))[`pages`], (#box(fill: luma(80%))[`note`]), DOI: #box(fill: luma(80%))[`doi`].
+    ```BibTeX
+    @inproceedings{Matsukawa:ICFD2022,
+        author      = {Matsukawa, Yuki and Tsukahara, Takahiro},
+        title       = {Laminarization in Subcritical {Taylor--Couette--Poiseuille} Flow with Increasing Pressure Gradient},
+        booktitle   = {Proceedings of 19th International Conference on Flow Dynamics},
+        year        = {2022},
+        pages       = {OS15-10}
+    }
+    ```
+  - `@conference` と同様です．学会等の講演論文集の一部を引用するときに `@inproceedings` を使用します．`@article` や `@inbook` と並んで使用頻度の高いエントリーだと思います．`booktitle` フィールドには日本語なら `booktitle = {`#box(fill: luma(80%))[`学会名`]`講演論文集}`，英語なら `booktitle = {Proceedings of `#box(fill: luma(80%))[`学会名`]`}` と入力しましょう．`@proceedings` は講演論文集全体を引用しているのに対して，`@inproceedings` は講演論文集の中の一講演を引用しています．上の例では `pages` に講演番号を入れています．
 
 
 

@@ -186,7 +186,7 @@ Typst でも `bib` ファイルを使用して文献リストを自動で作成�
 - `@book`
   - 必須項目\ `author` / `editor`, `title`, `publisher`, `year`
   - オプション項目\ `volume`, `number`, `series`, `address`, `edition`, `month`, `note`, `key`, `doi`, `url`
-  - 出力（英語文献）\ #box(fill: luma(80%))[`author 1`], #box(fill: luma(80%))[`author 2`] and #box(fill: luma(80%))[`author 3`], "#box(fill: luma(80%))[`title`]," #box(fill: luma(80%))[_`publisher`_] (#box(fill: luma(80%))[`year`]), #box(fill: luma(80%))[*`volume`*] (#box(fill: luma(80%))[`number`]), (#box(fill: luma(80%))[`note`]), DOI: #box(fill: luma(80%))[`doi`].
+  - 出力例（英語文献）\ #box(fill: luma(80%))[`author 1`], #box(fill: luma(80%))[`author 2`] and #box(fill: luma(80%))[`author 3`], "#box(fill: luma(80%))[`title`]," #box(fill: luma(80%))[_`publisher`_] (#box(fill: luma(80%))[`year`]), #box(fill: luma(80%))[*`volume`*] (#box(fill: luma(80%))[`number`]), (#box(fill: luma(80%))[`note`]), DOI: #box(fill: luma(80%))[`doi`].
   - 出力例（日本語文献）\ #box(fill: luma(80%))[`author 1`], #box(fill: luma(80%))[`author 2`], #box(fill: luma(80%))[`author 3`],「#box(fill: luma(80%))[`title`]」, #box(fill: luma(80%))[`publisher`] (#box(fill: luma(80%))[`year`]), #box(fill: luma(80%))[*`volume`*] (#box(fill: luma(80%))[`number`]), (#box(fill: luma(80%))[`note`]), DOI: #box(fill: luma(80%))[`doi`].
     ```BibTeX
     @book{Schmid:Springer2001,
@@ -198,6 +198,25 @@ Typst でも `bib` ファイルを使用して文献リストを自動で作成�
     }
     ```
   - 出版社が刊行した書籍を引用する際は `@book` を使います．似たエントリーとして `@inbook` がありますが，特定のページを参照したのではなく，書籍全体を参照した場合は `@book` を使いましょう．このテンプレートでは _Springer_ #footnote[Springer, <#link("https://www.springer.com/jp")>]や朝倉書店#footnote[朝倉書店, <#link("https://www.asakura.co.jp/")>]，丸善出版#footnote[丸善出版, <#link("https://www.maruzen-publishing.co.jp/")>]等の出版社から出た書籍を `@book` に分類しています．`publisher` フィールドにはこれらの出版社名を入れましょう．また，`@book` では `author` か `editor` か選べるようになっています．特定の著者ではなく学会等の編者を記載する場合には `editor` を使用してください．日本機械学会が編集している『JSMEテキストシリーズ』や『伝熱工学資料』などを引用する際は `editor` を使いましょう．
+- `@booklet`
+  - 必須項目\ `title`
+  - オプション項目\ `author`, `howpublished`, `address`, `month`, `year`, `note`, `key`, `doi`, `url`
+  - 出力例（英語文献）\ #box(fill: luma(80%))[`author 1`], #box(fill: luma(80%))[`author 2`] and #box(fill: luma(80%))[`author 3`], "#box(fill: luma(80%))[`title`]," #box(fill: luma(80%))[_`howpublished`_] (#box(fill: luma(80%))[`year`]), (#box(fill: luma(80%))[`note`]), URL: #box(fill: luma(80%))[`url`].
+  - 出力例（日本語文献）\ #box(fill: luma(80%))[`author 1`], #box(fill: luma(80%))[`author 2`], #box(fill: luma(80%))[`author 3`],「#box(fill: luma(80%))[`title`]」, #box(fill: luma(80%))[`howpublished`] (#box(fill: luma(80%))[`year`]), (#box(fill: luma(80%))[`note`]), URL: #box(fill: luma(80%))[`url`].
+    ```BibTeX
+    @booklet{Wang:MEnews2014,
+        author          = {Wang, Lin},
+        title           = {Exchange student from {Northwestern Polytechnical University (China)}},
+        howpublished    = {ME Newsletter, Department of Mechanical Engineering, Tokyo University of Science},
+        year            = {2014},
+        url             = {https://www.rs.tus.ac.jp/me/pdf/newsletter/ME_NL_No15.pdf}
+    }
+    ```
+  - `@booklet` は使う機会が少ないため分類が難しいエントリーですが，出版社が明記されていないような（薄い）冊子媒体が該当します．このテンプレートでは例として東京理科大学理工学部機械工学科（現・創域理工学部機械航空宇宙工学科）が毎年出している ME ニュースレター#footnote[MEニュースレター, <#link("https://www.rs.tus.ac.jp/me/newsletter.html")>]という広報の冊子を引用しました．
+
+
+
+
 
 
 

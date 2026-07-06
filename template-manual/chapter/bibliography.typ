@@ -362,12 +362,19 @@ Typst でも `bib` ファイルを使用して文献リストを自動で作成�
     }
     ```
   - `@phdthesis` は博士論文が該当します．エントリー名に `@phdthesis` と入っていますが，英語文献の場合は dissertation と出力するように設定しています．基本的な使い方は `@mastersthesis` と同じです.
-
-
-
-
-
-
+- `@proceedings`
+  - 必須項目\ `title`, `year`
+  - オプション項目\ `editor`, `organization`, `publisher`, `address`, `month`, `note`, `key`, `doi`, `url`
+  - 出力例\ #box(fill: luma(80%))[`editor`], (#box(fill: luma(80%))[`year`]), (#box(fill: luma(80%))[`note`]), URL: <#box(fill: luma(80%))[`url`]>.
+    ```BibTeX
+    @proceedings{THMT2023,
+        editor  = "{THMT}",
+        title   = "{Proceedings of 10th International Symposium on Turbulence, Heat and Mass Transfer}",
+        yomi    = {THMT},
+        year    = {2023}
+    }
+    ```
+  - 学会の講演論文集全体を引用する際には `@proceedings` を使用します．`@conference` や `@inproceedings` は講演論文集の中の一講演を引用しているのに対して，`@proceedings` は講演論文集全体を引用しています．
 
 
 

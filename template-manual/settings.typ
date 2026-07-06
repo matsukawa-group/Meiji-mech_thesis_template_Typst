@@ -160,8 +160,7 @@
         let nums = counter(heading).at(loc)
         let is-appendix = appendix-mode.at(loc)
 
-        link(loc)[
-          #if nums.len() == 1 {
+        link(loc)[#if nums.len() == 1 {
             if is-appendix {
               numbering("A", nums.first())
             } else {
@@ -173,8 +172,7 @@
             } else {
               numbering("1.1", ..nums)
             }
-          }
-        ]
+          }]
       }
     } else {
       it

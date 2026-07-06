@@ -274,6 +274,31 @@ Typst でも `bib` ファイルを使用して文献リストを自動で作成�
     }
     ```
   - `@conference` と同様です．学会等の講演論文集の一部を引用するときに `@inproceedings` を使用します．`@article` や `@inbook` と並んで使用頻度の高いエントリーだと思います．`booktitle` フィールドには日本語なら `booktitle = {`#box(fill: luma(80%))[`学会名`]`講演論文集}`，英語なら `booktitle = {Proceedings of `#box(fill: luma(80%))[`学会名`]`}` と入力しましょう．`@proceedings` は講演論文集全体を引用しているのに対して，`@inproceedings` は講演論文集の中の一講演を引用しています．上の例では `pages` に講演番号を入れています．
+- `@manual` <entry:manual>
+  - 必須項目\ `title`
+  - オプション項目\ `author`, `organization`, `address`, `edition`, `month`, `year`, `note`, `key`, `doi`, `url`
+  - 出力例（英語文献）\ #box(fill: luma(80%))[`author 1`], #box(fill: luma(80%))[`author 2`] and #box(fill: luma(80%))[`author 3`], "#box(fill: luma(80%))[`title`]" (#box(fill: luma(80%))[`year`]), (#box(fill: luma(80%))[`note`]), URL: <#box(fill: luma(80%))[`url`]>.
+  - 出力例（日本語文献）\ #box(fill: luma(80%))[`author 1`], #box(fill: luma(80%))[`author 2`], #box(fill: luma(80%))[`author 3`],「#box(fill: luma(80%))[`title`]」 (#box(fill: luma(80%))[`year`]), (#box(fill: luma(80%))[`note`]), URL: <#box(fill: luma(80%))[`url`]>.
+    ```BibTeX
+    @manual{Tecplot2023,
+        author  = "{Tecplot, Inc.}",
+        title   = {Tecplot 360 Getting Started Manual},
+        year    = {2023},
+        url     = {https://tecplot.azureedge.net/products/360/current/360_getting_started.pdf}
+    }
+    ```
+  - マニュアルや技術文書は `@manual` に分類しましょう．ただし，`author` フィールドが必須項目ではないので，このテンプレートでは企業名を `author` に入れています．
+
+
+
+
+
+
+
+
+
+
+
 
 
 

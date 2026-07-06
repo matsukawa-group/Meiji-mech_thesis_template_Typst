@@ -365,7 +365,8 @@ Typst でも `bib` ファイルを使用して文献リストを自動で作成�
 - `@proceedings`
   - 必須項目\ `title`, `year`
   - オプション項目\ `editor`, `organization`, `publisher`, `address`, `month`, `note`, `key`, `doi`, `url`
-  - 出力例\ #box(fill: luma(80%))[`editor`], (#box(fill: luma(80%))[`year`]), (#box(fill: luma(80%))[`note`]), URL: <#box(fill: luma(80%))[`url`]>.
+  - 出力例（英語文献）\ #box(fill: luma(80%))[`editor`], "#box(fill: luma(80%))[`title`]" (#box(fill: luma(80%))[`year`]), (#box(fill: luma(80%))[`note`]), URL: <#box(fill: luma(80%))[`url`]>.
+  - 出力例（日本語文献）\ #box(fill: luma(80%))[`editor`],「#box(fill: luma(80%))[`title`]」 (#box(fill: luma(80%))[`year`]), (#box(fill: luma(80%))[`note`]), URL: <#box(fill: luma(80%))[`url`]>.
     ```BibTeX
     @proceedings{THMT2023,
         editor  = "{THMT}",
@@ -391,8 +392,20 @@ Typst でも `bib` ファイルを使用して文献リストを自動で作成�
     }
     ```
   - 研究機関等から発行された技術報告書は `@techreport` に分類します．技術報告書を発行している研究機関はさまざまありますが，例えば NASA #footnote[アメリカ航空宇宙局（NASA） Technical Reports Server, <#link("https://ntrs.nasa.gov/")>]や国立天文台 #footnote[大学共同利用機関法人 自然科学研究機構 国立天文台，国立天文台欧文報告, <#link("https://www.nao.ac.jp/about-naoj/reports/publications-naoj.html")>]，鉄道総研 #footnote[公益財団法人 鉄道総合技術研究所（鉄道総研），鉄道総研報告, <#link("https://www.rtri.or.jp/publish/rtrirep/")>]などが挙げられます．また，企業によっては技術報告書を公開しているところもあります．
-
-
+- `@unpublished`
+  - 必須項目\ `author`, `title`, `note`
+  - オプション項目\ `month`, `year`, `key`, `doi`, `url`
+  - 出力例（英語文献）\ #box(fill: luma(80%))[`author 1`], #box(fill: luma(80%))[`author 2`] and #box(fill: luma(80%))[`author 3`], "#box(fill: luma(80%))[`title`]," (#box(fill: luma(80%))[`year`]), (#box(fill: luma(80%))[`note`]), URL: <#box(fill: luma(80%))[`url`]>.
+  - 出力例（日本語文献）\ #box(fill: luma(80%))[`author 1`], #box(fill: luma(80%))[`author 2`], #box(fill: luma(80%))[`author 3`],「#box(fill: luma(80%))[`title`]」, (#box(fill: luma(80%))[`year`]), (#box(fill: luma(80%))[`note`]), URL: <#box(fill: luma(80%))[`url`]>.
+    ```BibTeX
+    @unpublished{Dunkel:MITOCW2015,
+        author  = {Dunkel, Jörn},
+        title   = {Nonlinear Dynamics {II}: Continuum Systems, Linear Stability Analysis and Pattern Formation, {MIT Open Course Ware}},
+        year    = {2015},
+        url     = {https://ocw.mit.edu/courses/18-354j-nonlinear-dynamics-ii-continuum-systems-spring-2015/resources/mit18_354js15_ch7/}
+    }
+    ```
+  - `@unpublished` は正式には出版されていない本などが該当します．ただ，`@unpublished` を使う機会はほぼ無いと思われますし，そもそも具体的に何が該当するのかもパッとイメージできるものではありません．また，大抵の人は分類がよくわからなかったら `@misc` に入れてしまう気がします．無理矢理分類するとしたら大学のオープンコースウェア（OCW）の講義資料等が挙げられます．講義資料であれば正式に出版された書籍ではありませんがウェブ上にあるのをよく見かけると思います．上記の例は MIT の OCW #footnote[MIT Open Course Ware, <#link("https://ocw.mit.edu/")>]における講義資料です．
 
 
 

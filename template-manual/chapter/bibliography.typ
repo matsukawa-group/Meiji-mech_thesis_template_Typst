@@ -331,20 +331,21 @@ Typst でも `bib` ファイルを使用して文献リストを自動で作成�
         primaryClass    = {physics.flu-dyn}
     }
     ```
-  - その他該当種別が無いものは `@misc` とします．学部の卒業論文は `@misc` でいいと思います．ただし，`@mastersthesis` や `@phdthesis` と異なり，`school` のフィールドを使用できないので `howpublished` で代用します．したがって，`@mastersthesis` や `@phdthesis` では `school` に所属名だけ（例：`school = {東京理科大学大学院理工学研究科機械工学専攻}`）書けばよかったものが `@misc` で卒論を出力する際には `howpublished = {北海道大学理学部地球科学科卒業論文}` のように「`卒業論文`」の文字まで書く必要があります．該当するエントリーがよくわからなかったらとりあえず `@misc` に入れておくという人は多いと思います．また，arXiv #footnote[arXiv（「アーカイブ」と読みます）, <#link("https://arxiv.org/")>]と呼ばれるプレプリントサーバーから引用した文献は `@misc` に分類します．arXiv 上の Export BibTeX Citation と書いてあるところから文献情報を見ると `@misc` に分類されていることがわかると思います．この文献情報では上記のように `eprint = {2308.07255}`, `archivePrefix = {arXiv}` などと書かれていることが多いです．このテンプレートでは `eprint` の情報を利用して #quote-block[
-Araki, R., Bos, W. J. T. and Goto, S., "Space-local Navier--Stokes turbulence," (2023), arXiv: #link("https://doi.org/10.48550/arXiv.2308.07255")[`2308.07255`].]   のように自動で書いてくれます．`eprint` の情報から URL を自動生成するので，#link("https://doi.org/10.48550/arXiv.2308.07255")[`2308.07255`] と書かれている（青字の）箇所をクリックしたら arXiv の該当ページにジャンプできます．
-
-
-
-
-
-
-
-
-
-
-
-
+  - その他該当種別が無いものは `@misc` とします．学部の卒業論文は `@misc` でいいと思います．ただし，`@mastersthesis` や `@phdthesis` と異なり，`school` のフィールドを使用できないので `howpublished` で代用します．したがって，`@mastersthesis` や `@phdthesis` では `school` に所属名だけ（例：`school = {東京理科大学大学院理工学研究科機械工学専攻}`）書けばよかったものが `@misc` で卒論を出力する際には `howpublished = {北海道大学理学部地球科学科卒業論文}` のように「`卒業論文`」の文字まで書く必要があります．該当するエントリーがよくわからなかったらとりあえず `@misc` に入れておくという人は多いと思います．また，arXiv #footnote[arXiv（「アーカイブ」と読みます）, <#link("https://arxiv.org/")>]と呼ばれるプレプリントサーバーから引用した文献は `@misc` に分類します．arXiv 上の Export BibTeX Citation と書いてあるところから文献情報を見ると `@misc` に分類されていることがわかると思います．この文献情報では上記のように `eprint = {2308.07255}`, `archivePrefix = {arXiv}` などと書かれていることが多いです．このテンプレートでは `eprint` の情報を利用して #quote-block[Araki, R., Bos, W. J. T. and Goto, S., "Space-local Navier--Stokes turbulence," (2023), arXiv: #link("https://doi.org/10.48550/arXiv.2308.07255")[`2308.07255`].]   のように自動で書いてくれます．`eprint` の情報から URL を自動生成するので，#link("https://doi.org/10.48550/arXiv.2308.07255")[`2308.07255`] と書かれている（青字の）箇所をクリックしたら arXiv の該当ページにジャンプできます．
+- `@online` <entry:online>
+  - 使用可能項目\ `author`, `title`, `howpublished`, `month`, `year`, `url`, `doi`, `access`, `note`
+  - 出力例（英語文献）\ #box(fill: luma(80%))[`author 1`], #box(fill: luma(80%))[`author 2`] and #box(fill: luma(80%))[`author 3`], "#box(fill: luma(80%))[`title`]," (#box(fill: luma(80%))[`note`]), URL: <#box(fill: luma(80%))[`url`]>, (accessed on: #box(fill: luma(80%))[`access`]).
+  - 出力例（日本語文献）\ #box(fill: luma(80%))[`author 1`], #box(fill: luma(80%))[`author 2`], #box(fill: luma(80%))[`author 3`],「#box(fill: luma(80%))[`title`]」, (#box(fill: luma(80%))[`note`]), URL: <#box(fill: luma(80%))[`url`]>, (accessed on: #box(fill: luma(80%))[`access`]).
+    ```BibTeX
+    @online{Kawamura_Ret64,
+        author  = "{Kawamura Laboratory}",
+        title   = {{DNS} Database of Wall Turbulence and Heat Transfer: Text database of {Poiseuille} flow for $"Re"_tau = 64$},
+        year    = {},
+        url     = {https://www.rs.tus.ac.jp/~t2lab/db/index.html},
+        access  = {10 October, 2023}
+    }
+    ```
+  - `@online` はウェブページ等のオンライン資料を引用する際に使用します．本来，ウェブページ等の引用はあまり推奨されるものではありませんが，データベースを研究室のウェブページ等で公開していることがある #footnote[乱流の分野におけるデータベースとしては，東京理科大学河村研究室（現在は塚原研究室が管理）<#link("https://www.rs.tus.ac.jp/~t2lab/db/index.html")> や東京大学笠木研究室（現在は複数の大学によって管理）<#link("https://thtlab.jp")> などが挙げられます．]ので使う機会がゼロとは言えないでしょう．ウェブページの場合は，情報が更新される可能性があるので，参照日を明記することが重要です．このテンプレートでは `access` フィールドを使って参照日を記載するようにしています．
 
 
 

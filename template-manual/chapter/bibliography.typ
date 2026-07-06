@@ -291,7 +291,7 @@ Typst でも `bib` ファイルを使用して文献リストを自動で作成�
 - `@mastersthesis` <entry:mastersthesis>
   - 必須項目\ `author`, `title`, `school`, `year`
   - オプション項目\ `address`, `month`, `note`, `key`, `doi`, `url`
-  - 出力例（英語文献）\ #box(fill: luma(80%))[`author 1`], #box(fill: luma(80%))[`author 2`] and #box(fill: luma(80%))[`author 3`], "#box(fill: luma(80%))[`title`]," _Master's Thesis_, #box(fill: luma(80%))[`school`] (#box(fill: luma(80%))[`year`]), (#box(fill: luma(80%))[`note`]), URL: <#box(fill: luma(80%))[`url`]>.
+  - 出力例（英語文献）\ #box(fill: luma(80%))[`author 1`], #box(fill: luma(80%))[`author 2`] and #box(fill: luma(80%))[`author 3`], "#box(fill: luma(80%))[`title`]," _Master's Thesis_, #box(fill: luma(80%))[_`school`_] (#box(fill: luma(80%))[`year`]), (#box(fill: luma(80%))[`note`]), URL: <#box(fill: luma(80%))[`url`]>.
   - 出力例（日本語文献）\ #box(fill: luma(80%))[`author 1`], #box(fill: luma(80%))[`author 2`], #box(fill: luma(80%))[`author 3`],「#box(fill: luma(80%))[`title`]」, #box(fill: luma(80%))[`school`]修士論文 (#box(fill: luma(80%))[`year`]), (#box(fill: luma(80%))[`note`]), URL: <#box(fill: luma(80%))[`url`]>.
     ```BibTeX
     @mastersthesis{松川:修論2023,
@@ -349,7 +349,7 @@ Typst でも `bib` ファイルを使用して文献リストを自動で作成�
 - `@phdthesis` <entry:phdthesis>
   - 必須項目\ `author`, `title`, `school`, `year`
   - オプション項目\ `address`, `month`, `note`, `key`, `doi`, `url`
-  - 出力例（英語文献）\ #box(fill: luma(80%))[`author 1`], #box(fill: luma(80%))[`author 2`] and #box(fill: luma(80%))[`author 3`], "#box(fill: luma(80%))[`title`]," _Ph.D. Dissertation_, #box(fill: luma(80%))[`school`] (#box(fill: luma(80%))[`year`]), (#box(fill: luma(80%))[`note`]), URL: <#box(fill: luma(80%))[`url`]>.
+  - 出力例（英語文献）\ #box(fill: luma(80%))[`author 1`], #box(fill: luma(80%))[`author 2`] and #box(fill: luma(80%))[`author 3`], "#box(fill: luma(80%))[`title`]," _Ph.D. Dissertation_, #box(fill: luma(80%))[_`school`_] (#box(fill: luma(80%))[`year`]), (#box(fill: luma(80%))[`note`]), URL: <#box(fill: luma(80%))[`url`]>.
   - 出力例（日本語文献）\ #box(fill: luma(80%))[`author 1`], #box(fill: luma(80%))[`author 2`], #box(fill: luma(80%))[`author 3`],「#box(fill: luma(80%))[`title`]」, #box(fill: luma(80%))[`school`]博士論文 (#box(fill: luma(80%))[`year`]), (#box(fill: luma(80%))[`note`]), URL: <#box(fill: luma(80%))[`url`]>.
     ```BibTeX
     @phdthesis{塚原:博論2007,
@@ -375,6 +375,22 @@ Typst でも `bib` ファイルを使用して文献リストを自動で作成�
     }
     ```
   - 学会の講演論文集全体を引用する際には `@proceedings` を使用します．`@conference` や `@inproceedings` は講演論文集の中の一講演を引用しているのに対して，`@proceedings` は講演論文集全体を引用しています．
+- `@techreport`
+  - 必須項目\ `author`, `title`, `institution`, `year`
+  - オプション項目\ `type`, `number`, `address`, `month`, `note`, `key`, `doi`, `url`
+  - 出力例（英語文献）\ #box(fill: luma(80%))[`author 1`], #box(fill: luma(80%))[`author 2`] and #box(fill: luma(80%))[`author 3`], "#box(fill: luma(80%))[`title`]," #box(fill: luma(80%))[_`institution`_] (#box(fill: luma(80%))[`year`]), (#box(fill: luma(80%))[`note`]), URL: <#box(fill: luma(80%))[`url`]>.
+  - 出力例（日本語文献）\ #box(fill: luma(80%))[`author 1`], #box(fill: luma(80%))[`author 2`], #box(fill: luma(80%))[`author 3`],「#box(fill: luma(80%))[`title`]」, #box(fill: luma(80%))[_`institution`_] (#box(fill: luma(80%))[`year`]), (#box(fill: luma(80%))[`note`]), URL: <#box(fill: luma(80%))[`url`]>.
+    ```BibTeX
+    @techreport{Neuhart:NASAreport2004,
+        author      = {Neuhart, Dan H. and McGinley, Catherine B.},
+        title       = {Free-Stream Turbulence Intensity in the {Langley} 14- by 22-Foot Subsonic Tunnel},
+        institution = {NASA Technical Publication},
+        year        = {2004},
+        url         = {https://ntrs.nasa.gov/citations/20040120956},
+        note        = {TP-2004-213247}
+    }
+    ```
+  - 研究機関等から発行された技術報告書は `@techreport` に分類します．技術報告書を発行している研究機関はさまざまありますが，例えば NASA #footnote[アメリカ航空宇宙局（NASA） Technical Reports Server, <#link("https://ntrs.nasa.gov/")>]や国立天文台 #footnote[大学共同利用機関法人 自然科学研究機構 国立天文台，国立天文台欧文報告, <#link("https://www.nao.ac.jp/about-naoj/reports/publications-naoj.html")>]，鉄道総研 #footnote[公益財団法人 鉄道総合技術研究所（鉄道総研），鉄道総研報告, <#link("https://www.rtri.or.jp/publish/rtrirep/")>]などが挙げられます．また，企業によっては技術報告書を公開しているところもあります．
 
 
 

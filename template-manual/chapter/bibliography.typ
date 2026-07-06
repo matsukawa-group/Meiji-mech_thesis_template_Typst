@@ -4,14 +4,25 @@
 = 参考文献リストの作成と出力
 <ch:bibliography>
 
+第~@ch:bibliography~章では参考文献リストの作成と出力方法について説明します．
+第~@sec:bib-caution~節で参考文献の一般的な記載方法を，第~@sec:bib-cite~節で本文中での引用方法を，第~@sec:bib-file~節で書誌情報ファイル（`bib` ファイル）の作り方を説明します．
+
+== 参考文献の記載時の一般的な注意事項
+<sec:bib-caution>
+
+第~@sec:bib-caution~節はこのテンプレートに限らない，一般的に学術論文等で参考文献を載せる際に注意すべき点をまとめています．
+論文執筆の際には多くの文献を引用することになります．
+読者に正しい情報を提供するのはもちろんのこと，先人たちの業績を認め，評価するという観点でも文献を引用する際は細心の注意を払いましょう．
+
+
 参考文献の引用方法は Harvard 方式と Vancouver 方式に大別できます．
 
 - Harvard 方式
   - 本文中での引用はいわゆる author-year 方式．「著者名」と「発行年」を記載する．
   - 本文中での引用は苗字だけでの記載が多い．引用例：
-    - 著者 1 名：Reynolds (1883)
-    - 著者 2 名：Schmid and Henningson (2001)
-    - 著者 3 名以上：Berghout et al. (2020)
+    - 著者 1 名：#citet(<Reynolds:PhilTransRoySoc1883>)
+    - 著者 2 名：#citet(<Schmid:Springer2001>)
+    - 著者 3 名以上：#citet(<Berghout:JFM2020>)
   - et al. はラテン語で「その他」を意味する et alii の略．Italic 体で _et al._ と書くことも多い．
   - 論文末尾の文献リストは著者名のアルファベット順でソート．
 - Vancouver 方式

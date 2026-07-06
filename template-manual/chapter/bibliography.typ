@@ -303,6 +303,38 @@ Typst でも `bib` ファイルを使用して文献リストを自動で作成�
     }
     ```
   - 修士論文は \ttmastersthesis に分類します．`@masterthesis` ではなく `@master`#text(fill: red)[`s`]`thesis`です．#text(fill: red)[`s`] を忘れないでください．また，`year` は修了「年度」ではなく修了「年」を西暦で書いてください．例えば，日本の大学を 2023 年 3 月に修了した人は 2022 年度修了生ですが `year = {2023}` です．
+- `@misc`
+  - 必須項目\ なし
+  - オプション項目\ `author`, `title`, `howpublished`, `archivePrefix`, `eprint`, `month`, `year`, `note`, `key`, `doi`, `url`
+  - 出力例（通常，英語文献）\ #box(fill: luma(80%))[`author 1`], #box(fill: luma(80%))[`author 2`] and #box(fill: luma(80%))[`author 3`], "#box(fill: luma(80%))[`title`]," #box(fill: luma(80%))[_`howpublished`_] (#box(fill: luma(80%))[`year`]), (#box(fill: luma(80%))[`note`]), URL: <#box(fill: luma(80%))[`url`]>.
+  - 出力例（通常，日本語文献）\ #box(fill: luma(80%))[`author 1`], #box(fill: luma(80%))[`author 2`], #box(fill: luma(80%))[`author 3`],「#box(fill: luma(80%))[`title`]」, #box(fill: luma(80%))[`howpublished`] (#box(fill: luma(80%))[`year`]), (#box(fill: luma(80%))[`note`]), URL: <#box(fill: luma(80%))[`url`]>.
+  - 出力例（arXiv の場合）\ #box(fill: luma(80%))[`author 1`], #box(fill: luma(80%))[`author 2`] and #box(fill: luma(80%))[`author 3`], "#box(fill: luma(80%))[`title`]," (#box(fill: luma(80%))[`year`]), (#box(fill: luma(80%))[`note`]), arXiv: #box(fill: luma(80%))[`eprint`].
+  - `bib` ファイル作成例（通常）
+    ```BibTeX
+    @misc{湯村:卒論2006,
+        author          = {湯村, 翼},
+        yomi            = {Yumura, Tsubasa},
+        title           = {レイリーテイラー不安定による赤道電離圏プラズマバブルの発生},
+        howpublished    = {北海道大学理学部地球科学科卒業論文},
+        year            = {2006},
+        url             = {https://researchmap.jp/yumu/published_papers/1902404}
+    }
+    ```
+  - `bib` ファイル作成例（arXiv の場合）
+    ```BibTeX
+    @misc{Araki:arXiv2023,
+        author          = {Araki, Ryo and Bos, Wouter J. T. and Goto, Susumu},
+        title           = {Space-local {Navier--Stokes} turbulence}, 
+        year            = {2023},
+        eprint          = {2308.07255},
+        archivePrefix   = {arXiv},
+        primaryClass    = {physics.flu-dyn}
+    }
+    ```
+  - その他該当種別が無いものは `@misc` とします．学部の卒業論文は `@misc` でいいと思います．ただし，`@mastersthesis` や `@phdthesis` と異なり，`school` のフィールドを使用できないので `howpublished` で代用します．したがって，`@mastersthesis` や `@phdthesis` では `school` に所属名だけ（例：`school = {東京理科大学大学院理工学研究科機械工学専攻}`）書けばよかったものが `@misc` で卒論を出力する際には `howpublished = {北海道大学理学部地球科学科卒業論文}` のように「`卒業論文`」の文字まで書く必要があります．該当するエントリーがよくわからなかったらとりあえず `@misc` に入れておくという人は多いと思います．また，arXiv #footnote[arXiv（「アーカイブ」と読みます）, <#link("https://arxiv.org/")>]と呼ばれるプレプリントサーバーから引用した文献は `@misc` に分類します．arXiv 上の Export BibTeX Citation と書いてあるところから文献情報を見ると `@misc` に分類されていることがわかると思います．この文献情報では上記のように `eprint = {2308.07255}`, `archivePrefix = {arXiv}` などと書かれていることが多いです．このテンプレートでは `eprint` の情報を利用して #quote-block[
+Araki, R., Bos, W. J. T. and Goto, S., "Space-local Navier--Stokes turbulence," (2023), arXiv: #link("https://doi.org/10.48550/arXiv.2308.07255")[`2308.07255`].]   のように自動で書いてくれます．`eprint` の情報から URL を自動生成するので，#link("https://doi.org/10.48550/arXiv.2308.07255")[`2308.07255`] と書かれている（青字の）箇所をクリックしたら arXiv の該当ページにジャンプできます．
+
+
 
 
 

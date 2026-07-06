@@ -288,6 +288,22 @@ Typst でも `bib` ファイルを使用して文献リストを自動で作成�
     }
     ```
   - マニュアルや技術文書は `@manual` に分類しましょう．ただし，`author` フィールドが必須項目ではないので，このテンプレートでは企業名を `author` に入れています．
+- `@mastersthesis` <entry:mastersthesis>
+  - 必須項目\ `author`, `title`, `school`, `year`
+  - オプション項目\ `address`, `month`, `note`, `key`, `doi`, `url`
+  - 出力例（英語文献）\ #box(fill: luma(80%))[`author 1`], #box(fill: luma(80%))[`author 2`] and #box(fill: luma(80%))[`author 3`], "#box(fill: luma(80%))[`title`]," _Master's Thesis_, #box(fill: luma(80%))[`school`] (#box(fill: luma(80%))[`year`]), (#box(fill: luma(80%))[`note`]), URL: <#box(fill: luma(80%))[`url`]>.
+  - 出力例（日本語文献）\ #box(fill: luma(80%))[`author 1`], #box(fill: luma(80%))[`author 2`], #box(fill: luma(80%))[`author 3`],「#box(fill: luma(80%))[`title`]」, #box(fill: luma(80%))[`school`]修士論文 (#box(fill: luma(80%))[`year`]), (#box(fill: luma(80%))[`note`]), URL: <#box(fill: luma(80%))[`url`]>.
+    ```BibTeX
+    @mastersthesis{松川:修論2023,
+        author  = {松川, 裕樹},
+        yomi    = {Matsukawa, Yuki},
+        title   = {直接数値解析を用いた高円筒比Taylor--Couette--Poiseuille流の流動状態遷移過程の分類},
+        school  = {東京理科大学大学院理工学研究科機械工学専攻},
+        year    = {2023}
+    }
+    ```
+  - 修士論文は \ttmastersthesis に分類します．`@masterthesis` ではなく `@master`#text(fill: red)[`s`]`thesis`です．#text(fill: red)[`s`] を忘れないでください．また，`year` は修了「年度」ではなく修了「年」を西暦で書いてください．例えば，日本の大学を 2023 年 3 月に修了した人は 2022 年度修了生ですが `year = {2023}` です．
+
 
 
 

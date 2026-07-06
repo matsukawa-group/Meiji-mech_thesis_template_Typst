@@ -105,12 +105,11 @@
     numbering: (..nums) => {
       let ns = nums.pos()
       if ns.len() == 1 {
-        [第 #ns.first() 章#h(1em)]
+        [第 #ns.first() 章#h(0.5em)]
       } else {
         numbering("1.1", ..ns)
       }
     },
-    supplement: none,
   )
   show heading: it => {
     let is-appendix = appendix-mode.get()
@@ -151,6 +150,35 @@
       text(font: "Segoe UI")[#it.body]
     }
     par(text(size: 0pt, "")) // 見出しの後に字下げするために空の段落を設定
+  }
+  show ref: it => {
+    let el = it.element
+
+    if el != none and el.func() == heading {
+      context {
+        let loc = el.location()
+        let nums = counter(heading).at(loc)
+        let is-appendix = appendix-mode.at(loc)
+
+        link(loc)[
+          #if nums.len() == 1 {
+            if is-appendix {
+              numbering("A", nums.first())
+            } else {
+              nums.first()
+            }
+          } else {
+            if is-appendix {
+              numbering("A.1", ..nums)
+            } else {
+              numbering("1.1", ..nums)
+            }
+          }
+        ]
+      }
+    } else {
+      it
+    }
   }
 
   // ページ番号

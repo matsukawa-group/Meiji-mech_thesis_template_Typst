@@ -346,6 +346,26 @@ Typst でも `bib` ファイルを使用して文献リストを自動で作成�
     }
     ```
   - `@online` はウェブページ等のオンライン資料を引用する際に使用します．本来，ウェブページ等の引用はあまり推奨されるものではありませんが，データベースを研究室のウェブページ等で公開していることがある #footnote[乱流の分野におけるデータベースとしては，東京理科大学河村研究室（現在は塚原研究室が管理）<#link("https://www.rs.tus.ac.jp/~t2lab/db/index.html")> や東京大学笠木研究室（現在は複数の大学によって管理）<#link("https://thtlab.jp")> などが挙げられます．]ので使う機会がゼロとは言えないでしょう．ウェブページの場合は，情報が更新される可能性があるので，参照日を明記することが重要です．このテンプレートでは `access` フィールドを使って参照日を記載するようにしています．
+- `@phdthesis` <entry:phdthesis>
+  - 必須項目\ `author`, `title`, `school`, `year`
+  - オプション項目\ `address`, `month`, `note`, `key`, `doi`, `url`
+  - 出力例（英語文献）\ #box(fill: luma(80%))[`author 1`], #box(fill: luma(80%))[`author 2`] and #box(fill: luma(80%))[`author 3`], "#box(fill: luma(80%))[`title`]," _Ph.D. Dissertation_, #box(fill: luma(80%))[`school`] (#box(fill: luma(80%))[`year`]), (#box(fill: luma(80%))[`note`]), URL: <#box(fill: luma(80%))[`url`]>.
+  - 出力例（日本語文献）\ #box(fill: luma(80%))[`author 1`], #box(fill: luma(80%))[`author 2`], #box(fill: luma(80%))[`author 3`],「#box(fill: luma(80%))[`title`]」, #box(fill: luma(80%))[`school`]博士論文 (#box(fill: luma(80%))[`year`]), (#box(fill: luma(80%))[`note`]), URL: <#box(fill: luma(80%))[`url`]>.
+    ```BibTeX
+    @phdthesis{塚原:博論2007,
+        author  = {塚原, 隆裕},
+        yomi    = {Tsukahara, Takahiro},
+        title   = {大規模直接数値シミュレーションによる低レイノルズ数平行平板間乱流の研究},
+        school  = {東京理科大学大学院理工学研究科機械工学専攻},
+        year    = {2007},
+        url     = {https://iss.ndl.go.jp/books/R100000002-I000009177724-00}
+    }
+    ```
+  - `@phdthesis` は博士論文が該当します．エントリー名に `@phdthesis` と入っていますが，英語文献の場合は dissertation と出力するように設定しています．基本的な使い方は `@mastersthesis` と同じです.
+
+
+
+
 
 
 

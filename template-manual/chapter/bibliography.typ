@@ -99,7 +99,7 @@ Typst でも `bib` ファイルを使用して文献リストを自動で作成�
 また，エントリー名とフィールド名は大文字と小文字を区別しませんが，参照キーは区別するので気をつけてください．
 
 エントリーは雑誌論文や学位論文といった，その文献の該当する種別を表します．
-このテンプレートでサポートされているエントリーは #link(<entry:article>)[`@article`], #link(<entry:book>)[`@book`], #link(<entry:booklet>)[`@booklet`], #link(<entry:comment>)[`@comment`], #link(<entry:conference>)[`@conference`], `@inbook`, `@incollection`, `@inproceedings`, `@manual`, `@mastersthesis`, `@misc`, `@online`, `@phdthesis`, `@proceedings`, `@techreport`, `@unpublished` の 16 種類です．
+このテンプレートでサポートされているエントリーは #link(<entry:article>)[`@article`], #link(<entry:book>)[`@book`], #link(<entry:booklet>)[`@booklet`], #link(<entry:comment>)[`@comment`], #link(<entry:conference>)[`@conference`], #link(<entry:inbook>)[`@inbook`], #link(<entry:incollection>)[`@incollection`], #link(<entry:inproceedings>)[`@inproceedings`], #link(<entry:manual>)[`@manual`], #link(<entry:mastersthesis>)[`@mastersthesis`], #link(<entry:misc>)[`@misc`], #link(<entry:online>)[`@online`], #link(<entry:phdthesis>)[`@phdthesis`], #link(<entry:proceedings>)[`@proceedings`], #link(<entry:techreport>)[`@techreport`], #link(<entry:unpublished>)[`@unpublished`] の 16 種類です．
 それぞれのエントリーで必須となるフィールドが異なり，文献一覧への出力の方法も異なるので面倒くさがらずに分類しましょう．
 ただ，全ての文献を正確に分類することは難しく，判断が人により異なることもあります．
 このテンプレートにおける分類の仕方も見る人によっては違和感を覚えるものがあるかもしれません．
@@ -314,7 +314,7 @@ Typst でも `bib` ファイルを使用して文献リストを自動で作成�
     }
     ```
   - 修士論文は \ttmastersthesis に分類します．`@masterthesis` ではなく `@master`#text(fill: red)[`s`]`thesis`です．#text(fill: red)[`s`] を忘れないでください．また，`year` は修了「年度」ではなく修了「年」を西暦で書いてください．例えば，日本の大学を 2023 年 3 月に修了した人は 2022 年度修了生ですが `year = {2023}` です．
-- `@misc`
+- `@misc` <entry:misc>
   - 必須項目\ なし
   - オプション項目\ `author`, `title`, `howpublished`, `archivePrefix`, `eprint`, `month`, `year`, `note`, `key`, `doi`, `url`
   - 出力例（通常，英語文献）\ #box(fill: luma(80%))[`author 1`], #box(fill: luma(80%))[`author 2`] and #box(fill: luma(80%))[`author 3`], "#box(fill: luma(80%))[`title`]," #box(fill: luma(80%))[_`howpublished`_] (#box(fill: luma(80%))[`year`]), (#box(fill: luma(80%))[`note`]), URL: <#box(fill: luma(80%))[`url`]>.
@@ -373,7 +373,7 @@ Typst でも `bib` ファイルを使用して文献リストを自動で作成�
     }
     ```
   - `@phdthesis` は博士論文が該当します．エントリー名に `@phdthesis` と入っていますが，英語文献の場合は dissertation と出力するように設定しています．基本的な使い方は `@mastersthesis` と同じです.
-- `@proceedings`
+- `@proceedings` <entry:proceedings>
   - 必須項目\ `title`, `year`
   - オプション項目\ `editor`, `organization`, `publisher`, `address`, `month`, `note`, `key`, `doi`, `url`
   - 出力例（英語文献）\ #box(fill: luma(80%))[`editor`], "#box(fill: luma(80%))[`title`]" (#box(fill: luma(80%))[`year`]), (#box(fill: luma(80%))[`note`]), URL: <#box(fill: luma(80%))[`url`]>.
@@ -387,7 +387,7 @@ Typst でも `bib` ファイルを使用して文献リストを自動で作成�
     }
     ```
   - 学会の講演論文集全体を引用する際には `@proceedings` を使用します．`@conference` や `@inproceedings` は講演論文集の中の一講演を引用しているのに対して，`@proceedings` は講演論文集全体を引用しています．
-- `@techreport`
+- `@techreport` <entry:techreport>
   - 必須項目\ `author`, `title`, `institution`, `year`
   - オプション項目\ `type`, `number`, `address`, `month`, `note`, `key`, `doi`, `url`
   - 出力例（英語文献）\ #box(fill: luma(80%))[`author 1`], #box(fill: luma(80%))[`author 2`] and #box(fill: luma(80%))[`author 3`], "#box(fill: luma(80%))[`title`]," #box(fill: luma(80%))[_`institution`_] (#box(fill: luma(80%))[`year`]), (#box(fill: luma(80%))[`note`]), URL: <#box(fill: luma(80%))[`url`]>.
@@ -403,7 +403,7 @@ Typst でも `bib` ファイルを使用して文献リストを自動で作成�
     }
     ```
   - 研究機関等から発行された技術報告書は `@techreport` に分類します．技術報告書を発行している研究機関はさまざまありますが，例えば NASA #footnote[アメリカ航空宇宙局（NASA） Technical Reports Server, <#link("https://ntrs.nasa.gov/")>]や国立天文台 #footnote[大学共同利用機関法人 自然科学研究機構 国立天文台，国立天文台欧文報告, <#link("https://www.nao.ac.jp/about-naoj/reports/publications-naoj.html")>]，鉄道総研 #footnote[公益財団法人 鉄道総合技術研究所（鉄道総研），鉄道総研報告, <#link("https://www.rtri.or.jp/publish/rtrirep/")>]などが挙げられます．また，企業によっては技術報告書を公開しているところもあります．
-- `@unpublished`
+- `@unpublished` <entry:unpublished>
   - 必須項目\ `author`, `title`, `note`
   - オプション項目\ `month`, `year`, `key`, `doi`, `url`
   - 出力例（英語文献）\ #box(fill: luma(80%))[`author 1`], #box(fill: luma(80%))[`author 2`] and #box(fill: luma(80%))[`author 3`], "#box(fill: luma(80%))[`title`]," (#box(fill: luma(80%))[`year`]), (#box(fill: luma(80%))[`note`]), URL: <#box(fill: luma(80%))[`url`]>.

@@ -50,7 +50,7 @@
 === 複数枚の図を配置する方法
 <sssec:figure-multiple>
 
-関連する図（ここではそれぞれの図を「サブ図」と呼称します）を複数枚配置するときは `grid` と `subfigure` を使いましょう．
+関連する図（パネル）を複数枚配置するときは `grid` と `subfigure` を使いましょう．
 `subfigure` は #link("https://typst.app/universe/package/hallon")[`hallon`] パッケージのコマンドです．
 `grid` コマンドでは列数や列間のスペースを指定できます．
 `columns: 2` とすれば 2 列のグリッドを作ることができます．
@@ -174,11 +174,11 @@
   ]
 ]
 #h(1em)
-また，`subfigure` を使うことでそれぞれのサブ図にラベルをつけることができます．
-参照時には `@fig:four_figures` と入力すると~@fig:four_figures~のように全体の図を参照できますし，`@subfig:four_figures-a` と入力すると~@subfig:four_figures-a~のようにサブ図を参照できます．
-図~@fig:four_figures(@subfig:four_figures-a)~のように全体の図とサブ図を両方参照したいときは `@fig:four_figures(@subfig:four_figures-a)` と入力すれば出力できます．
+また，`subfigure` を使うことでそれぞれのパネルにラベルをつけることができます．
+参照時には `@fig:four_figures` と入力すると~@fig:four_figures~のように全体の図を参照できますし，`@subfig:four_figures-a` と入力すると~@subfig:four_figures-a~のようにパネルを参照できます．
+図~@fig:four_figures(@subfig:four_figures-a)~のように全体の図とパネルを両方参照したいときは `@fig:four_figures(@subfig:four_figures-a)` と入力すれば出力できます．
 このとき，`@subfig:four_figures-a` 前後の括弧 `()` を忘れないでください．
-括弧をデフォルトで出力するような設定もできますが，図~@fig:four_figures(@subfig:four_figures-a, @subfig:four_figures-b)~のように複数のサブ図を参照したいときもあるので，このテンプレートでは括弧は手動で入力する方式にしています．
+括弧をデフォルトで出力するような設定もできますが，図~@fig:four_figures(@subfig:four_figures-a, @subfig:four_figures-b)~のように複数のパネルを参照したいときもあるので，このテンプレートでは括弧は手動で入力する方式にしています．
 
 === 画像のファイル形式
 <ssec:figure-file_format>

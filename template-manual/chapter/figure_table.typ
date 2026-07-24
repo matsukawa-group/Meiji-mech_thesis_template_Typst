@@ -180,6 +180,41 @@
 このとき，`@subfig:four_figures-a` 前後の括弧 `()` を忘れないでください．
 括弧をデフォルトで出力するような設定もできますが，図~@fig:four_figures(@subfig:four_figures-a, @subfig:four_figures-b)~のように複数のサブ図を参照したいときもあるので，このテンプレートでは括弧は手動で入力する方式にしています．
 
+=== 画像のファイル形式
+<ssec:figure-file_format>
+
+#figure(
+  placement: top,
+  grid(
+    columns: 3,
+    gutter: 2.5mm,
+    subfigure(
+      image("../figure/colormap1.pdf", height: 18%),
+      caption: [Left figure caption.],
+      label: <subfig:plasma>,
+    ),
+    subfigure(
+      image("../figure/colormap2.pdf", height: 18%),
+      caption: [Center figure caption.],
+      label: <subfig:bwr>,
+    ),
+    subfigure(
+      image("../figure/colormap2.png", height: 18%),
+      caption: [Right figure caption.],
+      label: <subfig:bwr_png>,
+    ),
+    [],
+    subfigure(
+      image("../figure/graph.pdf", width: 150%),
+      caption: [Graph.],
+      label: <subfig:graph>,
+    ),
+    [],
+  ),
+  caption: [Three figures placed side by side.],
+) <fig:figure-file_format>
+
+
 == 表の配置
 <sec:table>
 

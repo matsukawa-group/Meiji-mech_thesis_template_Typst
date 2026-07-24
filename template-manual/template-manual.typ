@@ -38,6 +38,7 @@
 
 #show: setup            // 文書全体の設定
 #show: show-theorion    // 定理環境
+#show: bib-init         // 参考文献の設定
 
 #set page(numbering: "i")
 // === 目次 ===
@@ -79,8 +80,20 @@
 // === 定理環境・かっこいい枠 ===
 #include "chapter/theorem.typ"
 
+// === 参考文献リストの作成と出力 ===
+#include "chapter/bibliography.typ"
+
 // === 謝辞 ===
 #include "chapter/acknowledgement.typ"
+
+// === 参考文献 ===
+#bibliography-list(
+  title: "参考文献",
+  bib-sort: true,
+  bib-sort-ref: false,
+  ..bib-file(read("mybib_en.bib"), ..my-bib-style),
+  ..bib-file(read("mybib_ja.bib"), ..my-bib-style),
+)
 
 // === 付録 ===
 #include "chapter/appendix.typ"

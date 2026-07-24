@@ -48,6 +48,7 @@
   indent: auto,
 )
 #heading(numbering: none)[図目次]
+#show outline.entry: set par(justify: true)
 #outline(
   title: none,
   indent: auto,

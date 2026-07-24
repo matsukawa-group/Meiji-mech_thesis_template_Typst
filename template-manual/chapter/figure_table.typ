@@ -235,6 +235,29 @@
   caption: [Examples of colormaps designed with consideration for color vision diversity. Panels (@subfig:plasma) and (@subfig:bwr) compare colormaps suitable for visualizing quantities that are symmetric about zero, such as fluctuation fields, and quantities that vary monotonically without symmetry about zero, respectively. Panel (@subfig:bwr_png) shows the raster (PNG) version of the same colormap as panel (@subfig:bwr) for comparison with the vector (PDF) version. Panel (@subfig:graph) presents an example line graph using the colormap "plasma".],
 ) <fig:figure-file_format>
 
+また，論文に使用する画像を作成する際には，カラーマップの選択にも注意が必要です．
+近年では，多様な色覚特性を有する読者にも情報が正しく伝わるよう，色覚多様性に配慮した図の作成が求められています．
+そのため，色の違いだけに依存した表現は避け，色覚特性によらず物理量の変化や大小関係を理解しやすいカラーマップを選択することが重要です．
+
+実際にいくつかの画像を比較してみましょう．
+まずは画像形式に着目して図~@fig:figure-file_format~を見てみます．
+パネル (@subfig:plasma,@subfig:bwr,@subfig:graph) は PDF ファイル，(@subfig:bwr_png) PNG ファイルです．
+パネル (@subfig:plasma,@subfig:bwr,@subfig:graph) はどれもベクター画像なのでいくら拡大しても明瞭なままですね．
+一方のパネル (@subfig:bwr_png) を拡大するとラスター画像なので小さな正方形で構成されていることが確認できます．これがベクター画像とラスター画像の違いです．
+また，この `template-manual.pdf` を開きながら `Ctrl` + `A` をしてください．
+パネル (@subfig:bwr_png) の文字が選択できないことが確認できます．
+これは PNG 形式の画像なので文字情報を持っていないためです．
+PDF 形式であっても文字抽出ができない場合もあります．
+皆さんが論文を書く際は文字抽出が可能なベクター形式を使用するのが理想です．
+
+次に色の選択に着目して再び図~@fig:figure-file_format~を見てみます．
+図~@fig:figure-file_format~は色覚多様性に配慮したカラーマップ・グラフの例を示しています．
+パネル (@subfig:plasma,@subfig:graph) は plasma と呼ばれるカラーマップを使用しており，明度が線形に変化するため，色覚特性に関わらず物理量の大小関係を理解しやすいカラーマップです#footnote[Choosing Colormaps in Matplotlib <#link("https://matplotlib.org/stable/users/explain/colors/colormaps.html")>]．
+特に，パネル (@subfig:graph) のように $[0, 6]$ の区間で単調に変化するカラーマップを示したいときには plasma カラーマップが適しています．
+流体力学の分野では，速度や温度の大きさなどを示すときに，このような単調に変化するカラーマップを使用することが多いです．
+一方，パネル (@subfig:bwr,@subfig:bwr_png) は青 → 白 → 赤のカラーマップを使用しており，図の例のように $0$ を中心とした区間で対称的に変化する物理量を示すのに適しています．
+流体力学の分野では，乱流の速度変動などの物理量は $0$（平均流速）を中心に対称的に変化することが多いので，このようなカラーマップを使用することが多いです．
+
 
 
 == 表の配置

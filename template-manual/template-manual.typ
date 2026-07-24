@@ -89,6 +89,8 @@
 // === 参考文献 ===
 #bibliography-list(
   title: "参考文献",
+  bib-sort: true,
+  bib-sort-ref: false,
   ..bib-file(read("mybib_en.bib"), ..my-bib-style),
   ..bib-file(read("mybib_ja.bib"), ..my-bib-style),
 )

@@ -13,7 +13,7 @@
 ここでは図を 1 枚だけ配置する方法を紹介します．
 
 #figure(
-  placement: bottom,  // 基本的には top を指定
+  placement: bottom, // 基本的には top を指定
   image("../figure/example-image.pdf", width: 60%),
   caption: [Please write the figure caption here.],
 )<fig:one_figure>
@@ -186,33 +186,37 @@
 #figure(
   placement: top,
   grid(
-    columns: 3,
+    rows: 2,
     gutter: 2.5mm,
-    subfigure(
-      image("../figure/colormap1.pdf", height: 18%),
-      caption: [Left figure caption.],
-      label: <subfig:plasma>,
+    grid(
+      columns: 3,
+      gutter: 1.5mm,
+      subfigure(
+        image("../figure/colormap1.pdf", height: 18%),
+        caption: [],
+        label: <subfig:plasma>,
+      ),
+      subfigure(
+        image("../figure/colormap2.pdf", height: 18%),
+        caption: [],
+        label: <subfig:bwr>,
+      ),
+      subfigure(
+        image("../figure/colormap2.png", height: 18%),
+        caption: [],
+        label: <subfig:bwr_png>,
+      ),
     ),
-    subfigure(
-      image("../figure/colormap2.pdf", height: 18%),
-      caption: [Center figure caption.],
-      label: <subfig:bwr>,
-    ),
-    subfigure(
-      image("../figure/colormap2.png", height: 18%),
-      caption: [Right figure caption.],
-      label: <subfig:bwr_png>,
-    ),
-    [],
-    subfigure(
-      image("../figure/graph.pdf", width: 150%),
-      caption: [Graph.],
-      label: <subfig:graph>,
-    ),
-    [],
+    align(center)[
+      #subfigure(
+        image("../figure/graph.pdf", width: 60%),
+        caption: [],
+        label: <subfig:graph>,
+      )],
   ),
-  caption: [Three figures placed side by side.],
+  caption: [Examples of colormaps designed with consideration for color vision diversity. Panels (@subfig:plasma) and (@subfig:bwr) compare colormaps suitable for visualizing quantities that are symmetric about zero, such as fluctuation fields, and quantities that vary monotonically without symmetry about zero, respectively. Panel (@subfig:bwr_png) shows the raster (PNG) version of the same colormap as panel (@subfig:bwr) for comparison with the vector (PDF) version. Panel (@subfig:graph) presents an example line graph using the colormap "plasma".],
 ) <fig:figure-file_format>
+
 
 
 == 表の配置

@@ -192,7 +192,7 @@
 - ベクター画像：円や直線などを数式的に処理することで作り上げた画像．どれだけ拡大しても明瞭なまま．代表的なベクター画像は以下の通り．
   - PS (PostScript)：拡張子は `.ps` で，Adobe が 1984 年に開発したページ記述言語で組まれた画像形式．Typst では使用できない．
   - EPS (Encapsulated PostScript)：拡張子は `.eps` で，PostScript の後継となる画像形式（カプセル化された PostScript）．バウンディングボックスを読み込むことで描画領域を確保する．一昔前の TeX/LaTeX では EPS 形式の画像を使用することが多かったが，現在では PDF 形式の画像を使用することが多い．Typst では使用できない．
-  - PDF (Portable Document Format)：拡張子は .pdf で，環境に左右されず，ほぼ同様の見た目で画像や文書を閲覧できる．一般的な用途では最も主流なベクター形式．Typst では 0.14.0 のバージョンから PDF 形式の画像を `#image()` コマンドで挿入できるようになった#footnote[Typst 0.14.0 (October 24, 2025), <#link("https://typst.app/docs/changelog/0.14.0/")>]．
+  - PDF (Portable Document Format)：拡張子は `.pdf` で，環境に左右されず，ほぼ同様の見た目で画像や文書を閲覧できる．一般的な用途では最も主流なベクター形式．Typst では 0.14.0 のバージョンから PDF 形式の画像を `#image()` コマンドで挿入できるようになった#footnote[Typst 0.14.0 (October 24, 2025), <#link("https://typst.app/docs/changelog/0.14.0/")>]．
   - SVG (Scalable Vector Graphics)：拡張子は `.svg` で，W3C によって標準化された XML ベースのベクター画像形式．0.14.0 以前の Typst では PDF 形式の画像を挿入できなかったため，ベクター画像としては SVG 形式の画像を挿入することが多かった．
 
 ラスター画像かベクター画像かという観点では，論文中の画像はできるだけベクター画像の方がいいです．
@@ -227,17 +227,13 @@
     ),
     align(center)[
       #subfigure(
-        image("../figure/graph.pdf", width: 60%),
+        image("../figure/graph.pdf", width: 55%),
         caption: [],
         label: <subfig:graph>,
       )],
   ),
   caption: [Examples of colormaps designed with consideration for color vision diversity. Panels (@subfig:plasma) and (@subfig:bwr) compare colormaps suitable for visualizing quantities that are symmetric about zero, such as fluctuation fields, and quantities that vary monotonically without symmetry about zero, respectively. Panel (@subfig:bwr_png) shows the raster (PNG) version of the same colormap as panel (@subfig:bwr) for comparison with the vector (PDF) version. Panel (@subfig:graph) presents an example line graph using the colormap "plasma".],
 ) <fig:figure-file_format>
-
-また，論文に使用する画像を作成する際には，カラーマップの選択にも注意が必要です．
-近年では，多様な色覚特性を有する読者にも情報が正しく伝わるよう，色覚多様性に配慮した図の作成が求められています．
-そのため，色の違いだけに依存した表現は避け，色覚特性によらず物理量の変化や大小関係を理解しやすいカラーマップを選択することが重要です．
 
 実際にいくつかの画像を比較してみましょう．
 まずは画像形式に着目して図~@fig:figure-file_format~を見てみます．
@@ -250,7 +246,19 @@
 PDF 形式であっても文字抽出ができない場合もあります．
 皆さんが論文を書く際は文字抽出が可能なベクター形式を使用するのが理想です．
 
-次に色の選択に着目して再び図~@fig:figure-file_format~を見てみます．
+また，論文に使用する画像を作成する際には，カラーマップの選択にも注意が必要です．
+近年では，多様な色覚特性を有する読者にも情報が正しく伝わるよう，色覚多様性に配慮した図の作成が求められています．
+流体力学分野に限らず，古くから青 → 緑 → 赤のカラーマップ（rainbow，jet，turbo など）が広く用いられてきました．
+しかし，これらのカラーマップは色覚特性によっては物理量の変化や大小関係を正しく認識しにくく，また知覚的にも一様ではないことが指摘されています．
+特に，赤と緑を対比させた配色は，最も一般的な赤緑色覚異常（protanopia や deuteranopia など）では識別が困難となる場合があるため，色のみを情報の識別手段とする表現は避けることが推奨されています#footnote[赤緑色覚異常については以下のものが参考になる：
+- #citefull(<Wong:NatMethods2011>)
+- #citefull(<Crameri:NatCommun2020>)]．
+そのため，色覚特性によらず物理量の変化や大小関係を理解しやすいカラーマップを選択するとともに，必要に応じて明度や線種，マーカーなどを併用して情報を伝えることが重要です．
+また，主要論文誌の中には，論文投稿時に図の色覚多様性への配慮を求める場合もあります#footnote[論文投稿時に図の色覚多様性への配慮を求める主要論文誌の例：
+  - Nature: #link("https://research-figure-guide.nature.com/figures/preparing-figures-our-specifications/")[Preparing figures - our specifications]
+  - Springer Nature: #link("https://www.springernature.com/gp/policies/accessibility-figures-images")[Accessibility requirements for figures, images and supplementary materials]]．
+
+色の選択に着目して再び図~@fig:figure-file_format~を見てみます．
 図~@fig:figure-file_format~は色覚多様性に配慮したカラーマップ・グラフの例を示しています．
 パネル (@subfig:plasma,@subfig:graph) は plasma と呼ばれるカラーマップを使用しており，明度が線形に変化するため，色覚特性に関わらず物理量の大小関係を理解しやすいカラーマップです#footnote[Choosing Colormaps in Matplotlib <#link("https://matplotlib.org/stable/users/explain/colors/colormaps.html")>]．
 特に，パネル (@subfig:graph) のように $[0, 6]$ の区間で単調に変化するカラーマップを示したいときには plasma カラーマップが適しています．

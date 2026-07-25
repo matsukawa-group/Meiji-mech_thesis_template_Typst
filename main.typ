@@ -72,8 +72,8 @@
 // Typst ソースは一つの typ ファイルに書くのではなく，章ごとの typ ファイルに分割して書きましょう．
 // 分割したファイルを読み込むときは #include を使います．
 
-// === Typst 文書の基本的な書き方 ===
-#include "chapter/basic.typ"
+// === 序論 ===
+#include "chapter/introduction.typ"
 
 // === 図表の配置 ===
 #include "chapter/figure_table.typ"

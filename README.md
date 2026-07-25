@@ -51,11 +51,12 @@ Meiji-mech_thesis_template_Typst/
 ├── chapter/                      # 論文本文を章ごとに分割した Typst ファイル
 │   ├── acknowledgement.typ       # 謝辞
 │   ├── appendix.typ              # 付録
-│   ├── basic.typ                 # 基本的な文章・数式の記述例
-│   ├── bibliography.typ          # 引用および参考文献
-│   ├── figure_table.typ          # 図および表の記述例
-│   ├── symbol.typ                # 記号・単位等の記述例
-│   └── theorem.typ               # 定理環境等の記述例
+│   ├── conclusion.typ            # 結論
+│   ├── discussion.typ            # 考察
+│   ├── introduction.typ          # 序論
+│   ├── method.typ                # 計算手法・実験方法
+│   ├── result.typ                # 結果
+│   └── symbol.typ                # 記号表
 │
 ├── figure/                       # 論文で使用する図
 │

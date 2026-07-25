@@ -4,6 +4,11 @@
 = 図表の配置
 <ch:figure-table>
 
+第~@ch:figure-table~章では，Typst で図や表を配置する方法について説明します．
+第~@sec:figure~節では図の配置方法について，第~@sec:table~節では表の配置方法について説明します．
+特に，第~@sec:figure~節では，図の配置方法（第~@ssec:figure-single, @ssec:figure-multiple~節）に加えて，画像のファイル形式や色の選択についても説明します（第~@ssec:figure-file_format_color~節）．
+ベクター画像とラスター画像の違い，色覚多様性に配慮したカラーマップの選択についても詳細に説明するので参考にしてください．
+
 == 図の配置
 <sec:figure>
 
@@ -48,7 +53,7 @@
 ハイパーリンクも埋め込まれているので，該当する図が遠く離れた位置にあってもクリックすればすぐに飛べるようになっています．
 
 === 複数枚の図を配置する方法
-<sssec:figure-multiple>
+<ssec:figure-multiple>
 
 関連する図（パネル）を複数枚配置するときは `grid` と `subfigure` を使いましょう．
 `subfigure` は #link("https://typst.app/universe/package/hallon")[`hallon`] パッケージのコマンドです．
@@ -180,8 +185,8 @@
 このとき，`@subfig:four_figures-a` 前後の括弧 `()` を忘れないでください．
 括弧をデフォルトで出力するような設定もできますが，図~@fig:four_figures(@subfig:four_figures-a, @subfig:four_figures-b)~のように複数のパネルを参照したいときもあるので，このテンプレートでは括弧は手動で入力する方式にしています．
 
-=== 画像のファイル形式
-<ssec:figure-file_format>
+=== 画像のファイル形式と色の選択
+<ssec:figure-file_format_color>
 
 画像形式は大きく分類するとラスター画像とベクター画像に分類できます．
 

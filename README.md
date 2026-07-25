@@ -5,6 +5,37 @@
 パブリックリポジトリなので他研究室所属の方もご自身の PC に入れることができます．
 使用する際に流体力学研究室の許可を取る必要はありませんが，このテンプレートを使用したことで生じた問題に関して大学・学科・流体力学研究室および研究室に所属する個人は一切の責任を負いませんのでご了承ください．
 
+## Typst について
+
+### Typst の環境構築
+
+ターミナル上で以下のように入力する．
+
+Windows の場合：
+
+```
+winget install --id Typst.Typst
+```
+
+Mac の場合：
+
+```
+brew install typst
+```
+
+### Typst のアップデート
+
+ターミナル上で以下のように入力する．
+
+```
+typst update
+```
+
+### Visual Studio Code を使用する場合
+
+エディタとして Visual Studio Code を使用すると編集が楽です．
+拡張機能として [Tinymist Typst](https://marketplace.visualstudio.com/items?itemName=myriad-dreamin.tinymist) を入れておくと，`Ctrl` + `K` `V` でリアルタイムのプレビューを見ることができます．
+
 ## リポジトリの構成
 
 ```
@@ -29,7 +60,14 @@ Meiji-mech_thesis_template_Typst/
 ├── figure/                       # 論文で使用する図
 │
 └── template-manual/              # テンプレートの使用方法を示したマニュアル
-    ├── chapter/                  # マニュアル本文
+    ├── chapter/                  # マニュアル本文を章ごとに分割した Typst ファイル
+    │   ├── acknowledgement.typ   # 謝辞
+    │   ├── appendix.typ          # 付録
+    │   ├── basic.typ             # 基本的な文章・数式の記述例
+    │   ├── bibliography.typ      # 引用および参考文献
+    │   ├── figure_table.typ      # 図および表の記述例
+    │   ├── symbol.typ            # 記号表の記述例
+    │   └── theorem.typ           # 定理環境等の記述例
     ├── figure/                   # マニュアルで使用する図
     ├── mybib_en.bib              # 欧文文献データベース
     ├── mybib_ja.bib              # 和文文献データベース
@@ -38,7 +76,9 @@ Meiji-mech_thesis_template_Typst/
     └── template-manual.pdf       # コンパイル済みマニュアル
 ```
 
-## 卒論・修論用リポジトリの作成
+## 学位論文テンプレートの使用方法
+
+### 卒論・修論用リポジトリの作成
 
 ここでは学位論文用リポジトリの作成方法を説明します．
 
@@ -65,7 +105,7 @@ git push origin HEAD
 
 これでテンプレートの中身が自身の学位論文リポジトリに反映されたので自由に編集して大丈夫です．
 
-## テンプレートへの修正の反映
+### テンプレートへの修正の反映
 
 この学位論文テンプレートが更新された場合は，以下のコマンドを実行して自身のリポジトリに反映してください．
 

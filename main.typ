@@ -84,8 +84,8 @@
 // === 考察 ===
 #include "chapter/discussion.typ"
 
-// === 参考文献リストの作成と出力 ===
-#include "chapter/bibliography.typ"
+// === 結論 ===
+#include "chapter/conclusion.typ"
 
 // === 謝辞 ===
 #include "chapter/acknowledgement.typ"

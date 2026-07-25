@@ -16,8 +16,12 @@
 === A の先行研究
 <ssec:previous_A>
 
+#citet(<Reynolds:PhilTransRoySoc1883>)
+
 === B の先行研究
 <ssec:previous_B>
+
+#citet(<塚原:ながれ2015>)
 
 == 本研究の意義・目的
 <sec:objective>

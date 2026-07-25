@@ -81,8 +81,8 @@
 // === 結果 ===
 #include "chapter/result.typ"
 
-// === 定理環境・かっこいい枠 ===
-#include "chapter/theorem.typ"
+// === 考察 ===
+#include "chapter/discussion.typ"
 
 // === 参考文献リストの作成と出力 ===
 #include "chapter/bibliography.typ"

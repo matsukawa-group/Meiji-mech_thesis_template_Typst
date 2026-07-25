@@ -78,8 +78,8 @@
 // === 計算手法・実験手法 ===
 #include "chapter/method.typ"
 
-// === 図表の配置 ===
-#include "chapter/figure_table.typ"
+// === 結果 ===
+#include "chapter/result.typ"
 
 // === 定理環境・かっこいい枠 ===
 #include "chapter/theorem.typ"

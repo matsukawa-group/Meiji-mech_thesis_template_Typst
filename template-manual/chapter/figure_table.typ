@@ -4,6 +4,11 @@
 = 図表の配置
 <ch:figure-table>
 
+第~@ch:figure-table~章では，Typst で図や表を配置する方法について説明します．
+第~@sec:figure~節では図の配置方法について，第~@sec:table~節では表の配置方法について説明します．
+特に，第~@sec:figure~節では，図の配置方法（第~@ssec:figure-single, @ssec:figure-multiple~節）に加えて，画像のファイル形式や色の選択についても説明します（第~@ssec:figure-file_format_color~節）．
+ベクター画像とラスター画像の違い，色覚多様性に配慮したカラーマップの選択についても詳細に説明するので参考にしてください．
+
 == 図の配置
 <sec:figure>
 
@@ -13,7 +18,7 @@
 ここでは図を 1 枚だけ配置する方法を紹介します．
 
 #figure(
-  placement: bottom,  // 基本的には top を指定
+  placement: bottom, // 基本的には top を指定
   image("../figure/example-image.pdf", width: 60%),
   caption: [Please write the figure caption here.],
 )<fig:one_figure>
@@ -48,9 +53,9 @@
 ハイパーリンクも埋め込まれているので，該当する図が遠く離れた位置にあってもクリックすればすぐに飛べるようになっています．
 
 === 複数枚の図を配置する方法
-<sssec:figure-multiple>
+<ssec:figure-multiple>
 
-関連する図（ここではそれぞれの図を「サブ図」と呼称します）を複数枚配置するときは `grid` と `subfigure` を使いましょう．
+関連する図（パネル）を複数枚配置するときは `grid` と `subfigure` を使いましょう．
 `subfigure` は #link("https://typst.app/universe/package/hallon")[`hallon`] パッケージのコマンドです．
 `grid` コマンドでは列数や列間のスペースを指定できます．
 `columns: 2` とすれば 2 列のグリッドを作ることができます．
@@ -174,11 +179,99 @@
   ]
 ]
 #h(1em)
-また，`subfigure` を使うことでそれぞれのサブ図にラベルをつけることができます．
-参照時には `@fig:four_figures` と入力すると~@fig:four_figures~のように全体の図を参照できますし，`@subfig:four_figures-a` と入力すると~@subfig:four_figures-a~のようにサブ図を参照できます．
-図~@fig:four_figures(@subfig:four_figures-a)~のように全体の図とサブ図を両方参照したいときは `@fig:four_figures(@subfig:four_figures-a)` と入力すれば出力できます．
+また，`subfigure` を使うことでそれぞれのパネルにラベルをつけることができます．
+参照時には `@fig:four_figures` と入力すると~@fig:four_figures~のように全体の図を参照できますし，`@subfig:four_figures-a` と入力すると~@subfig:four_figures-a~のようにパネルを参照できます．
+図~@fig:four_figures(@subfig:four_figures-a)~のように全体の図とパネルを両方参照したいときは `@fig:four_figures(@subfig:four_figures-a)` と入力すれば出力できます．
 このとき，`@subfig:four_figures-a` 前後の括弧 `()` を忘れないでください．
-括弧をデフォルトで出力するような設定もできますが，図~@fig:four_figures(@subfig:four_figures-a, @subfig:four_figures-b)~のように複数のサブ図を参照したいときもあるので，このテンプレートでは括弧は手動で入力する方式にしています．
+括弧をデフォルトで出力するような設定もできますが，図~@fig:four_figures(@subfig:four_figures-a, @subfig:four_figures-b)~のように複数のパネルを参照したいときもあるので，このテンプレートでは括弧は手動で入力する方式にしています．
+
+=== 画像のファイル形式と色の選択
+<ssec:figure-file_format_color>
+
+画像形式は大きく分類するとラスター画像とベクター画像に分類できます．
+
+- ラスター画像：小さな正方形（ピクセル，画素）を大量に組み合わせて作り上げた画像．ラスター画像を拡大するとピクセルの存在を確認できる．代表的なラスター画像は以下の通り．
+  - GIF (Graphics Interchange Format)：拡張子は `.gif` で，256 色以下の画像を扱える可逆圧縮形式ファイル．使用できる色は少ないものの，アニメーションにも対応していることから現在でも使う機会が多い．Typst でも GIF 形式の画像を挿入できるが，生成される PDF にはアニメーションが含まれない．
+  - JPEG (Joint Photographic Experts Group)：拡張子は `.jpeg` や `.jpg` で，最大 24 ビット（約 1677 万色）の色に対応している非可逆圧縮形式ファイル．Typst でも使用可能．
+  - PNG (Portable Network Graphics)：拡張子は `.png` で，JPEG と同様 24 ビットの色に対応している可逆圧縮形式ファイル．透過処理にも対応している．Typst でも使用可能．
+- ベクター画像：円や直線などを数式的に処理することで作り上げた画像．どれだけ拡大しても明瞭なまま．代表的なベクター画像は以下の通り．
+  - PS (PostScript)：拡張子は `.ps` で，Adobe が 1984 年に開発したページ記述言語で組まれた画像形式．Typst では使用できない．
+  - EPS (Encapsulated PostScript)：拡張子は `.eps` で，PostScript の後継となる画像形式（カプセル化された PostScript）．バウンディングボックスを読み込むことで描画領域を確保する．一昔前の TeX/LaTeX では EPS 形式の画像を使用することが多かったが，現在では PDF 形式の画像を使用することが多い．Typst では使用できない．
+  - PDF (Portable Document Format)：拡張子は `.pdf` で，環境に左右されず，ほぼ同様の見た目で画像や文書を閲覧できる．一般的な用途では最も主流なベクター形式．Typst では 0.14.0 のバージョンから PDF 形式の画像を `#image()` コマンドで挿入できるようになった#footnote[Typst 0.14.0 (October 24, 2025), <#link("https://typst.app/docs/changelog/0.14.0/")>]．
+  - SVG (Scalable Vector Graphics)：拡張子は `.svg` で，W3C によって標準化された XML ベースのベクター画像形式．0.14.0 以前の Typst では PDF 形式の画像を挿入できなかったため，ベクター画像としては SVG 形式の画像を挿入することが多かった．
+
+ラスター画像かベクター画像かという観点では，論文中の画像はできるだけベクター画像の方がいいです．
+これは上記説明にも書いたように，ベクター画像は内部で数式処理をしているためいくら拡大しても解像度が落ちず明瞭なままだからです．
+ただし，これは一般的なグラフや簡単なカラーマップ限定の話です．
+複雑なカラーマップをベクター画像にするとファイルサイズが膨大になり，画像を開くだけでも一苦労です．
+このような場合には諦めてラスター画像にしましょう．
+
+#figure(
+  placement: top,
+  grid(
+    rows: 2,
+    gutter: 2.5mm,
+    grid(
+      columns: 3,
+      gutter: 1.5mm,
+      subfigure(
+        image("../figure/colormap1.pdf", height: 18%),
+        caption: [],
+        label: <subfig:plasma>,
+      ),
+      subfigure(
+        image("../figure/colormap2.pdf", height: 18%),
+        caption: [],
+        label: <subfig:bwr>,
+      ),
+      subfigure(
+        image("../figure/colormap2.png", height: 18%),
+        caption: [],
+        label: <subfig:bwr_png>,
+      ),
+    ),
+    align(center)[
+      #subfigure(
+        image("../figure/graph.pdf", width: 55%),
+        caption: [],
+        label: <subfig:graph>,
+      )],
+  ),
+  caption: [Examples of colormaps designed with consideration for color vision diversity. Panels (@subfig:plasma) and (@subfig:bwr) compare colormaps suitable for visualizing quantities that are symmetric about zero, such as fluctuation fields, and quantities that vary monotonically without symmetry about zero, respectively. Panel (@subfig:bwr_png) shows the raster (PNG) version of the same colormap as panel (@subfig:bwr) for comparison with the vector (PDF) version. Panel (@subfig:graph) presents an example line graph using the colormap "plasma".],
+) <fig:figure-file_format>
+
+実際にいくつかの画像を比較してみましょう．
+まずは画像形式に着目して図~@fig:figure-file_format~を見てみます．
+パネル (@subfig:plasma,@subfig:bwr,@subfig:graph) は PDF ファイル，(@subfig:bwr_png) PNG ファイルです．
+パネル (@subfig:plasma,@subfig:bwr,@subfig:graph) はどれもベクター画像なのでいくら拡大しても明瞭なままですね．
+一方のパネル (@subfig:bwr_png) を拡大するとラスター画像なので小さな正方形で構成されていることが確認できます．これがベクター画像とラスター画像の違いです．
+また，この `template-manual.pdf` を開きながら `Ctrl` + `A` をしてください．
+パネル (@subfig:bwr_png) の文字が選択できないことが確認できます．
+これは PNG 形式の画像なので文字情報を持っていないためです．
+PDF 形式であっても文字抽出ができない場合もあります．
+皆さんが論文を書く際は文字抽出が可能なベクター形式を使用するのが理想です．
+
+また，論文に使用する画像を作成する際には，カラーマップの選択にも注意が必要です．
+近年では，多様な色覚特性を有する読者にも情報が正しく伝わるよう，色覚多様性に配慮した図の作成が求められています．
+流体力学分野に限らず，古くから青 → 緑 → 赤のカラーマップ（rainbow，jet，turbo など）が広く用いられてきました．
+しかし，これらのカラーマップは色覚特性によっては物理量の変化や大小関係を正しく認識しにくく，また知覚的にも一様ではないことが指摘されています．
+特に，赤と緑を対比させた配色は，最も一般的な赤緑色覚異常（protanopia や deuteranopia など）では識別が困難となる場合があるため，色のみを情報の識別手段とする表現は避けることが推奨されています#footnote[赤緑色覚異常については以下のものが参考になる：
+- #citefull(<Wong:NatMethods2011>)
+- #citefull(<Crameri:NatCommun2020>)]．
+そのため，色覚特性によらず物理量の変化や大小関係を理解しやすいカラーマップを選択するとともに，必要に応じて明度や線種，マーカーなどを併用して情報を伝えることが重要です．
+また，主要論文誌の中には，論文投稿時に図の色覚多様性への配慮を求める場合もあります#footnote[論文投稿時に図の色覚多様性への配慮を求める主要論文誌の例：
+  - Nature: #link("https://research-figure-guide.nature.com/figures/preparing-figures-our-specifications/")[Preparing figures - our specifications]
+  - Springer Nature: #link("https://www.springernature.com/gp/policies/accessibility-figures-images")[Accessibility requirements for figures, images and supplementary materials]]．
+
+色の選択に着目して再び図~@fig:figure-file_format~を見てみます．
+図~@fig:figure-file_format~は色覚多様性に配慮したカラーマップ・グラフの例を示しています．
+パネル (@subfig:plasma,@subfig:graph) は plasma と呼ばれるカラーマップを使用しており，明度が線形に変化するため，色覚特性に関わらず物理量の大小関係を理解しやすいカラーマップです#footnote[Choosing Colormaps in Matplotlib <#link("https://matplotlib.org/stable/users/explain/colors/colormaps.html")>]．
+特に，パネル (@subfig:graph) のように $[0, 6]$ の区間で単調に変化するカラーマップを示したいときには plasma カラーマップが適しています．
+流体力学の分野では，速度や温度の大きさなどを示すときに，このような単調に変化するカラーマップを使用することが多いです．
+一方，パネル (@subfig:bwr,@subfig:bwr_png) は青 → 白 → 赤のカラーマップを使用しており，図の例のように $0$ を中心とした区間で対称的に変化する物理量を示すのに適しています．
+流体力学の分野では，乱流の速度変動などの物理量は $0$（平均流速）を中心に対称的に変化することが多いので，このようなカラーマップを使用することが多いです．
+
+
 
 == 表の配置
 <sec:table>

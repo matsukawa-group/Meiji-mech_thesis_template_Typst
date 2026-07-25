@@ -75,6 +75,9 @@
 // === 序論 ===
 #include "chapter/introduction.typ"
 
+// === 計算手法・実験手法 ===
+#include "chapter/method.typ"
+
 // === 図表の配置 ===
 #include "chapter/figure_table.typ"
 

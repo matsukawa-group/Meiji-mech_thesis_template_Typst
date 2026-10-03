@@ -384,7 +384,6 @@ Typst でも `bib` ファイルを使用して文献リストを自動で作成�
     @proceedings{THMT2023,
         editor  = "{THMT}",
         title   = "{Proceedings of 10th International Symposium on Turbulence, Heat and Mass Transfer}",
-        yomi    = {THMT},
         year    = {2023}
     }
     ```

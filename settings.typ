@@ -5,6 +5,17 @@
 ////
 //////////////////////////////////////////////////////////////////
 
+// =================================================================
+// フォントの設定
+// =================================================================
+// OS によらず同じ見た目になるよう，リポジトリの fonts/ に同梱したフォントを使う（README 参照）．
+// New Computer Modern は Typst に内蔵されている．
+// 本文（欧文：New Computer Modern，和文：BIZ UD明朝）
+#let serif-font = ("New Computer Modern", "BIZ UDMincho")
+// 見出し等（欧文・和文とも BIZ UDPゴシック）
+#let sans-font = ("BIZ UDPGothic",)
+// =================================================================
+
 // 日本語のダミーテキスト
 #import "@preview/roremu:0.1.0": roremu
 // 数式を簡単に書くための設定
@@ -23,7 +34,6 @@
 
 // 複数の図を並べるための設定
 #import "@preview/hallon:0.1.3" as hallon: subfigure
-#import "@preview/smartaref:0.1.0": Cref, cref
 // 図のキャプションの設定
 #let my-figure-caption(it) = context {
   let gutter = 1em
@@ -78,8 +88,21 @@
   counter(heading).update(0)
   counter(figure.where(kind: image)).update(0)
   counter(figure.where(kind: table)).update(0)
+  counter(figure.where(kind: raw)).update(0)
   counter(math.equation).update(0)
   appendix-mode.update(true)
+  set-theorion-numbering("A.1") // 定理環境の番号も付録用に
+}
+
+// 章番号付きの番号（本文：1.1，付録：A.1）を作る．
+// 章番号と付録かどうかは loc の位置で判定する（省略時は現在の位置）．
+// 参照時は参照先の位置を loc に渡すことで，どこから参照しても正しい番号になる．
+#let chapter-number(n, loc: none, paren: false) = {
+  let loc = if loc == none { here() } else { loc }
+  let chap-no = counter(heading).at(loc).at(0, default: 0)
+  let pattern = if appendix-mode.at(loc) { "A.1" } else { "1.1" }
+  let num = numbering(pattern, chap-no, n)
+  if paren { [(#num)] } else { [#num] }
 }
 
 // =================================================================
@@ -91,7 +114,7 @@
   show: cjk-spacer
 
   // 本文のフォント
-  set text(lang: "en", font: ("New Computer Modern", "BIZ UDMincho"))
+  set text(lang: "en", font: serif-font)
 
   set par(
     justify: true, // 両端揃え
@@ -120,7 +143,7 @@
       let ns = counter(heading).at(it.location())
       block(width: 100%, above: 2em, below: 2em)[
         #if has-number {
-          text(size: 24pt, font: "Segoe UI")[
+          text(size: 24pt, font: sans-font)[
             #if is-appendix {
               [付録 #numbering("A", ns.first())]
             } else {
@@ -129,13 +152,13 @@
           ]
           v(1.0em)+h(-1em)
         }
-        #text(size: 24pt, font: "Segoe UI")[
+        #text(size: 24pt, font: sans-font)[
           #it.body
         ]
       ]
     } else if it.numbering != none {
       let ns = counter(heading).at(it.location())
-      text(font: "Segoe UI")[
+      text(font: sans-font)[
         #v(0.2em)
         #linebreak()
         #if is-appendix {
@@ -147,38 +170,10 @@
         #it.body
       ]
     } else {
-      text(font: "Segoe UI")[#it.body]
+      text(font: sans-font)[#it.body]
     }
     par(text(size: 0pt, "")) // 見出しの後に字下げするために空の段落を設定
   }
-  show ref: it => {
-    let el = it.element
-
-    if el != none and el.func() == heading {
-      context {
-        let loc = el.location()
-        let nums = counter(heading).at(loc)
-        let is-appendix = appendix-mode.at(loc)
-
-        link(loc)[#if nums.len() == 1 {
-            if is-appendix {
-              numbering("A", nums.first())
-            } else {
-              nums.first()
-            }
-          } else {
-            if is-appendix {
-              numbering("A.1", ..nums)
-            } else {
-              numbering("1.1", ..nums)
-            }
-          }]
-      }
-    } else {
-      it
-    }
-  }
-
   // ページ番号
   // 本文上の見た目と PDF 内部のページラベルを揃えるため
   // set page(numbering: "--- 1 ---")
@@ -196,7 +191,7 @@
     header: context {
       let is-chapter-start = query(heading.where(level: 1)).any(it => it.location().page() == here().page())
       if not is-chapter-start {
-        text(font: "Segoe UI", weight: "bold")[#hydra(1)]
+        text(font: sans-font, weight: "bold")[#hydra(1)]
         line(length: 100%, stroke: 0.5pt)
       }
     },
@@ -223,7 +218,8 @@
 
   // 数式に関する設定
   set math.equation(
-    numbering: (..n) => numbering("(1.1)", ..n),
+    numbering: (..nums) => chapter-number(nums.pos().first(), paren: true),
+    number-align: bottom,
     supplement: none,
   )
   show math.equation: set block(
@@ -239,15 +235,6 @@
     counter(figure.where(kind: raw)).update(0)
     it
   }
-  set math.equation(
-    numbering: num => 
-      numbering("(1.1)", counter(heading).get().first(), num),
-      number-align: bottom
-    )
-  set figure(
-    numbering: num =>
-      numbering("1.1", counter(heading).get().first(), num)
-  )
 
   // リンク
   show link: set text(fill: blue)
@@ -256,7 +243,6 @@
 
   // コードブロック
   import "@preview/codly:1.3.0": *
-  import "@preview/codly-languages:0.1.1": *
   show: codly-init.with()
 
   // 単位に関する設定
@@ -285,67 +271,41 @@
 
   // 図とキャプションの間のスペースを設定
   set figure(gap: 1em)
-  // 参照時に図・表は番号だけ表示
+  // 図・表・コードの番号（hallon の番号付けを上書きするため hallon の設定より後に置く）
+  set figure(numbering: (..nums) => chapter-number(nums.pos().first()))
+
+  // 参照の表示
+  // 図・表・コード・定理などは「Figure」等をつけずに番号だけを表示する．
+  // （Typst 標準の参照は参照先の位置で番号を計算するので，別の章から参照しても正しい番号になる）
+  set ref(supplement: none)
+  // 章・節と複数行の数式の行ラベルは標準の参照では正しく表示できないので個別に設定する．
+  // パッケージ（equate）の参照の設定より優先させるため，文書全体の設定の最後に置く．
+  // 番号は参照先の位置で計算する（参照した位置の章番号を使わないように）．
   show ref: it => {
     let el = it.element
+    if el == none { return it }
+    let loc = el.location()
 
-    if el != none and el.func() == figure {
-      let loc = el.location()
-
-      if el.kind == image {
-        link(loc)[#numbering(
-          el.numbering,
-          ..counter(figure.where(kind: image)).at(loc),
-        )]
-      } else if el.kind == table {
-        link(loc)[#numbering(
-          el.numbering,
-          ..counter(figure.where(kind: table)).at(loc),
-        )]
-      } else {
-        it
-      }
+    if el.func() == heading {
+      let nums = counter(heading).at(loc)
+      let is-appendix = appendix-mode.at(loc)
+      link(loc)[#if nums.len() == 1 {
+          if is-appendix { numbering("A", nums.first()) } else { nums.first() }
+        } else {
+          numbering(if is-appendix { "A.1" } else { "1.1" }, ..nums)
+        }]
+    } else if (
+      el.func() == figure and el.kind == math.equation
+        and el.body != none and el.body.func() == metadata
+    ) {
+      // 複数行の数式で行ごとにつけたラベル（equate，sub-numbering: false の場合）
+      let nums = el.body.value
+      let n = nums.first() + nums.slice(1).sum(default: 1) - 1
+      link(loc, chapter-number(n, loc: loc, paren: true))
     } else {
       it
     }
   }
-
-show figure.where(kind: image): set figure(
-  numbering: (..nums) => {
-    let fig-no = nums.pos().first()
-    let chap-no = counter(heading).get().first()
-
-    if appendix-mode.get() {
-      numbering("A.1", chap-no, fig-no)
-    } else {
-      numbering("1.1", chap-no, fig-no)
-    }
-  },
-)
-
-show figure.where(kind: table): set figure(
-  numbering: (..nums) => {
-    let tab-no = nums.pos().first()
-    let chap-no = counter(heading).get().first()
-
-    if appendix-mode.get() {
-      numbering("A.1", chap-no, tab-no)
-    } else {
-      numbering("1.1", chap-no, tab-no)
-    }
-  },
-)
-
-
-set math.equation(
-  numbering: (..nums) => {
-    if appendix-mode.get() {
-      numbering("(A.1)", counter(heading).get().first(), nums.pos().first())
-    } else {
-      numbering("(1.1)", counter(heading).get().first(), nums.pos().first())
-    }
-  },
-)
 
   doc
 }
@@ -373,12 +333,16 @@ set math.equation(
   FY: [],
   ID: [],
   class: [],
-  date: none,
 ) = [
   #align(center)[
     #v(25mm)
 
     #text(22pt)[#title]
+
+    // 副題（指定した場合のみ表示）
+    #if subtitle != none {
+      text(16pt)[#subtitle]
+    }
 
     #v(25mm)
 
@@ -414,7 +378,6 @@ set math.equation(
   supervisor: [],
   department: [],
   FY: [],
-  date: none,
 ) = [
   #align(center)[
     #v(15mm)
@@ -427,7 +390,7 @@ set math.equation(
 
     #v(18mm)
 
-    #box(width: 80%, stroke: 1pt, inset: 12pt)[#text(18pt)[#align(left)[論文題目：]#title]]
+    #box(width: 80%, stroke: 1pt, inset: 12pt)[#text(18pt)[#align(left)[論文題目：]#title#if subtitle != none [ \ #text(14pt)[#subtitle]]]]
 
     #v(18mm)
 
@@ -451,15 +414,19 @@ set math.equation(
   FY: [],
   ID: [],
   class: [],
-  date: datetime.today(),
 ) = {
+  assert(
+    kind in ("bachelor", "master"),
+    message: "thesis-cover の kind には \"bachelor\"（卒業論文）か \"master\"（修士論文）を指定してください．",
+  )
+
   set page(
     margin: (top: 25mm, bottom: 25mm, x: 25mm),
     numbering: "i",
     footer: none,
   )
   // 表紙のフォント
-  set text(lang: "en", font: ("New Computer Modern", "BIZ UDMincho"))
+  set text(lang: "en", font: serif-font)
 
   if kind == "bachelor" {
     bachelor-cover(
@@ -471,7 +438,6 @@ set math.equation(
       FY: FY,
       ID: ID,
       class: class,
-      date: date,
     )
   } else if kind == "master" {
     master-cover(
@@ -481,7 +447,6 @@ set math.equation(
       supervisor: supervisor,
       department: department,
       FY: FY,
-      date: date,
     )
   }
 }
@@ -940,7 +905,7 @@ set math.equation(
   let title-arg = if title == none {
     (:)
   } else {
-    (title: text(font: "Segoe UI")[#title])
+    (title: text(font: sans-font)[#title])
   }
 
   original-showybox(

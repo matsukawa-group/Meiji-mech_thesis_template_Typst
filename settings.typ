@@ -14,6 +14,8 @@
 #let serif-font = ("New Computer Modern", "BIZ UDMincho")
 // 見出し等（欧文・和文とも BIZ UDPゴシック）
 #let sans-font = ("BIZ UDPGothic",)
+// コード（欧文：DejaVu Sans Mono，和文：BIZ UDゴシック）
+#let mono-font = ("DejaVu Sans Mono", "BIZ UDGothic")
 // =================================================================
 
 // 日本語のダミーテキスト
@@ -241,8 +243,9 @@
   show ref: set text(fill: blue)
   show footnote: set text(fill: blue)
 
-  // コードブロック
+  // コードブロック（DejaVu Sans Mono には和文がないので和文フォントを補う）
   import "@preview/codly:1.3.0": *
+  show raw: set text(font: mono-font)
   show: codly-init.with()
 
   // 単位に関する設定

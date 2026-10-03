@@ -271,7 +271,7 @@ $
 ```Typst
 $
   epsilon lr((pdv(tilde(phi.alt)_1, t, 2) + g pdv(tilde(phi.alt)_1, z)) |)_(z = 0) & + epsilon^2 lr(\[pdv(tilde(phi.alt)_2, t, 2) + g pdv(tilde(phi.alt)_2, z) + tilde(eta)_1 pdv(, z) (pdv(tilde(phi.alt)_1, t, 2) + g pdv(tilde(phi.alt)_1, z))) #<equate:revoke> \
-  & + pdv(, t) lr(lr({(pdv(tilde(phi.alt)_1, x)) + (pdv(tilde(phi.alt)_1, z))^2}])|)_(z = 0) = 0 #<eq:wave>
+  & + pdv(, t) lr(lr({(pdv(tilde(phi.alt)_1, x))^2 + (pdv(tilde(phi.alt)_1, z))^2}])|)_(z = 0) = 0 #<eq:wave>
 $
 ```
 

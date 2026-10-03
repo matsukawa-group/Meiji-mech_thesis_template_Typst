@@ -46,6 +46,8 @@ OS によらず同じ見た目の PDF が得られるように，このテンプ
 | 本文（欧文） | New Computer Modern | Typst に内蔵 |
 | 本文（和文） | BIZ UD明朝（BIZ UDMincho） | `fonts/` に同梱 |
 | 見出し等（欧文・和文） | BIZ UDPゴシック（BIZ UDPGothic） | `fonts/` に同梱 |
+| コード（欧文） | DejaVu Sans Mono | Typst に内蔵 |
+| コード（和文） | BIZ UDゴシック（BIZ UDGothic） | `fonts/` に同梱 |
 
 BIZ UD フォントはモリサワのユニバーサルデザインフォントです．
 同梱しているフォントファイルは [Google Fonts](https://fonts.google.com/specimen/BIZ+UDMincho) で配布されているもので，[SIL Open Font License 1.1](https://openfontlicense.org/) のもとで再配布しています（ライセンス文は `fonts/` 内の各 `OFL.txt` を参照）．
@@ -82,7 +84,7 @@ Windows に標準で入っている BIZ UD フォントは使用許諾が異な�
 
 #### フォントが読み込まれているかの確認
 
-以下のコマンドの出力に `BIZ UDMincho` と `BIZ UDPGothic` が含まれていれば正しく読み込まれています．
+以下のコマンドの出力に `BIZ UDMincho`，`BIZ UDPGothic`，`BIZ UDGothic` が含まれていれば正しく読み込まれています．
 
 ```
 typst fonts --font-path fonts
@@ -118,6 +120,7 @@ Meiji-mech_thesis_template_Typst/
 ├── figure/                       # 論文で使用する図
 │
 ├── fonts/                        # 同梱フォント（SIL Open Font License 1.1）
+│   ├── BIZUDGothic/              # BIZ UDゴシック（コードの和文）
 │   ├── BIZUDMincho/              # BIZ UD明朝（本文の和文）
 │   └── BIZUDPGothic/             # BIZ UDPゴシック（見出し等）
 │

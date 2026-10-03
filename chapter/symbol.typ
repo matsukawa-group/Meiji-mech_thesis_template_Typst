@@ -9,7 +9,7 @@
   stroke: none,
   align: left,
   table.header(
-    table.cell[#text(font: "Segoe UI", weight: "bold")[Alphabet]],
+    table.cell[#text(font: sans-font, weight: "bold")[Alphabet]],
   ),
   [$d$], [Channel width [$#dimension[L]$]],
   [$L_j$], [Computational domain size in $j$-direction [$#dimension[L]$]],
@@ -26,7 +26,7 @@
   stroke: none,
   align: left,
   table.header(
-    table.cell[#text(font: "Segoe UI", weight: "bold")[Greek]],
+    table.cell[#text(font: sans-font, weight: "bold")[Greek]],
   ),
   [$delta$], [Channel half width [$#dimension[L]$]],
   [$epsilon_(i j k)$], [Levi--Civita symbol],
@@ -41,7 +41,7 @@
   stroke: none,
   align: left,
   table.header(
-    table.cell[#text(font: "Segoe UI", weight: "bold")[Superscripts]],
+    table.cell[#text(font: sans-font, weight: "bold")[Superscripts]],
   ),
   [$(quad)^*$], [Normalized by outer variables, e.g., $delta$],
   [$(quad)^+$], [Normalized by inner variables, e.g., $nu slash u_tau$ (wall unit)],
@@ -57,7 +57,7 @@
   stroke: none,
   align: left,
   table.header(
-    table.cell[#text(font: "Segoe UI", weight: "bold")[Subscripts]],
+    table.cell[#text(font: sans-font, weight: "bold")[Subscripts]],
   ),
   [$(quad)_rms$], [Root mean square],
   [$(quad)_("w")$], [Wall],
@@ -72,7 +72,7 @@
   stroke: none,
   align: left,
   table.header(
-    table.cell[#text(font: "Segoe UI", weight: "bold")[Abbreviations]],
+    table.cell[#text(font: sans-font, weight: "bold")[Abbreviations]],
   ),
   [CFD], [Computational fluid dynamics],
   [DNS], [Direct numerical simulation],

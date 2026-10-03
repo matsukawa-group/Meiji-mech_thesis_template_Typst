@@ -34,7 +34,6 @@
 
 // 複数の図を並べるための設定
 #import "@preview/hallon:0.1.3" as hallon: subfigure
-#import "@preview/smartaref:0.1.0": Cref, cref
 // 図のキャプションの設定
 #let my-figure-caption(it) = context {
   let gutter = 1em
@@ -89,8 +88,21 @@
   counter(heading).update(0)
   counter(figure.where(kind: image)).update(0)
   counter(figure.where(kind: table)).update(0)
+  counter(figure.where(kind: raw)).update(0)
   counter(math.equation).update(0)
   appendix-mode.update(true)
+  set-theorion-numbering("A.1") // 定理環境の番号も付録用に
+}
+
+// 章番号付きの番号（本文：1.1，付録：A.1）を作る．
+// 章番号と付録かどうかは loc の位置で判定する（省略時は現在の位置）．
+// 参照時は参照先の位置を loc に渡すことで，どこから参照しても正しい番号になる．
+#let chapter-number(n, loc: none, paren: false) = {
+  let loc = if loc == none { here() } else { loc }
+  let chap-no = counter(heading).at(loc).at(0, default: 0)
+  let pattern = if appendix-mode.at(loc) { "A.1" } else { "1.1" }
+  let num = numbering(pattern, chap-no, n)
+  if paren { [(#num)] } else { [#num] }
 }
 
 // =================================================================
@@ -162,34 +174,6 @@
     }
     par(text(size: 0pt, "")) // 見出しの後に字下げするために空の段落を設定
   }
-  show ref: it => {
-    let el = it.element
-
-    if el != none and el.func() == heading {
-      context {
-        let loc = el.location()
-        let nums = counter(heading).at(loc)
-        let is-appendix = appendix-mode.at(loc)
-
-        link(loc)[#if nums.len() == 1 {
-            if is-appendix {
-              numbering("A", nums.first())
-            } else {
-              nums.first()
-            }
-          } else {
-            if is-appendix {
-              numbering("A.1", ..nums)
-            } else {
-              numbering("1.1", ..nums)
-            }
-          }]
-      }
-    } else {
-      it
-    }
-  }
-
   // ページ番号
   // 本文上の見た目と PDF 内部のページラベルを揃えるため
   // set page(numbering: "--- 1 ---")
@@ -234,7 +218,8 @@
 
   // 数式に関する設定
   set math.equation(
-    numbering: (..n) => numbering("(1.1)", ..n),
+    numbering: (..nums) => chapter-number(nums.pos().first(), paren: true),
+    number-align: bottom,
     supplement: none,
   )
   show math.equation: set block(
@@ -250,15 +235,6 @@
     counter(figure.where(kind: raw)).update(0)
     it
   }
-  set math.equation(
-    numbering: num => 
-      numbering("(1.1)", counter(heading).get().first(), num),
-      number-align: bottom
-    )
-  set figure(
-    numbering: num =>
-      numbering("1.1", counter(heading).get().first(), num)
-  )
 
   // リンク
   show link: set text(fill: blue)
@@ -296,67 +272,40 @@
 
   // 図とキャプションの間のスペースを設定
   set figure(gap: 1em)
-  // 参照時に図・表は番号だけ表示
+  // 図・表・コードの番号（hallon の番号付けを上書きするため hallon の設定より後に置く）
+  set figure(numbering: (..nums) => chapter-number(nums.pos().first()))
+
+  // 参照の表示
+  // パッケージ（equate 等）の参照の設定より優先させるため，文書全体の設定の最後に置く．
+  // 章・節は番号だけ，図・表・コードは番号だけ，数式は括弧付きの番号を表示する．
+  // 番号は参照先の位置で計算する（参照した位置の章番号を使わないように）．
   show ref: it => {
     let el = it.element
+    if el == none { return it }
+    let loc = el.location()
 
-    if el != none and el.func() == figure {
-      let loc = el.location()
-
-      if el.kind == image {
-        link(loc)[#numbering(
-          el.numbering,
-          ..counter(figure.where(kind: image)).at(loc),
-        )]
-      } else if el.kind == table {
-        link(loc)[#numbering(
-          el.numbering,
-          ..counter(figure.where(kind: table)).at(loc),
-        )]
-      } else {
-        it
-      }
+    if el.func() == heading {
+      let nums = counter(heading).at(loc)
+      let is-appendix = appendix-mode.at(loc)
+      link(loc)[#if nums.len() == 1 {
+          if is-appendix { numbering("A", nums.first()) } else { nums.first() }
+        } else {
+          numbering(if is-appendix { "A.1" } else { "1.1" }, ..nums)
+        }]
+    } else if el.func() == figure and el.kind in (image, table, raw) {
+      link(loc, chapter-number(el.counter.at(loc).first(), loc: loc))
+    } else if (
+      el.func() == figure and el.kind == math.equation
+        and el.body != none and el.body.func() == metadata
+    ) {
+      // 複数行の数式で行ごとにつけたラベル（equate，sub-numbering: false の場合）
+      let nums = el.body.value
+      let n = nums.first() + nums.slice(1).sum(default: 1) - 1
+      link(loc, chapter-number(n, loc: loc, paren: true))
     } else {
       it
     }
   }
-
-show figure.where(kind: image): set figure(
-  numbering: (..nums) => {
-    let fig-no = nums.pos().first()
-    let chap-no = counter(heading).get().first()
-
-    if appendix-mode.get() {
-      numbering("A.1", chap-no, fig-no)
-    } else {
-      numbering("1.1", chap-no, fig-no)
-    }
-  },
-)
-
-show figure.where(kind: table): set figure(
-  numbering: (..nums) => {
-    let tab-no = nums.pos().first()
-    let chap-no = counter(heading).get().first()
-
-    if appendix-mode.get() {
-      numbering("A.1", chap-no, tab-no)
-    } else {
-      numbering("1.1", chap-no, tab-no)
-    }
-  },
-)
-
-
-set math.equation(
-  numbering: (..nums) => {
-    if appendix-mode.get() {
-      numbering("(A.1)", counter(heading).get().first(), nums.pos().first())
-    } else {
-      numbering("(1.1)", counter(heading).get().first(), nums.pos().first())
-    }
-  },
-)
 
   doc
 }

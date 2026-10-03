@@ -56,30 +56,31 @@ Windows に標準で入っている BIZ UD フォントは使用許諾が異な�
 同梱フォントを Typst に読み込ませる必要があります．
 必要な設定は OS ではなく，コンパイルの方法によって異なります．
 
-**Visual Studio Code + Tinymist でプレビュー・コンパイルする場合：設定不要**
+| コンパイルの方法 | 必要な設定 |
+| --- | --- |
+| Visual Studio Code + Tinymist | 不要（`.vscode/settings.json` で設定済み） |
+| ターミナルで `typst` コマンドを使う（Windows・Mac 共通） | `--font-path fonts` を付ける |
 
-`.vscode/settings.json` で同梱フォントを読み込むように設定済みです．
-ただし，このリポジトリのフォルダ（`main.typ` があるフォルダ）を VS Code で「フォルダーを開く」で開いてください．
-親フォルダを開いた場合や，ファイル単体で開いた場合はこの設定が読み込まれません．
+- Visual Studio Code + Tinymist の場合：
+  このリポジトリのフォルダ（`main.typ` があるフォルダ）を VS Code で「フォルダーを開く」で開いてください．
+  親フォルダを開いた場合や，ファイル単体で開いた場合は `.vscode/settings.json` が読み込まれません．
+- ターミナルの場合：
+  リポジトリのフォルダで以下のように入力します．
 
-**ターミナルで `typst` コマンドを使う場合（Windows・Mac 共通）：`--font-path fonts` を付ける**
+  ```
+  # 学位論文をコンパイル
+  typst compile --font-path fonts main.typ
 
-リポジトリのフォルダで以下のように入力します．
+  # 保存するたびに自動でコンパイル
+  typst watch --font-path fonts main.typ
 
-```
-# 学位論文をコンパイル
-typst compile --font-path fonts main.typ
+  # テンプレートマニュアルをコンパイル
+  typst compile --font-path fonts template-manual/template-manual.typ
+  ```
 
-# 保存するたびに自動でコンパイル
-typst watch --font-path fonts main.typ
+  毎回オプションを付けるのが面倒な場合は，環境変数 `TYPST_FONT_PATHS` にこのリポジトリの `fonts` フォルダの絶対パスを設定しておけば `--font-path` を省略できます．
 
-# テンプレートマニュアルをコンパイル
-typst compile --font-path fonts template-manual/template-manual.typ
-```
-
-毎回オプションを付けるのが面倒な場合は，環境変数 `TYPST_FONT_PATHS` にこのリポジトリの `fonts` フォルダの絶対パスを設定しておけば `--font-path` を省略できます．
-
-**フォントが読み込まれているかの確認**
+#### フォントが読み込まれているかの確認
 
 以下のコマンドの出力に `BIZ UDMincho` と `BIZ UDPGothic` が含まれていれば正しく読み込まれています．
 

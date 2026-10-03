@@ -5,6 +5,17 @@
 ////
 //////////////////////////////////////////////////////////////////
 
+// =================================================================
+// フォントの設定
+// =================================================================
+// OS によらず同じ見た目になるよう，リポジトリの fonts/ に同梱したフォントを使う（README 参照）．
+// New Computer Modern は Typst に内蔵されている．
+// 本文（欧文：New Computer Modern，和文：BIZ UD明朝）
+#let serif-font = ("New Computer Modern", "BIZ UDMincho")
+// 見出し等（欧文・和文とも BIZ UDPゴシック）
+#let sans-font = ("BIZ UDPGothic",)
+// =================================================================
+
 // 日本語のダミーテキスト
 #import "@preview/roremu:0.1.0": roremu
 // 数式を簡単に書くための設定
@@ -91,7 +102,7 @@
   show: cjk-spacer
 
   // 本文のフォント
-  set text(lang: "en", font: ("New Computer Modern", "BIZ UDMincho"))
+  set text(lang: "en", font: serif-font)
 
   set par(
     justify: true, // 両端揃え
@@ -120,7 +131,7 @@
       let ns = counter(heading).at(it.location())
       block(width: 100%, above: 2em, below: 2em)[
         #if has-number {
-          text(size: 24pt, font: "Segoe UI")[
+          text(size: 24pt, font: sans-font)[
             #if is-appendix {
               [付録 #numbering("A", ns.first())]
             } else {
@@ -129,13 +140,13 @@
           ]
           v(1.0em)+h(-1em)
         }
-        #text(size: 24pt, font: "Segoe UI")[
+        #text(size: 24pt, font: sans-font)[
           #it.body
         ]
       ]
     } else if it.numbering != none {
       let ns = counter(heading).at(it.location())
-      text(font: "Segoe UI")[
+      text(font: sans-font)[
         #v(0.2em)
         #linebreak()
         #if is-appendix {
@@ -147,7 +158,7 @@
         #it.body
       ]
     } else {
-      text(font: "Segoe UI")[#it.body]
+      text(font: sans-font)[#it.body]
     }
     par(text(size: 0pt, "")) // 見出しの後に字下げするために空の段落を設定
   }
@@ -196,7 +207,7 @@
     header: context {
       let is-chapter-start = query(heading.where(level: 1)).any(it => it.location().page() == here().page())
       if not is-chapter-start {
-        text(font: "Segoe UI", weight: "bold")[#hydra(1)]
+        text(font: sans-font, weight: "bold")[#hydra(1)]
         line(length: 100%, stroke: 0.5pt)
       }
     },
@@ -459,7 +470,7 @@ set math.equation(
     footer: none,
   )
   // 表紙のフォント
-  set text(lang: "en", font: ("New Computer Modern", "BIZ UDMincho"))
+  set text(lang: "en", font: serif-font)
 
   if kind == "bachelor" {
     bachelor-cover(
@@ -940,7 +951,7 @@ set math.equation(
   let title-arg = if title == none {
     (:)
   } else {
-    (title: text(font: "Segoe UI")[#title])
+    (title: text(font: sans-font)[#title])
   }
 
   original-showybox(

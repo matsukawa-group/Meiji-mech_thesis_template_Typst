@@ -275,8 +275,11 @@
   set figure(numbering: (..nums) => chapter-number(nums.pos().first()))
 
   // 参照の表示
-  // パッケージ（equate 等）の参照の設定より優先させるため，文書全体の設定の最後に置く．
-  // 章・節は番号だけ，図・表・コードは番号だけ，数式は括弧付きの番号を表示する．
+  // 図・表・コード・定理などは「Figure」等をつけずに番号だけを表示する．
+  // （Typst 標準の参照は参照先の位置で番号を計算するので，別の章から参照しても正しい番号になる）
+  set ref(supplement: none)
+  // 章・節と複数行の数式の行ラベルは標準の参照では正しく表示できないので個別に設定する．
+  // パッケージ（equate）の参照の設定より優先させるため，文書全体の設定の最後に置く．
   // 番号は参照先の位置で計算する（参照した位置の章番号を使わないように）．
   show ref: it => {
     let el = it.element
@@ -291,8 +294,6 @@
         } else {
           numbering(if is-appendix { "A.1" } else { "1.1" }, ..nums)
         }]
-    } else if el.func() == figure and el.kind in (image, table, raw) {
-      link(loc, chapter-number(el.counter.at(loc).first(), loc: loc))
     } else if (
       el.func() == figure and el.kind == math.equation
         and el.body != none and el.body.func() == metadata
@@ -332,12 +333,16 @@
   FY: [],
   ID: [],
   class: [],
-  date: none,
 ) = [
   #align(center)[
     #v(25mm)
 
     #text(22pt)[#title]
+
+    // 副題（指定した場合のみ表示）
+    #if subtitle != none {
+      text(16pt)[#subtitle]
+    }
 
     #v(25mm)
 
@@ -373,7 +378,6 @@
   supervisor: [],
   department: [],
   FY: [],
-  date: none,
 ) = [
   #align(center)[
     #v(15mm)
@@ -386,7 +390,7 @@
 
     #v(18mm)
 
-    #box(width: 80%, stroke: 1pt, inset: 12pt)[#text(18pt)[#align(left)[論文題目：]#title]]
+    #box(width: 80%, stroke: 1pt, inset: 12pt)[#text(18pt)[#align(left)[論文題目：]#title#if subtitle != none [ \ #text(14pt)[#subtitle]]]]
 
     #v(18mm)
 
@@ -410,8 +414,12 @@
   FY: [],
   ID: [],
   class: [],
-  date: datetime.today(),
 ) = {
+  assert(
+    kind in ("bachelor", "master"),
+    message: "thesis-cover の kind には \"bachelor\"（卒業論文）か \"master\"（修士論文）を指定してください．",
+  )
+
   set page(
     margin: (top: 25mm, bottom: 25mm, x: 25mm),
     numbering: "i",
@@ -430,7 +438,6 @@
       FY: FY,
       ID: ID,
       class: class,
-      date: date,
     )
   } else if kind == "master" {
     master-cover(
@@ -440,7 +447,6 @@
       supervisor: supervisor,
       department: department,
       FY: FY,
-      date: date,
     )
   }
 }

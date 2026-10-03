@@ -243,7 +243,6 @@
 
   // コードブロック
   import "@preview/codly:1.3.0": *
-  import "@preview/codly-languages:0.1.1": *
   show: codly-init.with()
 
   // 単位に関する設定
